@@ -4,6 +4,15 @@
 (require 'buffer-move)   ;; Buffer-move for better window management
 (require 'app-launchers) ;; Use emacs as a run launcher like dmenu (experimental)
 
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)) ;;To ensure Emacs always starts with js2-mode for .js files
+
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+
 (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
 
 (use-package company
@@ -30,7 +39,7 @@
   (setq dashboard-set-file-icons t)
   (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
   ;;(setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
-  (setq dashboard-startup-banner "~/.config/emacs/images/dtmacs-logo.png")  ;; use custom image as banner
+  (setq dashboard-startup-banner "~/.config/emacs/images/leonamsh-logo.png")  ;; use custom image as banner
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   (setq dashboard-items '((recents . 5)
                           (agenda . 5 )
@@ -607,7 +616,7 @@
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
   ;; Sets the default theme to load!!! 
-  (load-theme 'doom-dracula t)
+  (load-theme 'kaolin-ocean t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   (doom-themes-neotree-config)
   ;; Corrects (and improves) org-mode's native fontification.

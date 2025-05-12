@@ -11,7 +11,7 @@ feh --bg-fill --randomize ~/Documentos/git/walls/abstract ~/Documentos/git/walls
 variety &
 numlockx on &
 lxsession &
-picom --daemon &
+#picom --daemon &
 /usr/bin/emacs --daemon &
 nm-applet &
 "$HOME"/.screenlayout/layout.sh &

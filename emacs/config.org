@@ -8,6 +8,7 @@
 - [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
   - [[#adding-the-scripts-directory-to-path][Adding the scripts directory to path]]
   - [[#sourcing-the-scripts][Sourcing the scripts]]
+  - [[#emacs-starts-modes][Emacs Starts modes]]
 - [[#all-the-icons][ALL THE ICONS]]
 - [[#backup][BACKUP]]
 - [[#company][COMPANY]]
@@ -67,9 +68,14 @@ To keep this =config.org= a reasonable length, I have moved a lot of code to ind
 (require 'app-launchers) ;; Use emacs as a run launcher like dmenu (experimental)
 #+end_src
 
+** Emacs Starts modes 
+#+begin_src emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)) ;;To ensure Emacs always starts with js2-mode for .js files
+#+end_src
+
 * ALL THE ICONS
 This is an icon set that can be used with dashboard, dired, ibuffer and other Emacs programs.
- begin_src emacs-lisp
+ #+begin_src emacs-lisp
 (use-package all-the-icons
   :ensure t
   :if (display-graphic-p))
@@ -119,7 +125,7 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
   (setq dashboard-set-file-icons t)
   (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
   ;;(setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
-  (setq dashboard-startup-banner "~/.config/emacs/images/dtmacs-logo.png")  ;; use custom image as banner
+  (setq dashboard-startup-banner "~/.config/emacs/images/leonamsh-logo.png")  ;; use custom image as banner
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   (setq dashboard-items '((recents . 5)
                           (agenda . 5 )
@@ -900,7 +906,7 @@ The first line below designates the directory where will place all of our custom
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
   ;; Sets the default theme to load!!! 
-  (load-theme 'doom-dracula t)
+  (load-theme 'kaolin-ocean t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   (doom-themes-neotree-config)
   ;; Corrects (and improves) org-mode's native fontification.

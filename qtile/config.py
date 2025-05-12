@@ -31,6 +31,7 @@ from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 import colors
 from qtile_extras.widget.decorations import PowerLineDecoration, RectDecoration
+from spotify import Spotify
 
 powerline = {
     "decorations": [
@@ -41,9 +42,9 @@ powerline = {
 
 mod = "mod4"                # Sets mod key to SUPER/WINDOWS
 myTerm = "kitty"            # My terminal of choice
-myBrowser = "brave"       # My browser of choice
-myBrowser2 = "vivaldi"     # My browser of choice
-myFiles = "thunar"        # My file manager of choice
+myBrowser2 = "firefox-developer-edition"       # My browser of choice
+myBrowser = "brave"     # My browser of choice
+myFiles = "nautilus"        # My file manager of choice
 myCode = "code"             # vscode
 myMusic = "flatpak run com.spotify.Client"         # spotify
 myEmacs = "emacsclient -c -a 'emacs' " # The space at the end is IMPORTANT!
@@ -198,13 +199,13 @@ keys = [
 ]
 
 groups = []
-group_names = ["1", "2", "3", "4"]
+group_names = ["1", "2", "3", "4", "5"]
 #group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 #group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 #group_labels = ["DEV", "WWW", "SYS", "MUS", "VBOX", "CHAT", "DOC", "VID", "GFX", "MISC"]
 #group_labels = ["", "", "", "", "", "", "𝦝", "", "", "⛨"]
 group_labels = ["", "", "", ""]
-group_labels = ["", "", "", ""]
+group_labels = ["", "", "", "", ""]
 
 group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
 
@@ -352,7 +353,6 @@ def init_widgets_list():
                 widget.Image(
                     filename='~/.config/qtile/Assets/4.png',
                 ),
-
                 widget.WindowName(
                     background=colors[0],
                     font="SauceCodePro Nerd Font",
@@ -365,7 +365,16 @@ def init_widgets_list():
                 widget.Image(
                     filename='~/.config/qtile/Assets/3.png',
                 ),
-
+                Spotify(
+                    font="SauceCodePro Nerd Font",
+                    fontsize=13,
+                    max_chars=40,
+                    background=colors[9],
+                    play_icon='',
+                    pause_icon='',
+                    update_interval=0.5,
+                    format="{icon} {artist} {track} ",
+                ),
                 widget.Systray(
                     background=colors[9],
                     fontsize=2,
@@ -464,9 +473,8 @@ def init_widgets_screen2():
 # For ex: Screen(top=bar.Bar(widgets=init_widgets_screen2(), background="#00000000", size=24)),
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=[8, 8, 0, 8], size=28)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), margin=[8, 8, 0, 8], size=28)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), margin=[8, 12, 0, 12], size=28))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=[0,0,0,0], size=28)),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), margin=[0,0,0,0], size=28))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()

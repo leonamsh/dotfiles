@@ -18,14 +18,20 @@
      "1f669e8abe4dc2855268c9a607b5e350e2811b3c5afd09af5939ff0c01a89c5a"
      default))
  '(package-selected-packages
-   '(colorful-mode dockerfile-mode dracula-theme emmet-mode fish-mode
-		   flycheck fontawesome format-sql haskell-mode
-		   hyprlang-ts-mode i3wm-config-mode
-		   js-react-redux-yasnippets js2-mode json-mode
-		   kaolin-themes magit markdown-mode markdown-toc
-		   markdownfmt prettier prettier-js prettier-rc
-		   python-mode sqlformat sqlup-mode toml-mode treemacs
-		   typescript-mode web-mode yasnippet)))
+   '(all-the-icons-nerd-fonts auto-correct ayu-theme colorful-mode
+			      css-autoprefixer dockerfile-mode
+			      dracula-theme emmet-mode eslint-rc
+			      eslintd-fix fish-mode flycheck
+			      fontawesome format-sql haskell-mode
+			      hyprlang-ts-mode i3wm-config-mode
+			      js-react-redux-yasnippets js2-mode
+			      js3-mode json-mode kaolin-themes magit
+			      markdown-mode markdown-toc markdownfmt
+			      nerd-icons nerd-icons-completion
+			      nerd-icons-ivy-rich prettier prettier-js
+			      prettier-rc python-mode sqlformat
+			      sqlup-mode toml-mode treemacs
+			      typescript-mode web-mode yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
