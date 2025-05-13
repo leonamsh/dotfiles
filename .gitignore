@@ -1,7 +1,6 @@
 # Ignora TUDO no diretório .config
 /*
 # Exceto estas pastas (e seus conteúdos)
-!/emacs/
 !/fish/
 !/alacritty/
 !/polybar/
