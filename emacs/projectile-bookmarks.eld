@@ -1,1 +1,1 @@
-("~/Documentos/git/maisPraTi/" "~/.config/" "~/Documentos/git/useroverridesarkenfox/" "~/Documentos/git/.dotfiles/" "~/Documentos/git/scripts/" "~/Documentos/aulas/+prati/node_modules/prompt-sync/" "~/.oh-my-zsh/" "~/Documentos/git/qtileDotfiles/Cozytile/" "~/Documentos/git/archpaw/" "~/Documentos/git/dotfiles/")
+("~/.config/")

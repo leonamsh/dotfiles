@@ -42,12 +42,13 @@ powerline = {
 
 mod = "mod4"                # Sets mod key to SUPER/WINDOWS
 myTerm = "kitty"            # My terminal of choice
-myBrowser2 = "firefox-developer-edition"       # My browser of choice
+myBrowser2 = "vivaldi"       # My browser of choice
 myBrowser = "brave"     # My browser of choice
 myFiles = "nautilus"        # My file manager of choice
 myCode = "code"             # vscode
 myMusic = "flatpak run com.spotify.Client"         # spotify
-myEmacs = "emacsclient -c -a 'emacs' " # The space at the end is IMPORTANT!
+myEmacs = "emacs" # The space at the end is IMPORTANT!
+# myEmacs = "emacsclient -c -a 'emacs' " # The space at the end is IMPORTANT!
 logOut = "sh -c ~/.config/rofi/scripts/power" #logout menu option - about to change it to rofi power script
 # logOut = "archlinux-logout" #logout menu option - about to change it to rofi power script
 

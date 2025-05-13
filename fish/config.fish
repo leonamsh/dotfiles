@@ -106,6 +106,12 @@ alias fupd='fupp && upp & updspd'
 alias clone='git clone'
 #alias --='--noconfirm --needed'
 #alias ---='--noconfirm'
+alias doomsync='/home/lm/.config/emacs/bin/doom sync'
+alias doomupd='/home/lm/.config/emacs/bin/doom upgrade'
+alias doomdoc='/home/lm/.config/emacs/bin/doom doctor'
+alias doompurge='/home/lm/.config/emacs/bin/doom purge'
+#~export PATH="$HOME/.emacs.d/bin:$PATH"~
+
 
 # Replace ls with eza
 alias ls='eza -al --color=always --group-directories-first --icons' # preferred listing
