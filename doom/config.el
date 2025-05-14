@@ -86,9 +86,7 @@
   )
 
 ;; gotta make emacs realod init.el every start. idk how to do it thou D:
-(after! lsp-mode
-  (load-file "~/.config/doom/init.el")
-  )
+(load! "~/.doom.d/init.el")
 ;; automatically organize imports
 (add-hook 'go-mode-hook #'lsp-deferred)
 ;; Make sure you don't have other goimports hooks enabled.
@@ -110,231 +108,224 @@
 (require 'pbcopy)
 (turn-on-pbcopy)
 
-;; general Keybindings
-(use-package general
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+
+;; Keybindings com map!
+(map! :leader
+      :desc "Counsel M-x" "SPC" #'counsel-M-x
+      :desc "Find file" "." #'find-file
+      :desc "Perspective" "=" #'perspective-map
+      :desc "Comment lines" "TAB TAB" #'comment-line
+      :desc "Universal argument" "u" #'universal-argument)
+
+;; Buffer/bookmark bindings
+(map! :leader
+      :prefix "b"
+      :desc "Switch to buffer" "b" #'switch-to-buffer
+      :desc "Create indirect buffer copy" "c" #'clone-indirect-buffer
+      :desc "Clone indirect buffer other window" "C" #'clone-indirect-buffer-other-window
+      :desc "Delete bookmark" "d" #'bookmark-delete
+      :desc "Ibuffer" "i" #'ibuffer
+      :desc "Kill current buffer" "k" #'kill-current-buffer
+      :desc "Kill multiple buffers" "K" #'kill-some-buffers
+      :desc "List bookmarks" "l" #'list-bookmarks
+      :desc "Set bookmark" "m" #'bookmark-set
+      :desc "Next buffer" "n" #'next-buffer
+      :desc "Previous buffer" "p" #'previous-buffer
+      :desc "Reload buffer" "r" #'revert-buffer
+      :desc "Rename buffer" "R" #'rename-buffer
+      :desc "Save buffer" "s" #'basic-save-buffer
+      :desc "Save multiple buffers" "S" #'save-some-buffers
+      :desc "Save bookmarks" "w" #'bookmark-save)
+
+;; Dired bindings
+(map! :leader
+      :prefix "d"
+      :desc "Open maisPraTi folder" "A" (lambda () (interactive) (neotree-dir "~/Documentos/git/maisPraTi/"))
+      :desc "Open dired" "d" #'dired
+      :desc "Open doom folder" "D" (lambda () (interactive) (neotree-dir "~/.config/.doom.d/"))
+      :desc "Dired jump" "j" #'dired-jump
+      :desc "Open neotree" "n" #'neotree-dir
+      :desc "Peep-dired" "p" #'peep-dired
+      :desc "Open teste producao" "P" (lambda () (interactive) (dired "i:/Teste_Producao/")))
+
+;; Eshell/Evaluate bindings
+(map! :leader
+      :prefix "e"
+      :desc "Evaluate buffer" "b" #'eval-buffer
+      :desc "Evaluate defun" "d" #'eval-defun
+      :desc "Evaluate expression" "e" #'eval-expression
+      :desc "Eshell history" "h" #'counsel-esh-history
+      :desc "Evaluate last sexp" "l" #'eval-last-sexp
+      :desc "Evaluate region" "r" #'eval-region
+      :desc "Reload EWW" "R" #'eww-reload
+      :desc "Eshell" "s" #'eshell
+      :desc "EWW browser" "w" #'eww)
+
+;; File bindings
+(map! :leader
+      :prefix "f"
+      :desc "Open alacritty config" "a" (lambda () (interactive) (find-file "~/.config/alacritty/alacritty.toml"))
+      :desc "Open emacs config" "c" (lambda () (interactive) (find-file "~/.doom.d/config.el"))
+      :desc "Open user-emacs-directory" "e" (lambda () (interactive) (dired "~/.doom.d/custom.el"))
+      :desc "Find grep dired" "d" #'find-grep-dired
+      :desc "Open fish config" "f" (lambda () (interactive) (find-file "~/.config/fish/config.fish"))
+      :desc "Search current file" "g" #'counsel-grep-or-swiper
+      :desc "Open hyprland config" "h" (lambda () (interactive) (find-file "~/.config/hypr/hyprland.conf"))
+      :desc "Open init.el" "i" (lambda () (interactive) (find-file "~/.doom.d/init.el"))
+      :desc "Jump to file" "j" #'counsel-file-jump
+      :desc "Open kitty config" "k" (lambda () (interactive) (find-file "~/.config/kitty/kitty.conf"))
+      :desc "Locate file" "l" #'counsel-locate
+      :desc "Open qtile config" "q" (lambda () (interactive) (find-file "~/.config/qtile/config.py"))
+      :desc "Find recent files" "r" #'counsel-recentf
+      :desc "Sudo find file" "u" #'sudo-edit-find-file
+      :desc "Sudo edit file" "U" #'sudo-edit
+      :desc "Open zshrc" "z" (lambda () (interactive) (find-file "~/.zshrc")))
+
+;; Git bindings
+(map! :leader
+      :prefix "g"
+      :desc "Magit dispatch" "/" #'magit-dispatch
+      :desc "Magit file dispatch" "." #'magit-file-dispatch
+      :desc "Switch branch" "b" #'magit-branch-checkout
+      :desc "Create branch and checkout" "c b" #'magit-branch-and-checkout
+      :desc "Create commit" "c c" #'magit-commit-create
+      :desc "Create fixup commit" "c f" #'magit-commit-fixup
+      :desc "Clone repo" "C" #'magit-clone
+      :desc "Show commit" "f c" #'magit-show-commit
+      :desc "Magit find file" "f f" #'magit-find-file
+      :desc "Find gitconfig" "f g" #'magit-find-git-config-file
+      :desc "Git fetch" "F" #'magit-fetch
+      :desc "Magit status" "g" #'magit-status
+      :desc "Initialize repo" "i" #'magit-init
+      :desc "Buffer log" "l" #'magit-log-buffer-file
+      :desc "Revert file" "r" #'vc-revert
+      :desc "Stage file" "s" #'magit-stage-file
+      :desc "Time machine" "t" #'git-timemachine
+      :desc "Unstage file" "u" #'magit-unstage-file)
+
+;; Help bindings
+(map! :leader
+      :prefix "h"
+      :desc "Apropos" "a" #'counsel-apropos
+      :desc "Describe bindings" "b" #'describe-bindings
+      :desc "Describe char" "c" #'describe-char
+      :desc "About Emacs" "d a" #'about-emacs
+      :desc "View debugging" "d d" #'view-emacs-debugging
+      :desc "View FAQ" "d f" #'view-emacs-FAQ
+      :desc "Emacs manual" "d m" #'info-emacs-manual
+      :desc "View news" "d n" #'view-emacs-news
+      :desc "Describe distribution" "d o" #'describe-distribution
+      :desc "View problems" "d p" #'view-emacs-problems
+      :desc "View todo" "d t" #'view-emacs-todo
+      :desc "Describe no warranty" "d w" #'describe-no-warranty
+      :desc "View messages" "e" #'view-echo-area-messages
+      :desc "Describe function" "f" #'describe-function
+      :desc "Describe face" "F" #'describe-face
+      :desc "Describe GNU Project" "g" #'describe-gnu-project
+      :desc "Info" "i" #'info
+      :desc "Describe input method" "I" #'describe-input-method
+      :desc "Describe key" "k" #'describe-key
+      :desc "View keystrokes" "l" #'view-lossage
+      :desc "Describe language" "L" #'describe-language-environment
+      :desc "Describe mode" "m" #'describe-mode
+      :desc "Reload config" "r r" (lambda () (interactive) (load-file "~/.config/.doom.d/init.el"))
+      :desc "Load theme" "t" #'load-theme
+      :desc "Describe variable" "v" #'describe-variable
+      :desc "Where is" "w" #'where-is
+      :desc "Describe command" "x" #'describe-command)
+
+;; Org bindings
+(map! :leader
+      :prefix "m"
+      :desc "Org agenda" "a" #'org-agenda
+      :desc "Org export" "e" #'org-export-dispatch
+      :desc "Toggle item" "i" #'org-toggle-item
+      :desc "Org todo" "t" #'org-todo
+      :desc "Babel tangle" "B" #'org-babel-tangle
+      :desc "Todo list" "T" #'org-todo-list
+      :desc "Insert hline" "b -" #'org-table-insert-hline
+      :desc "Time stamp" "d t" #'org-time-stamp)
+
+;; Open bindings
+(map! :leader
+      :prefix "o"
+      :desc "Dashboard" "d" #'dashboard-open
+      :desc "Elfeed" "e" #'elfeed
+      :desc "New frame" "f" #'make-frame
+      :desc "Select frame" "F" #'select-frame-by-name)
+
+;; Projectile bindings (mantido como estava)
+(map! :leader
+      :desc "Projectile" "p" #'projectile-command-map)
+
+;; Search bindings
+(map! :leader
+      :prefix "s"
+      :desc "Dictionary search" "d" #'dictionary-search
+      :desc "Man pages" "m" #'man
+      :desc "TLDR" "t" #'tldr
+      :desc "Woman" "w" #'woman)
+
+;; Toggle bindings
+(map! :leader
+      :prefix "t"
+      :desc "Toggle eshell" "e" #'eshell-toggle
+      :desc "Toggle flycheck" "f" #'flycheck-mode
+      :desc "Toggle line numbers" "l" #'display-line-numbers-mode
+      :desc "Toggle neotree" "n" #'neotree-toggle
+      :desc "Toggle org mode" "o" #'org-mode
+      :desc "Toggle rainbow" "r" #'rainbow-mode
+      :desc "Toggle truncate lines" "t" #'visual-line-mode
+      :desc "Toggle vterm" "v" #'vterm-toggle
+      :desc "Package install" "p" #'package-install)
+
+;; Window bindings
+(map! :leader
+      :prefix "w"
+      :desc "Close window" "c" #'evil-window-delete
+      :desc "New window" "n" #'evil-window-new
+      :desc "Split window" "s" #'evil-window-split
+      :desc "Vsplit window" "v" #'evil-window-vsplit
+      :desc "Window left" "h" #'evil-window-left
+      :desc "Window down" "j" #'evil-window-down
+      :desc "Window up" "k" #'evil-window-up
+      :desc "Window right" "l" #'evil-window-right
+      :desc "Next window" "w" #'evil-window-next
+      :desc "Buffer move left" "H" #'buf-move-left
+      :desc "Buffer move down" "J" #'buf-move-down
+      :desc "Buffer move up" "K" #'buf-move-up
+      :desc "Buffer move right" "L" #'buf-move-right)
+
+;; Configurações adicionais (mantidas da sua configuração original)
+(use-package which-key
+  :init (which-key-mode 1)
+  :diminish
   :config
-  (general-evil-setup)
+  (setq which-key-side-window-location 'bottom
+        which-key-sort-order #'which-key-key-order-alpha
+        which-key-allow-imprecise-window-fit nil
+        which-key-sort-uppercase-first nil
+        which-key-add-column-padding 1
+        which-key-max-display-columns nil
+        which-key-min-display-lines 6
+        which-key-side-window-slot -10
+        which-key-side-window-max-height 0.25
+        which-key-idle-delay 0.8
+        which-key-max-description-length 25
+        which-key-separator " → "))
 
-  ;; set up 'SPC' as the global leader key
-  (general-create-definer dt/leader-keys
-    :states '(normal insert visual emacs)
-    :keymaps 'override
-    :prefix "SPC" ;; set leader
-    :global-prefix "M-SPC") ;; access leader in insert mode
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
-  (dt/leader-keys
-    "SPC" '(counsel-M-x :wk "Counsel M-x")
-    "." '(find-file :wk "Find file")
-    "=" '(perspective-map :wk "Perspective") ;; Lists all the perspective keybindings
-    "TAB TAB" '(comment-line :wk "Comment lines")
-    "u" '(universal-argument :wk "Universal argument"))
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
 
-  (dt/leader-keys
-    "b" '(:ignore t :wk "Bookmarks/Buffers")
-    "b b" '(switch-to-buffer :wk "Switch to buffer")
-    "b c" '(clone-indirect-buffer :wk "Create indirect buffer copy in a split")
-    "b C" '(clone-indirect-buffer-other-window :wk "Clone indirect buffer in new window")
-    "b d" '(bookmark-delete :wk "Delete bookmark")
-    "b i" '(ibuffer :wk "Ibuffer")
-    "b k" '(kill-current-buffer :wk "Kill current buffer")
-    "b K" '(kill-some-buffers :wk "Kill multiple buffers")
-    "b l" '(list-bookmarks :wk "List bookmarks")
-    "b m" '(bookmark-set :wk "Set bookmark")
-    "b n" '(next-buffer :wk "Next buffer")
-    "b p" '(previous-buffer :wk "Previous buffer")
-    "b r" '(revert-buffer :wk "Reload buffer")
-    "b R" '(rename-buffer :wk "Rename buffer")
-    "b s" '(basic-save-buffer :wk "Save buffer")
-    "b S" '(save-some-buffers :wk "Save multiple buffers")
-    "b w" '(bookmark-save :wk "Save current bookmarks to bookmark file"))
-
-  (dt/leader-keys
-    "d" '(:ignore t :wk "Dired")
-    "d A" '((lambda () (interactive)
-              (neotree-dir "~/Documentos/git/maisPraTi/"))
-            :wk "Open maisPraTi folder on dired")
-    "d d" '(dired :wk "Open dired")
-    "d D" '((lambda () (interactive)
-              (neotree-dir "~/.config/doom/"))
-            :wk "Open doom folder on dired")
-    "d j" '(dired-jump :wk "Dired jump to current")
-    "d n" '(neotree-dir :wk "Open directory in neotree")
-    "d p" '(peep-dired :wk "Peep-dired"))
-
-  (dt/leader-keys
-    "e" '(:ignore t :wk "Eshell/Evaluate")
-    "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
-    "e d" '(eval-defun :wk "Evaluate defun containing or after point")
-    "e e" '(eval-expression :wk "Evaluate and elisp expression")
-    "e h" '(counsel-esh-history :which-key "Eshell history")
-    "e l" '(eval-last-sexp :wk "Evaluate elisp expression before point")
-    "e r" '(eval-region :wk "Evaluate elisp in region")
-    "e R" '(eww-reload :which-key "Reload current page in EWW")
-    "e s" '(eshell :which-key "Eshell")
-    "e w" '(eww :which-key "EWW emacs web wowser"))
-
-  (dt/leader-keys
-    "f" '(:ignore t :wk "Files")
-    "f a" '((lambda () (interactive)
-              (find-file "~/.config/alacritty/alacritty.toml"))
-            :wk "Open alacritty config file")
-    "f c" '((lambda () (interactive)
-              (find-file "~/.config/doom/config.el"))
-            :wk "Open emacs config.org")
-    "f e" '((lambda () (interactive)
-              (dired "~/.config/doom/"))
-            :wk "Open user-emacs-directory in dired")
-    "f d" '(find-grep-dired :wk "Search for string in files in DIR")
-    "f f" '((lambda () (interactive)
-              (find-file "~/.config/fish/config.fish"))
-            :wk "Open fish config file")
-
-    "f g" '(counsel-grep-or-swiper :wk "Search for string current file")
-    "f h" '((lambda () (interactive)
-              (find-file "~/.config/hypr/hyprland.conf"))
-            :wk "Open hyprland config file")
-    "f i" '((lambda () (interactive)
-              (find-file "~/.config/doom/init.el"))
-            :wk "Open emacs init.el")
-    "f j" '(counsel-file-jump :wk "Jump to a file below current directory")
-    "f k" '((lambda () (interactive)
-              (find-file "~/.config/kitty/kitty.conf"))
-            :wk "Open kitty config file")
-    "f l" '(counsel-locate :wk "Locate a file")
-    "f q" '((lambda () (interactive)
-              (find-file "~/.config/qtile/config.py"))
-            :wk "Open qtile config file")
-    "f r" '(counsel-recentf :wk "Find recent files")
-    "f u" '(sudo-edit-find-file :wk "Sudo find file")
-    "f U" '(sudo-edit :wk "Sudo edit file")
-    "f z" '((lambda () (interactive)
-              (find-file "~/.zshrc"))
-            :wk "Open fish config file"))
-
-  (dt/leader-keys
-    "g" '(:ignore t :wk "Git")
-    "g /" '(magit-displatch :wk "Magit dispatch")
-    "g ." '(magit-file-displatch :wk "Magit file dispatch")
-    "g b" '(magit-branch-checkout :wk "Switch branch")
-    "g c" '(:ignore t :wk "Create")
-    "g c b" '(magit-branch-and-checkout :wk "Create branch and checkout")
-    "g c c" '(magit-commit-create :wk "Create commit")
-    "g c f" '(magit-commit-fixup :wk "Create fixup commit")
-    "g C" '(magit-clone :wk "Clone repo")
-    "g f" '(:ignore t :wk "Find")
-    "g f c" '(magit-show-commit :wk "Show commit")
-    "g f f" '(magit-find-file :wk "Magit find file")
-    "g f g" '(magit-find-git-config-file :wk "Find gitconfig file")
-    "g F" '(magit-fetch :wk "Git fetch")
-    "g g" '(magit-status :wk "Magit status")
-    "g i" '(magit-init :wk "Initialize git repo")
-    "g l" '(magit-log-buffer-file :wk "Magit buffer log")
-    "g r" '(vc-revert :wk "Git revert file")
-    "g s" '(magit-stage-file :wk "Git stage file")
-    "g t" '(git-timemachine :wk "Git time machine")
-    "g u" '(magit-stage-file :wk "Git unstage file"))
-
-  (dt/leader-keys
-    "h" '(:ignore t :wk "Help")
-    "h a" '(counsel-apropos :wk "Apropos")
-    "h b" '(describe-bindings :wk "Describe bindings")
-    "h c" '(describe-char :wk "Describe character under cursor")
-    "h d" '(:ignore t :wk "Emacs documentation")
-    "h d a" '(about-emacs :wk "About Emacs")
-    "h d d" '(view-emacs-debugging :wk "View Emacs debugging")
-    "h d f" '(view-emacs-FAQ :wk "View Emacs FAQ")
-    "h d m" '(info-emacs-manual :wk "The Emacs manual")
-    "h d n" '(view-emacs-news :wk "View Emacs news")
-    "h d o" '(describe-distribution :wk "How to obtain Emacs")
-    "h d p" '(view-emacs-problems :wk "View Emacs problems")
-    "h d t" '(view-emacs-todo :wk "View Emacs todo")
-    "h d w" '(describe-no-warranty :wk "Describe no warranty")
-    "h e" '(view-echo-area-messages :wk "View echo area messages")
-    "h f" '(describe-function :wk "Describe function")
-    "h F" '(describe-face :wk "Describe face")
-    "h g" '(describe-gnu-project :wk "Describe GNU Project")
-    "h i" '(info :wk "Info")
-    "h I" '(describe-input-method :wk "Describe input method")
-    "h k" '(describe-key :wk "Describe key")
-    "h l" '(view-lossage :wk "Display recent keystrokes and the commands run")
-    "h L" '(describe-language-environment :wk "Describe language environment")
-    "h m" '(describe-mode :wk "Describe mode")
-    "h r" '(:ignore t :wk "Reload")
-    "h r r" '((lambda () (interactive)
-                (load-file "~/.config/doom/init.el"))
-              :wk "Reload emacs config")
-    "h t" '(load-theme :wk "Load theme")
-    "h v" '(describe-variable :wk "Describe variable")
-    "h w" '(where-is :wk "Prints keybinding for command if set")
-    "h x" '(describe-command :wk "Display full documentation for command"))
-
-  (dt/leader-keys
-    "m" '(:ignore t :wk "Org")
-    "m a" '(org-agenda :wk "Org agenda")
-    "m e" '(org-export-dispatch :wk "Org export dispatch")
-    "m i" '(org-toggle-item :wk "Org toggle item")
-    "m t" '(org-todo :wk "Org todo")
-    "m B" '(org-babel-tangle :wk "Org babel tangle")
-    "m T" '(org-todo-list :wk "Org todo list"))
-
-  (dt/leader-keys
-    "m b" '(:ignore t :wk "Tables")
-    "m b -" '(org-table-insert-hline :wk "Insert hline in table"))
-
-  (dt/leader-keys
-    "m d" '(:ignore t :wk "Date/deadline")
-    "m d t" '(org-time-stamp :wk "Org time stamp"))
-
-  (dt/leader-keys
-    "o" '(:ignore t :wk "Open")
-    "o d" '(dashboard-open :wk "Dashboard")
-    "o e" '(elfeed :wk "Elfeed RSS")
-    "o f" '(make-frame :wk "Open buffer in new frame")
-    "o F" '(select-frame-by-name :wk "Select frame by name"))
-
-  ;; projectile-command-map already has a ton of bindings
-  ;; set for us, so no need to specify each individually.
-  (dt/leader-keys
-    "p" '(projectile-command-map :wk "Projectile"))
-
-  (dt/leader-keys
-    "s" '(:ignore t :wk "Search")
-    "s d" '(dictionary-search :wk "Search dictionary")
-    "s m" '(man :wk "Man pages")
-    "s t" '(tldr :wk "Lookup TLDR docs for a command")
-    "s w" '(woman :wk "Similar to man but doesn't require man"))
-
-  (dt/leader-keys
-    "t" '(:ignore t :wk "Toggle")
-    "t e" '(eshell-toggle :wk "Toggle eshell")
-    "t f" '(flycheck-mode :wk "Toggle flycheck")
-    "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
-    "t n" '(neotree-toggle :wk "Toggle neotree file viewer")
-    "t o" '(org-mode :wk "Toggle org mode")
-    "t r" '(rainbow-mode :wk "Toggle rainbow mode")
-    "t t" '(visual-line-mode :wk "Toggle truncated lines")
-    "t v" '(vterm-toggle :wk "Toggle vterm")
-    "t p" '(package-install :wk "Package Installer"))
-
-  (dt/leader-keys
-    "w" '(:ignore t :wk "Windows")
-    ;; Window splits
-    "w c" '(evil-window-delete :wk "Close window")
-    "w n" '(evil-window-new :wk "New window")
-    "w s" '(evil-window-split :wk "Horizontal split window")
-    "w v" '(evil-window-vsplit :wk "Vertical split window")
-    ;; Window motions
-    "w h" '(evil-window-left :wk "Window left")
-    "w j" '(evil-window-down :wk "Window down")
-    "w k" '(evil-window-up :wk "Window up")
-    "w l" '(evil-window-right :wk "Window right")
-    "w w" '(evil-window-next :wk "Goto next window")
-    ;; Move Windows
-    "w H" '(buf-move-left :wk "Buffer move left")
-    "w J" '(buf-move-down :wk "Buffer move down")
-    "w K" '(buf-move-up :wk "Buffer move up")
-    "w L" '(buf-move-right :wk "Buffer move right"))
-  )
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
 
 (use-package which-key
   :init
