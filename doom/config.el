@@ -108,13 +108,10 @@
 ;; (require 'pbcopy)
 ;; (turn-on-pbcopy)
 
-<<<<<<< HEAD
 ;;
 (require 'simpleclip)
 (simpleclip-mode 1)
 
-=======
->>>>>>> 38cc0ee446d7c46f2fb9338872e877bf80c90532
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
@@ -334,19 +331,16 @@
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
-<<<<<<< HEAD
 (move-text-default-bindings)
 
 (use-package all-the-icons
   :ensure t
   :if (display-graphic-p))
 
-=======
 (use-package all-the-icons
   :ensure t
   :if (display-graphic-p))
 
->>>>>>> 38cc0ee446d7c46f2fb9338872e877bf80c90532
 (use-package all-the-icons-dired
   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
 
