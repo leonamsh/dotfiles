@@ -57,6 +57,9 @@
 (package! prettier-js)
 (package! prettier-rc)
 (package! all-the-icons-dired)
+(package! counsel)
+(package! simpleclip)
+(package! move-text)
 
 ;;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
