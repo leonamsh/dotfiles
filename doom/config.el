@@ -259,7 +259,6 @@
       :desc "duplicate line" "D" #'duplicate-dwim)
 =======
       :desc "Time stamp" "d t" #'org-time-stamp)
->>>>>>> 38cc0ee446d7c46f2fb9338872e877bf80c90532
 
 ;; Open bindings
 (map! :leader
