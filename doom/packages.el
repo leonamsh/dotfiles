@@ -60,6 +60,14 @@
 (package! counsel)
 (package! simpleclip)
 (package! move-text)
+(package! all)
+(package! vterm-toggle)
+(package! eshell-toggle)
+(package! neotree)
+(package! projectile)
+(package! all-the-icons-nerd-fonts)
+(package! buffer-move)
+(package! markdown-mode)
 
 ;;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.

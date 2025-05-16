@@ -35,7 +35,7 @@
 (setq doom-font (font-spec :family "JetBrains Mono" :size 16)
       doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 16))
 
-(setq doom-theme 'doom-ayu-mirage)
+(setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -86,7 +86,7 @@
   )
 
 ;; gotta make emacs realod init.el every start. idk how to do it thou D:
-(load! "~/.doom.d/init.el")
+;; (load! "~/.config/doom/init.el")
 ;; automatically organize imports
 (add-hook 'go-mode-hook #'lsp-deferred)
 ;; Make sure you don't have other goimports hooks enabled.
@@ -150,7 +150,7 @@
       :prefix "d"
       :desc "Open maisPraTi folder" "A" (lambda () (interactive) (neotree-dir "~/Documentos/git/maisPraTi/"))
       :desc "Open dired" "d" #'dired
-      :desc "Open doom folder" "D" (lambda () (interactive) (neotree-dir "~/.config/.doom.d/"))
+      :desc "Open doom folder" "d" (lambda () (interactive) (neotree-dir "~/.config/doom/"))
       :desc "Dired jump" "j" #'dired-jump
       :desc "Open neotree" "n" #'neotree-dir
       :desc "Peep-dired" "p" #'peep-dired
@@ -173,13 +173,13 @@
 (map! :leader
       :prefix "f"
       :desc "Open alacritty config" "a" (lambda () (interactive) (find-file "~/.config/alacritty/alacritty.toml"))
-      :desc "Open emacs config" "c" (lambda () (interactive) (find-file "~/.doom.d/config.el"))
-      :desc "Open user-emacs-directory" "e" (lambda () (interactive) (dired "~/.doom.d/custom.el"))
+      :desc "Open emacs config" "c" (lambda () (interactive) (find-file "~/.config/doom/config.el"))
+      :desc "Open user-emacs-directory" "e" (lambda () (interactive) (dired "~/.config/doom/custom.el"))
       :desc "Find grep dired" "d" #'find-grep-dired
       :desc "Open fish config" "f" (lambda () (interactive) (find-file "~/.config/fish/config.fish"))
       :desc "Search current file" "g" #'counsel-grep-or-swiper
       :desc "Open hyprland config" "h" (lambda () (interactive) (find-file "~/.config/hypr/hyprland.conf"))
-      :desc "Open init.el" "i" (lambda () (interactive) (find-file "~/.doom.d/init.el"))
+      :desc "Open init.el" "i" (lambda () (interactive) (find-file "~/.config/doom/init.el"))
       :desc "Jump to file" "j" #'counsel-file-jump
       :desc "Open kitty config" "k" (lambda () (interactive) (find-file "~/.config/kitty/kitty.conf"))
       :desc "Locate file" "l" #'counsel-locate
@@ -206,6 +206,7 @@
       :desc "Magit status" "g" #'magit-status
       :desc "Initialize repo" "i" #'magit-init
       :desc "Buffer log" "l" #'magit-log-buffer-file
+      :desc "magit push" "p" #'magit-push
       :desc "Revert file" "r" #'vc-revert
       :desc "Stage file" "s" #'magit-stage-file
       :desc "Time machine" "t" #'git-timemachine
@@ -236,7 +237,7 @@
       :desc "View keystrokes" "l" #'view-lossage
       :desc "Describe language" "L" #'describe-language-environment
       :desc "Describe mode" "m" #'describe-mode
-      :desc "Reload config" "r r" (lambda () (interactive) (load-file "~/.config/.doom.d/init.el"))
+      :desc "Reload config" "r r" (lambda () (interactive) (load-file "~/.config/doom/init.el"))
       :desc "Load theme" "t" #'load-theme
       :desc "Describe variable" "v" #'describe-variable
       :desc "Where is" "w" #'where-is
@@ -252,13 +253,10 @@
       :desc "Babel tangle" "B" #'org-babel-tangle
       :desc "Todo list" "T" #'org-todo-list
       :desc "Insert hline" "b -" #'org-table-insert-hline
-<<<<<<< HEAD
-      :desc "Time stamp" "d t" #'org-time-stamp
+      :desc "Time stamp" "s" #'org-time-stamp
       :desc "move line up" "u" #'move-line-up
       :desc "move line down" "d" #'move-line-down
       :desc "duplicate line" "D" #'duplicate-dwim)
-=======
-      :desc "Time stamp" "d t" #'org-time-stamp)
 
 ;; Open bindings
 (map! :leader
@@ -288,6 +286,7 @@
       :desc "Toggle line numbers" "l" #'display-line-numbers-mode
       :desc "Toggle neotree" "n" #'neotree-toggle
       :desc "Toggle org mode" "o" #'org-mode
+      :desc "open projects" "N" #'treemacs-projectile
       :desc "Toggle rainbow" "r" #'rainbow-mode
       :desc "Toggle truncate lines" "t" #'visual-line-mode
       :desc "Toggle vterm" "v" #'vterm-toggle
@@ -363,6 +362,8 @@
 	which-key-separator " → " ))
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)) ;;To ensure Emacs always starts with js2-mode for .js files
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 (use-package all-the-icons
   :ensure t
