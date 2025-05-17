@@ -43,7 +43,7 @@ powerline = {
 mod = "mod4"                # Sets mod key to SUPER/WINDOWS
 myTerm = "kitty"            # My terminal of choice
 myBrowser2 = "vivaldi"       # My browser of choice
-myBrowser = "brave"     # My browser of choice
+myBrowser = "firefox"     # My browser of choice
 myFiles = "nautilus"        # My file manager of choice
 myCode = "code"             # vscode
 myMusic = "flatpak run com.spotify.Client"         # spotify
@@ -205,8 +205,10 @@ group_names = ["1", "2", "3", "4", "5"]
 #group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 #group_labels = ["DEV", "WWW", "SYS", "MUS", "VBOX", "CHAT", "DOC", "VID", "GFX", "MISC"]
 #group_labels = ["", "", "", "", "", "", "𝦝", "", "", "⛨"]
-group_labels = ["", "", "", ""]
-group_labels = ["", "", "", "", ""]
+#group_labels = ["", "", "👁", "", "", "", "✀", "꩜", "", "⎙"]
+group_labels = ["I", "II", "III", "IV", "V"]
+# group_labels = ["", "", "", "", ""]
+# group_labels = ["", "", "", "꩜", ""]
 
 group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
 
@@ -268,197 +270,320 @@ def dmlogout():
     qtile.cmd_spawn("sh -c /home/lm/.config/qtile/scripts/dm-logout.sh")
 def power():
     qtile.cmd_spawn("sh -c ~/.config/rofi/scripts/power")
+
 extension_defaults = widget_defaults.copy()
+
 def init_widgets_list():
     widgets_list = [
+        widget.Spacer(length = 8),
+        widget.Image(
+                 filename = "~/.config/qtile/Assets/launch_Icon.png",
+                 scale = "False",
+                 mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("qtilekeys-yad")},
+                 ),
+        widget.Prompt(
+                 font = "Ubuntu Mono",
+                 fontsize=14,
+                 foreground = colors[1]
+        ),
+        widget.GroupBox(
+                 fontsize = 15,
+                 margin_y = 5,
+                 margin_x = 14,
+                 padding_y = 0,
+                 padding_x = 2,
+                 borderwidth = 3,
+                 active = colors[8],
+                 inactive = colors[9],
+                 rounded = False,
+                 highlight_color = colors[0],
+                 highlight_method = "line",
+                 this_current_screen_border = colors[7],
+                 this_screen_border = colors [4],
+                 other_current_screen_border = colors[7],
+                 other_screen_border = colors[4],
+                 ),
+        widget.TextBox(
+                 text = '|',
+                 font = "Ubuntu Mono",
+                 foreground = colors[9],
+                 padding = 2,
+                 fontsize = 14
+                 ),
+        widget.LaunchBar(
+                 progs = [("🦁", "firefox", "Brave web browser"),
+                          ("🚀", "kitty", "Alacritty terminal"),
+                          ("📁", "thunar", "PCManFM file manager"),
+                          ("🎸", "vlc", "VLC media player")
+                         ],
+                 fontsize = 12,
+                 padding = 12,
+                 foreground = colors[3],
+        ),
+        widget.TextBox(
+                 text = '|',
+                 font = "Ubuntu Mono",
+                 foreground = colors[9],
+                 padding = 2,
+                 fontsize = 14
+                 ),
+        widget.CurrentLayout(
+                 foreground = colors[8],
+                 padding = 5
+                 ),
+        widget.TextBox(
+                 text = '|',
+                 font = "Ubuntu Mono",
+                 foreground = colors[9],
+                 padding = 2,
+                 fontsize = 14
+                 ),
+        widget.WindowName(
+                 foreground = colors[6],
+                 padding = 8,
+                 max_chars = 40
+                 ),
+        widget.GenPollText(
+                 update_interval = 300,
+                 func = lambda: subprocess.check_output("printf $(uname -r)", shell=True, text=True),
+                 foreground = colors[3],
+                 padding = 8,
+                 fmt = '❤  {}',
+                 ),
+        widget.CPU(
+                 foreground = colors[4],
+                 padding = 8,
+                 mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
+                 format = '  Cpu: {load_percent}%',
+                 ),
+        widget.Memory(
+                 foreground = colors[8],
+                 padding = 8,
+                 mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
+                 format = '{MemUsed: .0f}{mm}',
+                 fmt = '🖥  Mem: {}',
+                 ),
+        widget.DF(
+                 update_interval = 60,
+                 foreground = colors[5],
+                 padding = 8,
+                 mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('notify-disk')},
+                 partition = '/',
+                 #format = '[{p}] {uf}{m} ({r:.0f}%)',
+                 format = '{uf}{m} free',
+                 fmt = '🖴  Disk: {}',
+                 visible_on_warn = False,
+                 ),
+        widget.Volume(
+                 foreground = colors[7],
+                 padding = 8,
+                 fmt = '🕫  Vol: {}',
+                 ),
+        widget.Clock(
+                 foreground = colors[8],
+                 padding = 8,
+                 mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('notify-date')},
+                 ## Uncomment for date and time
+                 # format = "⧗  %a, %b %d - %H:%M",
+                 ## Uncomment for time only
+                 format = "⧗  %I:%M %p",
+                 ),
+        widget.Systray(padding = 6),
+        widget.Spacer(length = 8),
 
-                widget.Spacer(length=15,
-                    background=colors[9]
-                ),
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/launch_Icon.png',
-                    margin=2,
-                    background=colors[9],
-                    mouse_callbacks={"Button1": power},
-                ),
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/6.png',
-                ),
-
-                widget.GroupBox(
-                    #font="SauceCodePro Nerd Font",
-                    font="font awesome",
-                    fontsize=16,
-                    #width=100,
-                    borderwidth=2,
-                    highlight_method='block',
-                    spacing=True,
-                    #margin=6,
-                    padding=4,
-                    center_aligned=True,
-                    active=colors[2],
-                    block_highlight_text_color=colors[3],
-                    highlight_color=colors[0],
-                    inactive=colors[9],
-                    foreground=colors[1],
-                    background=colors[0],
-                    this_current_screen_border=colors[1],
-                    this_screen_border=colors[0],
-                    other_current_screen_border=colors[1],
-                    other_screen_border=colors[0],
-                    urgent_border=colors[0],
-                    rounded=True,
-                    disable_drag=True,
-                ),
-
-                widget.Spacer(
-                    length=8,
-                    background=colors[0],
-                ),
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/1.png',
-                ),
-
-
-                widget.CurrentLayoutIcon(
-                    custom_icon_paths=["~/.config/qtile/Assets/layout"],
-                    background=colors[0],
-                    scale=0.50,
-                ),
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/5.png',
-                ),
-
-                widget.TextBox(
-                    text=" ",
-                    font="Font Awesome 6 Free Solid",
-                    fontsize=13,
-                    background=colors[9],
-                    foreground=colors[2],
-                    mouse_callbacks={"Button1": search},
-                ),
-
-                widget.TextBox(
-                    fmt='Search',
-                    background=colors[9],
-                    font="SauceCodePro Nerd Font",
-                    fontsize=13,
-                    foreground=colors[2],
-                    mouse_callbacks={"Button1": search},
-                ),
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/4.png',
-                ),
-                widget.WindowName(
-                    background=colors[0],
-                    font="SauceCodePro Nerd Font",
-                    fontsize=13,
-                    empty_group_string="Desktop",
-                    max_chars=130,
-                    foreground=colors[2],
-                ),
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/3.png',
-                ),
-                Spotify(
-                    font="SauceCodePro Nerd Font",
-                    fontsize=13,
-                    max_chars=40,
-                    background=colors[9],
-                    play_icon='',
-                    pause_icon='',
-                    update_interval=0.5,
-                    format="{icon} {artist} {track} ",
-                ),
-                widget.Systray(
-                    background=colors[9],
-                    fontsize=2,
-                ),
-
-                widget.TextBox(
-                    text=' ',
-                    background=colors[9],
-                ),
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/6.png',
-                    background=colors[0],
-                ),
-
-                widget.TextBox(
-                    text="",
-                    font="Font Awesome 6 Free Solid",
-                    fontsize=13,
-                    background=colors[0],
-                    foreground=colors[2],
-                ),
-
-                widget.Memory(
-                    background=colors[0],
-                    format='{MemUsed: .0f}{mm}',
-                    foreground=colors[2],
-                    font="SauceCodePro Nerd Font",
-                    fontsize=13,
-                    update_interval=5,
-                ),
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/2.png',
-                ),
-
-                widget.Spacer(
-                    length=8,
-                    background=colors[0],
-                ),
-
-                widget.TextBox(
-                    text=" ",
-                    font="Font Awesome 6 Free Solid",
-                    fontsize=13,
-                    background=colors[0],
-                    foreground=colors[2],
-                ),
-
-                widget.Volume(
-                    font="SauceCodePro Nerd Font",
-                    fontsize=13,
-                    background=colors[0],
-                    foreground=colors[2],
-                ),
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/5.png',
-                    background=colors[0],
-                ),
-
-                widget.TextBox(
-                    text=" ",
-                    font="Font Awesome 6 Free Solid",
-                    fontsize=13,
-                    background=colors[9],
-                    foreground=colors[2],
-                ),
-
-                widget.Clock(
-                    format='%a %d-%m-%y - %I:%M %p',
-                    background=colors[9],
-                    foreground=colors[2],
-                    font="SauceCodePro Nerd Font",
-                    fontsize=13,
-                ),
-
-                widget.Spacer(
-                    length=18,
-                    background=colors[9],
-                ),
-    ]
+        ]
     return widgets_list
+
+# def init_widgets_list():
+#     widgets_list = [
+
+#                 widget.Spacer(length=15,
+#                     background=colors[9]
+#                 ),
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/launch_Icon.png',
+#                     margin=2,
+#                     background=colors[9],
+#                     mouse_callbacks={"Button1": power},
+#                 ),
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/6.png',
+#                 ),
+
+#                 widget.GroupBox(
+#                     #font="SauceCodePro Nerd Font",
+#                     font="font awesome",
+#                     fontsize=16,
+#                     #width=100,
+#                     borderwidth=2,
+#                     highlight_method='block',
+#                     spacing=True,
+#                     #margin=6,
+#                     padding=4,
+#                     center_aligned=True,
+#                     active=colors[2],
+#                     block_highlight_text_color=colors[3],
+#                     highlight_color=colors[0],
+#                     inactive=colors[9],
+#                     foreground=colors[1],
+#                     background=colors[0],
+#                     this_current_screen_border=colors[1],
+#                     this_screen_border=colors[0],
+#                     other_current_screen_border=colors[1],
+#                     other_screen_border=colors[0],
+#                     urgent_border=colors[0],
+#                     rounded=True,
+#                     disable_drag=True,
+#                 ),
+
+#                 widget.Spacer(
+#                     length=8,
+#                     background=colors[0],
+#                 ),
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/1.png',
+#                 ),
+
+
+#                 widget.CurrentLayoutIcon(
+#                     custom_icon_paths=["~/.config/qtile/Assets/layout"],
+#                     background=colors[0],
+#                     scale=0.50,
+#                 ),
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/5.png',
+#                 ),
+
+#                 widget.TextBox(
+#                     text=" ",
+#                     font="Font Awesome 6 Free Solid",
+#                     fontsize=13,
+#                     background=colors[9],
+#                     foreground=colors[2],
+#                     mouse_callbacks={"Button1": search},
+#                 ),
+
+#                 widget.TextBox(
+#                     fmt='Search',
+#                     background=colors[9],
+#                     font="SauceCodePro Nerd Font",
+#                     fontsize=13,
+#                     foreground=colors[2],
+#                     mouse_callbacks={"Button1": search},
+#                 ),
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/4.png',
+#                 ),
+#                 widget.WindowName(
+#                     background=colors[0],
+#                     font="SauceCodePro Nerd Font",
+#                     fontsize=13,
+#                     empty_group_string="Desktop",
+#                     max_chars=130,
+#                     foreground=colors[2],
+#                 ),
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/3.png',
+#                 ),
+#                 Spotify(
+#                     font="SauceCodePro Nerd Font",
+#                     fontsize=13,
+#                     max_chars=40,
+#                     background=colors[9],
+#                     play_icon='',
+#                     pause_icon='',
+#                     update_interval=0.5,
+#                     format="{icon} {artist} {track} ",
+#                 ),
+#                 widget.Systray(
+#                     background=colors[9],
+#                     fontsize=2,
+#                 ),
+
+#                 widget.TextBox(
+#                     text=' ',
+#                     background=colors[9],
+#                 ),
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/6.png',
+#                     background=colors[0],
+#                 ),
+
+#                 widget.TextBox(
+#                     text="",
+#                     font="Font Awesome 6 Free Solid",
+#                     fontsize=13,
+#                     background=colors[0],
+#                     foreground=colors[2],
+#                 ),
+
+#                 widget.Memory(
+#                     background=colors[0],
+#                     format='{MemUsed: .0f}{mm}',
+#                     foreground=colors[2],
+#                     font="SauceCodePro Nerd Font",
+#                     fontsize=13,
+#                     update_interval=5,
+#                 ),
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/2.png',
+#                 ),
+
+#                 widget.Spacer(
+#                     length=8,
+#                     background=colors[0],
+#                 ),
+
+#                 widget.TextBox(
+#                     text=" ",
+#                     font="Font Awesome 6 Free Solid",
+#                     fontsize=13,
+#                     background=colors[0],
+#                     foreground=colors[2],
+#                 ),
+
+#                 widget.Volume(
+#                     font="SauceCodePro Nerd Font",
+#                     fontsize=13,
+#                     background=colors[0],
+#                     foreground=colors[2],
+#                 ),
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/5.png',
+#                     background=colors[0],
+#                 ),
+
+#                 widget.TextBox(
+#                     text=" ",
+#                     font="Font Awesome 6 Free Solid",
+#                     fontsize=13,
+#                     background=colors[9],
+#                     foreground=colors[2],
+#                 ),
+
+#                 widget.Clock(
+#                     format='%a %d-%m-%y - %I:%M %p',
+#                     background=colors[9],
+#                     foreground=colors[2],
+#                     font="SauceCodePro Nerd Font",
+#                     fontsize=13,
+#                 ),
+
+#                 widget.Spacer(
+#                     length=18,
+#                     background=colors[9],
+#                 ),
+#     ]
+#     return widgets_list
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()

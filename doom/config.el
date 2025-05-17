@@ -185,6 +185,7 @@
       :desc "Locate file" "l" #'counsel-locate
       :desc "Open qtile config" "q" (lambda () (interactive) (find-file "~/.config/qtile/config.py"))
       :desc "Find recent files" "r" #'counsel-recentf
+      :desc "Open hyprland config" "t" (lambda () (interactive) (neotree-dir "~/Documentos/git/"))
       :desc "Sudo find file" "u" #'sudo-edit-find-file
       :desc "Sudo edit file" "U" #'sudo-edit
       :desc "Open zshrc" "z" (lambda () (interactive) (find-file "~/.zshrc")))
