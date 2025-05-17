@@ -66,9 +66,11 @@
 (package! projectile)
 (package! all-the-icons-nerd-fonts)
 (package! buffer-move)
+(package! markdown-mode)
 (package! json-mode)
 (package! js2-mode)
-(package! markdown-mode)
+(package! js2-highlight-vars)
+(package! js2hl)
 
 ;;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.

@@ -32,8 +32,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-font (font-spec :family "JetBrains Mono" :size 16)
-      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 16))
+(setq doom-font (font-spec :family "Terminess Nerd Font Mono" :size 19)
+      doom-variable-pitch-font (font-spec :family "Terminess Nerd Font Mono" :size 19))
 
 (setq doom-theme 'doom-one)
 
@@ -81,6 +81,17 @@
 ;; source: https://nayak.io/posts/golang-development-doom-emacs/
 ;; golang formatting set up
 ;; use gofumpt
+;;
+;; (after! org
+;;   ;; Configurações de inicialização
+;;   (setq org-startup-folded 'content
+;;         org-startup-indented t
+;;         org-startup-with-inline-images t
+;;         org-hide-emphasis-markers t))
+
+;; ;; Atalho personalizado para recarregar
+;; (map! :leader :prefix "h" :desc "Reload Org" "r o" #'org-mode-restart)
+;;
 (after! lsp-mode
   (setq  lsp-go-use-gofumpt t)
   )
@@ -118,6 +129,7 @@
 (set-keyboard-coding-system 'utf-8)
 
 ;; Keybindings com map!
+;;
 (map! :leader
       :desc "Counsel M-x" "SPC" #'counsel-M-x
       :desc "Find file" "." #'find-file
@@ -150,7 +162,7 @@
       :prefix "d"
       :desc "Open maisPraTi folder" "A" (lambda () (interactive) (neotree-dir "~/Documentos/git/maisPraTi/"))
       :desc "Open dired" "d" #'dired
-      :desc "Open doom folder" "d" (lambda () (interactive) (neotree-dir "~/.config/doom/"))
+      :desc "Open doom folder" "D" (lambda () (interactive) (neotree-dir "~/.config/doom/"))
       :desc "Dired jump" "j" #'dired-jump
       :desc "Open neotree" "n" #'neotree-dir
       :desc "Peep-dired" "p" #'peep-dired
@@ -276,6 +288,7 @@
       :prefix "s"
       :desc "Dictionary search" "d" #'dictionary-search
       :desc "Man pages" "m" #'man
+      :desc "change words" "r" #'replace-regexp
       :desc "TLDR" "t" #'tldr
       :desc "Woman" "w" #'woman)
 
@@ -328,7 +341,6 @@
         which-key-max-description-length 25
         which-key-separator " → "))
 
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 (move-text-default-bindings)
 
@@ -362,9 +374,28 @@
 	which-key-allow-imprecise-window-fit nil
 	which-key-separator " → " ))
 
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)) ;;To ensure Emacs always starts with js2-mode for .js files
-(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)) ;;To ensure Emacs always starts with js2-mode for .js files
+;; (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-highlight-vars-mode))
+;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-highlight-unusded-variables-mode))
+;; (add-to-list 'auto-mode-alist '("\\.js$" . frontside-javascript))
+;; (add-to-list 'auto-mode-alist '("\\.js$" . js2hl-mode))
+;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+
+;; Configuração unificada para JS
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+;; Hooks para funcionalidades extras (modos menores/detalhes)
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (js2-highlight-vars-mode)                ; Destaque de variáveis
+            (js2hl-mode)                             ; Highlighting adicional
+            (flycheck-mode)                          ; Verificação de sintaxe
+            (prettier-js-mode)))                     ; Formatação automática                                        ;;
+
+;; Configurações diretas (sem conflitos)
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 (use-package all-the-icons
   :ensure t
