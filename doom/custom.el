@@ -5,8 +5,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(all-the-icons-nerd-fonts ayu-theme better-jumper dracula-theme pbcopy
-     projectile)))
+   '(ace-window all-the-icons-nerd-fonts cfrs evil exec-path-from-shell hydra
+     ligature lsp-mode pfuture projectile)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

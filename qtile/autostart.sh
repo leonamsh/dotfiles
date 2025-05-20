@@ -4,11 +4,11 @@ COLORSCHEME=DoomOne
 
 ### AUTOSTART PROGRAMS ###
 #starting utility applications at boot time
-run variety &
-run xfce4-power-manager &
-numlockx on &
-feh --bg-fill --randomize ~/Documentos/git/walls/abstract ~/Documentos/git/walls/abstract/
 variety &
+xfce4-power-manager &
+numlockx on &
+# feh --bg-fill --randomize ~/Documentos/git/walls/abstract ~/Documentos/git/walls/abstract/
+killall rofi &
 numlockx on &
 lxsession &
 #picom --daemon &
@@ -17,7 +17,7 @@ nm-applet &
 "$HOME"/.screenlayout/layout.sh &
 # "$HOME"/home/lm/.config/qtile/sxhkd/sxhkdrc &
 sleep 1
-conky -c "$HOME"/.config/conky/qtile/01/"$COLORSCHEME".conf || echo "Couldn't start conky."
+# conky -c "$HOME"/.config/conky/qtile/01/"$COLORSCHEME".conf || echo "Couldn't start conky."
 
 ### UNCOMMENT ONLY ONE OF THE FOLLOWING THREE OPTIONS! ###
 # 1. Uncomment to restore last saved wallpaper

@@ -71,6 +71,8 @@
 (package! js2-mode)
 (package! js2-highlight-vars)
 (package! js2hl)
+(package! apheleia)
+(package! exec-path-from-shell)
 
 ;;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.

@@ -163,6 +163,7 @@
       :desc "Open maisPraTi folder" "A" (lambda () (interactive) (neotree-dir "~/Documentos/git/maisPraTi/"))
       :desc "Open dired" "d" #'dired
       :desc "Open doom folder" "D" (lambda () (interactive) (neotree-dir "~/.config/doom/"))
+      :desc "Open dired" "f" #'+neotree/find-this-file
       :desc "Dired jump" "j" #'dired-jump
       :desc "Open neotree" "n" #'neotree-dir
       :desc "Peep-dired" "p" #'peep-dired
@@ -188,6 +189,7 @@
       :desc "Open emacs config" "c" (lambda () (interactive) (find-file "~/.config/doom/config.el"))
       :desc "Open user-emacs-directory" "e" (lambda () (interactive) (dired "~/.config/doom/custom.el"))
       :desc "Find grep dired" "d" #'find-grep-dired
+      :desc "Find grep dired" "d" #'make-directory
       :desc "Open fish config" "f" (lambda () (interactive) (find-file "~/.config/fish/config.fish"))
       :desc "Search current file" "g" #'counsel-grep-or-swiper
       :desc "Open hyprland config" "h" (lambda () (interactive) (find-file "~/.config/hypr/hyprland.conf"))
@@ -198,8 +200,8 @@
       :desc "Open qtile config" "q" (lambda () (interactive) (find-file "~/.config/qtile/config.py"))
       :desc "Find recent files" "r" #'counsel-recentf
       :desc "Open hyprland config" "t" (lambda () (interactive) (neotree-dir "~/Documentos/git/"))
-      :desc "Sudo find file" "u" #'sudo-edit-find-file
-      :desc "Sudo edit file" "U" #'sudo-edit
+      :desc "Sudo find file" "u" #'doom/sudo-find-file
+      :desc "Sudo edit file" "U" #'doom/sudo-this-file
       :desc "Open zshrc" "z" (lambda () (interactive) (find-file "~/.zshrc")))
 
 ;; Git bindings
@@ -270,14 +272,6 @@
       :desc "move line up" "u" #'move-line-up
       :desc "move line down" "d" #'move-line-down
       :desc "duplicate line" "D" #'duplicate-dwim)
-
-;; Open bindings
-(map! :leader
-      :prefix "o"
-      :desc "Dashboard" "d" #'dashboard-open
-      :desc "Elfeed" "e" #'elfeed
-      :desc "New frame" "f" #'make-frame
-      :desc "Select frame" "F" #'select-frame-by-name)
 
 ;; Projectile bindings (mantido como estava)
 (map! :leader
@@ -396,6 +390,26 @@
 ;; Configurações diretas (sem conflitos)
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+
+;; (require 'exec-path-from-shell)
+
+;; (use-package exec-path-from-shell
+;;   :config
+;;   (exec-path-from-shell +global))  ; Habilita globalmente
+                                        ;
+(use-package apheleia
+  ;; :straight (apheleia :host github :repo "raxod502/apheleia")
+  :config
+  (setf (alist-get 'prettier apheleia-formatters)
+        '(npx "prettier"
+          "--trailing-comma"  "es5"
+          "--bracket-spacing" "true"
+          "--single-quote"    "true"
+          "--semi"            "false"
+          "--print-width"     "100"
+          file))
+  (add-to-list 'apheleia-mode-alist '(rjsx-mode . prettier))
+  (apheleia-global-mode t))
 
 (use-package all-the-icons
   :ensure t

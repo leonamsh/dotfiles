@@ -42,14 +42,15 @@ powerline = {
 
 mod = "mod4"                # Sets mod key to SUPER/WINDOWS
 myTerm = "kitty"            # My terminal of choice
-myBrowser2 = "vivaldi"       # My browser of choice
-myBrowser = "firefox"     # My browser of choice
-myFiles = "nautilus"        # My file manager of choice
+myBrowser = "floorp"       # My browser of choice
+myBrowser2 = "brave"     # My browser of choice
+myFiles = "thunar"        # My file manager of choice
 myCode = "code"             # vscode
 myMusic = "flatpak run com.spotify.Client"         # spotify
 myEmacs = "emacs" # The space at the end is IMPORTANT!
 # myEmacs = "emacsclient -c -a 'emacs' " # The space at the end is IMPORTANT!
 logOut = "sh -c ~/.config/rofi/scripts/power" #logout menu option - about to change it to rofi power script
+# logOut = "sh -c ~/.config/rofi/scripts/power" #logout menu option - about to change it to rofi power script
 # logOut = "archlinux-logout" #logout menu option - about to change it to rofi power script
 
 # Allows you to input a name when adding treetab section.
@@ -167,24 +168,6 @@ keys = [
 
     # Emacs programs launched using the key chord SUPER+e followed by 'key'
     Key([mod],"e", lazy.spawn(myEmacs), desc='Emacs Dashboard'),
-    # Dmenu/rofi scripts launched using the key chord SUPER+p followed by 'key'
-    KeyChord([mod], "p", [
-        Key([], "h", lazy.spawn("dm-hub -r"), desc='List all dmscripts'),
-        Key([], "a", lazy.spawn("dm-sounds -r"), desc='Choose ambient sound'),
-        Key([], "b", lazy.spawn("dm-setbg -r"), desc='Set background'),
-        Key([], "c", lazy.spawn("dtos-colorscheme -r"), desc='Choose color scheme'),
-        Key([], "e", lazy.spawn("dm-confedit -r"), desc='Choose a config file to edit'),
-        Key([], "i", lazy.spawn("dm-maim -r"), desc='Take a screenshot'),
-        Key([], "k", lazy.spawn("dm-kill -r"), desc='Kill processes '),
-        Key([], "m", lazy.spawn("dm-man -r"), desc='View manpages'),
-        Key([], "n", lazy.spawn("dm-note -r"), desc='Store and copy notes'),
-        Key([], "o", lazy.spawn("dm-bookman -r"), desc='Browser bookmarks'),
-        Key([], "p", lazy.spawn("rofi-pass"), desc='Logout menu'),
-        Key([], "q", lazy.spawn("dm-logout -r"), desc='Logout menu'),
-        Key([], "r", lazy.spawn("dm-radio -r"), desc='Listen to online radio'),
-        Key([], "s", lazy.spawn("dm-websearch -r"), desc='Search various engines'),
-        Key([], "t", lazy.spawn("dm-translate -r"), desc='Translate text')
-    ])
 ]
 
 groups = []
@@ -299,7 +282,7 @@ def init_widgets_list():
                  fontsize = 14
                  ),
         widget.LaunchBar(
-                 progs = [("🦁", "firefox", "Brave web browser"),
+                 progs = [("🦁", "brave", "Brave web browser"),
                           ("🚀", "kitty", "Alacritty terminal"),
                           ("📁", "thunar", "PCManFM file manager"),
                           ("🎸", "vlc", "VLC media player")
@@ -580,7 +563,7 @@ def init_widgets_screen1():
 # All other monitors' bars will display everything but widgets 22 (systray) and 23 (spacer).
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    del widgets_screen2[12:16]
+    del widgets_screen2[16:20]
     return widgets_screen2
 
 # For adding transparency to your bar, add (background="#00000000") to the "Screen" line(s)
