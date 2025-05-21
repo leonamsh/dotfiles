@@ -1,0 +1,1 @@
+/home/lm/.config/emacs/elpaca/repos/themes/themes/doom-ir-black-theme.el

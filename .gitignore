@@ -14,6 +14,7 @@
 !/autostart/
 !/i3/
 !/sxhk/
+!/emacs/
 !/doom/
 !/zsh/
 # Opcional: inclua o próprio .gitignore se quiser versioná-lo

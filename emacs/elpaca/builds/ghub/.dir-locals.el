@@ -1,0 +1,1 @@
+/home/lm/.config/emacs/elpaca/repos/ghub/.dir-locals.el
