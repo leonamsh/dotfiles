@@ -42,7 +42,7 @@ powerline = {
 
 mod = "mod4"                # Sets mod key to SUPER/WINDOWS
 myTerm = "kitty"            # My terminal of choice
-myBrowser = "floorp"       # My browser of choice
+myBrowser = "vivaldi"       # My browser of choice
 myBrowser2 = "brave"     # My browser of choice
 myFiles = "thunar"        # My file manager of choice
 myCode = "code"             # vscode

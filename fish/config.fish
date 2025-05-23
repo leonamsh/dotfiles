@@ -162,6 +162,7 @@ alias jctl="journalctl -p 3 -xb"
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 
 # study stream aliases (Fish shell version)
+# shell /usr/bin/fish
 # Requer https://github.com/caarlos0/timer e o comando spd-say
 
 function cleanup_pomodoro --on-signal INT
@@ -215,4 +216,4 @@ end
 alias wo='pomodoro trabalho'
 alias br='pomodoro descanso'
 
-
+set -gx PATH ~/.npm-global/bin $PATH

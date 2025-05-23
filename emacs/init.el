@@ -13,7 +13,10 @@
      "944d52450c57b7cbba08f9b3d08095eb7a5541b0ecfb3a0a9ecd4a18f3c28948"
      "636b135e4b7c86ac41375da39ade929e2bd6439de8901f53f88fde7dd5ac3561"
      "1f669e8abe4dc2855268c9a607b5e350e2811b3c5afd09af5939ff0c01a89c5a" default))
- '(package-selected-packages '(magit taxy-magit-section yaml-mode))
+ '(package-selected-packages
+   '(flymake-eslint magit prettier-js taxy-magit-section yaml-mode))
+ '(safe-local-variable-directories '("/home/lm/.config/"))
+ '(safe-local-variable-values '((git-commit-major-mode . git-commit-elisp-text-mode)))
  '(send-mail-function 'smtpmail-send-it)
  '(smtpmail-smtp-server "smtp.1and1.com")
  '(smtpmail-smtp-service 587))

@@ -31,7 +31,7 @@
   :hook (company-mode . company-box-mode))
 
 (use-package dashboard
-  :ensure t 
+  :ensure t
   :init
   (setq initial-buffer-choice 'dashboard-open)
   (setq dashboard-set-heading-icons t)
@@ -44,7 +44,7 @@
                           (agenda . 5 )
                           (bookmarks . 3)
                           (projects . 3)))
-  :custom 
+  :custom
   (dashboard-modify-heading-icons '((recents . "file-text")
 				      (bookmarks . "book")))
   :config
@@ -107,7 +107,7 @@
                         ("https://betanews.com/feed" betanews linux)
                         ("http://lxer.com/module/newswire/headlines.rss" lxer linux)
                         ("https://distrowatch.com/news/dwd.xml" distrowatch linux)))))
- 
+
 
 (use-package elfeed-goodies
   :init
@@ -186,15 +186,15 @@
   :after evil
   :config
   ;; Do not uncomment this unless you want to specify each and every mode
-  ;; that evil-collection should works with.  The following line is here 
-  ;; for documentation purposes in case you need it.  
+  ;; that evil-collection should works with.  The following line is here
+  ;; for documentation purposes in case you need it.
   ;; (setq evil-collection-mode-list '(calendar dashboard dired ediff info magit ibuffer))
   (add-to-list 'evil-collection-mode-list 'help) ;; evilify help mode
   (evil-collection-init))
 
 (use-package evil-tutor)
 
-;; Using RETURN to follow links in Org/Evil 
+;; Using RETURN to follow links in Org/Evil
 ;; Unmap keys in 'evil-maps if not done, (setq org-return-follows-link t) will not work
 (with-eval-after-load 'evil-maps
   (define-key evil-motion-state-map (kbd "SPC") nil)
@@ -205,21 +205,36 @@
 
 (use-package flycheck
   :ensure t
-  :defer t
-  :diminish
-  :init (global-flycheck-mode))
+  :init
+  (global-flycheck-mode)
+  :config
+  ;; Garante que o Flycheck use o ESLint local do projeto
+  (setq flycheck-javascript-eslint-executable "node_modules/.bin/eslint")
+  ;; Remove checkers desnecessários
+  (setq flycheck-disabled-checkers '(javascript-jshint))
+  ;; Remove avisos sobre ponto e vírgula
+  (setq flycheck-checkers (delq 'javascript-semi flycheck-checkers)))
+
+(defun my/flycheck-set-local-eslint ()
+  "Define o ESLint local como executável do Flycheck."
+  (let ((eslint-local (concat (projectile-project-root) "node_modules/.bin/eslint")))
+    (when (file-exists-p eslint-local)
+      (setq flycheck-javascript-eslint-executable eslint-local))))
+
+(add-hook 'js-mode-hook 'my/flycheck-set-local-eslint)
+(add-hook 'rjsx-mode-hook 'my/flycheck-set-local-eslint)
 
 (set-face-attribute 'default nil
-  :font "Terminess Nerd Font Mono"
-  :height 140
+  :font "Iosevka Nerd Font Mono"
+  :height 130
   :weight 'medium)
 (set-face-attribute 'variable-pitch nil
-  :font "Ubuntu"
+  :font "Iosevka Nerd Font Mono"
   :height 120
   :weight 'medium)
 (set-face-attribute 'fixed-pitch nil
-  :font "JetBrains Mono"
-  :height 110
+  :font "Iosevka Nerd Font Mono"
+  :height 130
   :weight 'medium)
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
@@ -232,7 +247,7 @@
 ;; This sets the default font on all graphical frames created after restarting Emacs.
 ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
 ;; are not right unless I also add this method of setting the default font.
-(add-to-list 'default-frame-alist '(font . "JetBrains Mono-11"))
+;; (add-to-list 'default-frame-alist '(font . "Inconsolata-14"))
 
 ;; Uncomment the following line if line spacing needs adjusting.
 (setq-default line-spacing 0.12)
@@ -254,7 +269,7 @@
 (use-package general
   :config
   (general-evil-setup)
-  
+
   ;; set up 'SPC' as the global leader key
   (general-create-definer dt/leader-keys
     :states '(normal insert visual emacs)
@@ -279,7 +294,7 @@
     "a p" '(ellama-provider-select :wk "Ellama provider select")
     "a s" '(ellama-summarize :wk "Ellama summarize region")
     "a t" '(ellama-translate :wk "Ellama translate region"))
-   
+
   (dt/leader-keys
     "b" '(:ignore t :wk "Bookmarks/Buffers")
     "b b" '(switch-to-buffer :wk "Switch to buffer")
@@ -316,7 +331,7 @@
     "d w" '(wdired-change-to-wdired-mode :wk "Writable dired"))
 
   (dt/leader-keys
-    "e" '(:ignore t :wk "Ediff/Eshell/Eval/EWW")    
+    "e" '(:ignore t :wk "Ediff/Eshell/Eval/EWW")
     "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
     "e d" '(eval-defun :wk "Evaluate defun containing or after point")
     "e e" '(eval-expression :wk "Evaluate and elisp expression")
@@ -336,10 +351,10 @@
 	      (find-file "~/.config/alacritty/alacritty.toml"))
 	    :wk "open alacritty config file")
     "f c" '((lambda () (interactive)
-              (find-file "~/.config/emacs/config.org")) 
+              (find-file "~/.config/emacs/config.org"))
             :wk "Open emacs config.org")
     "f e" '((lambda () (interactive)
-              (dired "~/.config/emacs/")) 
+              (dired "~/.config/emacs/"))
             :wk "Open user-emacs-directory in dired")
     "f f" '((lambda () (interactive)
 	     (find-file "~/.config/fish/config.fish"))
@@ -347,7 +362,7 @@
     "f d" '(find-grep-dired :wk "Search for string in files in DIR")
     "f g" '(counsel-grep-or-swiper :wk "Search for string current file")
     "f i" '((lambda () (interactive)
-              (find-file "~/.config/emacs/init.el")) 
+              (find-file "~/.config/emacs/init.el"))
             :wk "Open emacs init.el" )
     "f j" '(counsel-file-jump :wk "Jump to a file below current directory")
     "f k" '((lambda () (interactive)
@@ -365,16 +380,16 @@
 	    :wk "open zsh config"))
 
   (dt/leader-keys
-    "g" '(:ignore t :wk "Git")    
+    "g" '(:ignore t :wk "Git")
     "g /" '(magit-displatch :wk "Magit dispatch")
     "g ." '(magit-file-displatch :wk "Magit file dispatch")
     "g b" '(magit-branch-checkout :wk "Switch branch")
-    "g c" '(:ignore t :wk "Create") 
+    "g c" '(:ignore t :wk "Create")
     "g c b" '(magit-branch-and-checkout :wk "Create branch and checkout")
     "g c c" '(magit-commit-create :wk "Create commit")
     "g c f" '(magit-commit-fixup :wk "Create fixup commit")
     "g C" '(magit-clone :wk "Clone repo")
-    "g f" '(:ignore t :wk "Find") 
+    "g f" '(:ignore t :wk "Find")
     "g f c" '(magit-show-commit :wk "Show commit")
     "g f f" '(magit-find-file :wk "Magit find file")
     "g f g" '(magit-find-git-config-file :wk "Find gitconfig file")
@@ -447,7 +462,7 @@
     "o f" '(make-frame :wk "Open buffer in new frame")
     "o F" '(select-frame-by-name :wk "Select frame by name"))
 
-  ;; projectile-command-map already has a ton of bindings 
+  ;; projectile-command-map already has a ton of bindings
   ;; set for us, so no need to specify each individually.
   (dt/leader-keys
     "p" '(projectile-command-map :wk "Projectile"))
@@ -520,7 +535,7 @@
 (use-package counsel
   :after ivy
   :diminish
-  :config 
+  :config
     (counsel-mode)
     (setq ivy-initial-inputs-alist nil)) ;; removes starting ^ regex in M-x
 
@@ -576,7 +591,7 @@
         neo-window-width 55
         neo-window-fixed-size nil
         inhibit-compacting-font-caches t
-        projectile-switch-project-action 'neotree-projectile-action) 
+        projectile-switch-project-action 'neotree-projectile-action)
         ;; truncate long file names in neotree
         (add-hook 'neo-after-create-hook
            #'(lambda (_)
@@ -594,14 +609,14 @@
 
 (eval-after-load 'org-indent '(diminish 'org-indent-mode))
 
-  (custom-set-faces
-   '(org-level-1 ((t (:inherit outline-1 :height 1.7))))
-   '(org-level-2 ((t (:inherit outline-2 :height 1.6))))
-   '(org-level-3 ((t (:inherit outline-3 :height 1.5))))
-   '(org-level-4 ((t (:inherit outline-4 :height 1.4))))
-   '(org-level-5 ((t (:inherit outline-5 :height 1.3))))
-   '(org-level-6 ((t (:inherit outline-5 :height 1.2))))
-   '(org-level-7 ((t (:inherit outline-5 :height 1.1)))))
+(custom-set-faces
+ '(org-level-1 ((t (:inherit outline-1 :height 1.7))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.6))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.5))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.4))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.3))))
+ '(org-level-6 ((t (:inherit outline-5 :height 1.2))))
+ '(org-level-7 ((t (:inherit outline-5 :height 1.1)))))
 
 (require 'org-tempo)
 
@@ -637,7 +652,7 @@
   ;; I'm only setting the additional binding because setting it
   ;; helps suppress an annoying warning message.
   (persp-mode-prefix-key (kbd "C-c M-p"))
-  :init 
+  :init
   (persp-mode)
   :config
   ;; Sets a file to write to when we save states
@@ -677,7 +692,7 @@
 (global-auto-revert-mode t)  ;; Automatically show changes if the file has changed
 (global-display-line-numbers-mode 1) ;; Display line numbers
 (global-visual-line-mode t)  ;; Enable truncated lines
-(menu-bar-mode -1)           ;; Disable the menu bar 
+(menu-bar-mode -1)           ;; Disable the menu bar
 (scroll-bar-mode -1)         ;; Disable the scroll bar
 (tool-bar-mode -1)           ;; Disable the tool bar
 (setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
@@ -764,7 +779,7 @@
   :config
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  ;; Sets the default theme to load!!! 
+  ;; Sets the default theme to load!!!
   (load-theme 'doom-one t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   (doom-themes-neotree-config)
@@ -813,13 +828,13 @@
     (browse-url
      (concat "https://github.com/search?l=" language
              "&type=code&q=" code))))
-  
+
 (defun dm-search ()
   "Search various search engines."
   (interactive)
   (let ((engine (completing-read
                  "Search Engine: "
-                 '("Arch Wiki" 
+                 '("Arch Wiki"
                    "Bing"
                    "Google"
                    "Wikipedia")))
@@ -828,80 +843,103 @@
       (browse-url
        (concat "https://www.google.com/search?q=" query)))))
 
-(defun dt/key-value-completing (choice)                                     
+(defun dt/key-value-completing (choice)
   (interactive
    (list
-    (let ((completions '(("1" "One") 
+    (let ((completions '(("1" "One")
                          ("2" "Two")
-                         ("3" "Three"))))              
+                         ("3" "Three"))))
       (cadr (assoc (completing-read "Choose: " completions) completions)))))
   (message "You choose `%s'" choice))
 
-;; Configuração unificada para JS
-;; (use-package js2-mode)
-;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
-;; ;; Hooks para funcionalidades extras (modos menores/detalhes)
-;; (add-hook 'js2-mode-hook
-;;           (lambda ()
-;;             (js2-highlight-vars-mode)                ; Destaque de variáveis
-;;             (js2hl-mode)                             ; Highlighting adicional
-;;             (flycheck-mode)                          ; Verificação de sintaxe
-;;             (prettier-js-mode)))                     ; Formatação automática                                        ;;
 
-;; ;; Configurações diretas (sem conflitos)
-;; (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-;; (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
-;; (require 'exec-path-from-shell)
 
-;; (use-package exec-path-from-shell
+
+
+;; ;; Apheleia + Prettier
+;; (use-package apheleia
+;;   :ensure t
 ;;   :config
-    ;;   (exec-path-from-shell +global))  ; Habilita globalmente
+;;   (setf (alist-get 'prettier apheleia-formatters)
+;;         '("npx" "prettier"
+;;           "--trailing-comma=es5"
+;;           "--bracket-spacing=true"
+;;           "--single-quote=true"
+;;           "--semi=false"
+;;           "--print-width=100"
+;;           "--stdin-filepath" file))
+;;   (apheleia-global-mode 1))
 
-;;
-;; Todos os pacotes em blocos organizados
-;; Configuracao simplificada e moderna
-;; Configuracoes de codificacao DEVEM vir primeiro (topo do arquivo)
-;; Configuracoes de codificacao DEVEM vir primeiro (topo do arquivo)
+;; ;; Garante que Apheleia esteja carregado antes
+;; (with-eval-after-load 'apheleia
+;;   (defun my-apheleia-format-before-save ()
+;;     "Formata o buffer com Apheleia antes de salvar, se aplicável."
+;;     (when (and (buffer-file-name)
+;;                (apheleia-formatter-for (buffer-file-name)))
+;;       (apheleia-format-buffer)))
+;;   (add-hook 'before-save-hook #'my-apheleia-format-before-save))
+
+;; Modo JSX (suporte moderno a JS/JSX)
+(use-package rjsx-mode
+  :ensure t
+  :mode ("\\.js\\'" . rjsx-mode)
+  :hook (rjsx-mode . (lambda ()
+                       (flycheck-mode)
+                       (lsp)))
+  :config
+  (setq jsx-indent-level 2)
+  (setq js-indent-level 2)
+  (setq-local apheleia-preferred-formatter 'prettier))
+;; LSP Mode
+(use-package lsp-mode
+  :ensure t)
+
+;; Outras configurações
+(use-package markdown-mode
+  :ensure t
+  :mode "\\.md\\'")
+
+(setq auto-mode-alist (append auto-mode-alist '(("\\.org\\'" . org-mode))))
+
+(electric-indent-mode 1)
+
+;; Garante que o Emacs encontre o Prettier
+(setenv "PATH" (concat (expand-file-name "~/.npm-global/bin") ":" (getenv "PATH")))
+
+;; Instala e configura prettier-js
+(use-package prettier-js
+  :ensure t
+  :hook ((js-mode rjsx-mode typescript-mode web-mode) . prettier-js-mode)
+  :config
+  (setq prettier-js-args '(
+    "--print-width" "100"
+    "--single-quote" "true"
+    "--trailing-comma" "es5"
+    "--bracket-spacing" "true"
+    "--semi" "false"
+  ))
+  (setq prettier-js-show-errors 'buffer))
+
+;; Formata ao salvar
+(add-hook 'before-save-hook
+          (lambda ()
+            (when (derived-mode-p 'js-mode 'rjsx-mode 'typescript-mode)
+              (prettier-js))))
+
+;; Atalho manual
+(global-set-key (kbd "C-c f") 'prettier-js)
+
+(use-package simpleclip
+  :ensure t
+  :config (simpleclip-mode 1))
+
+;; Codificação UTF-8
 (setq-default coding-system-for-read 'utf-8)
 (setq-default coding-system-for-write 'utf-8)
 (prefer-coding-system 'utf-8)
 (set-charset-priority 'unicode)
 
-;; Auto-deteccao de codificacao
-(setq-default enable-character-translation t)
 (setq inhibit-eol-conversion t)
-
-;; Configuracao do Apheleia (versao corrigida)
-(use-package apheleia
-  :ensure t
-  :config
-  (setf (alist-get 'prettier apheleia-formatters)
-        '("npx" "prettier"
-          "--trailing-comma=es5"
-          "--bracket-spacing=true"
-          "--single-quote=true"
-          "--semi=false"
-          "--print-width=100"
-          "--stdin-filepath" file))
-  (apheleia-global-mode 1))  ;; Use 1 para ativar, t e apenas para booleanos
-
-;; Configuracao de modos principais
-(use-package js2-mode
-  :ensure t
-  :mode "\\.js\\'"
-  :hook (js2-mode . (lambda ()
-                      (js2-highlight-vars-mode)
-                      (flycheck-mode))))
-
-(use-package markdown-mode
-  :ensure t
-  :mode "\\.md\\'")
-
-;; Org-mode nao precisa de :ensure (ja vem com o Emacs)
-(setq auto-mode-alist (append auto-mode-alist '(("\\.org\\'" . org-mode))))
-
-(use-package simpleclip
-  :ensure t
-  :config (simpleclip-mode 1))
+(setq-default enable-character-translation t)

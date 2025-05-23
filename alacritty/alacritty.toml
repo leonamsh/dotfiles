@@ -50,3 +50,9 @@ history = 50000
 
 [window]
 opacity = 1
+
+[terminal]
+
+[terminal.shell]
+program = "/usr/bin/fish"
+args = []
