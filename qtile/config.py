@@ -42,7 +42,7 @@ powerline = {
 
 mod = "mod4"                # Sets mod key to SUPER/WINDOWS
 myTerm = "kitty"            # My terminal of choice
-myBrowser = "vivaldi"       # My browser of choice
+myBrowser = "floorp"       # My browser of choice
 myBrowser2 = "brave"     # My browser of choice
 myFiles = "thunar"        # My file manager of choice
 myCode = "code"             # vscode
@@ -171,46 +171,53 @@ keys = [
 ]
 
 groups = []
-group_names = ["1", "2", "3", "4", "5"]
+group_names = ["1", "2", "3", "4", "5", "6"]
 #group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 #group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 #group_labels = ["DEV", "WWW", "SYS", "MUS", "VBOX", "CHAT", "DOC", "VID", "GFX", "MISC"]
 #group_labels = ["", "", "", "", "", "", "𝦝", "", "", "⛨"]
 #group_labels = ["", "", "👁", "", "", "", "✀", "꩜", "", "⎙"]
-group_labels = ["I", "II", "III", "IV", "V"]
-# group_labels = ["", "", "", "", ""]
+# group_labels = ["I", "II", "III", "IV", "V", "꩜"]
+group_labels = ["", "", "", "", "", "꩜"]
 # group_labels = ["", "", "", "꩜", ""]
 
 group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
 
 
+# Cria grupos 1-5
 for i in range(len(group_names)):
     groups.append(
         Group(
             name=group_names[i],
             layout=group_layouts[i].lower(),
             label=group_labels[i],
-        ))
-
-for i in groups:
-    keys.extend(
-        [
-            # mod1 + letter of group = switch to group
-            Key(
-                [mod],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc="Switch to group {}".format(i.name),
-            ),
-            # mod1 + shift + letter of group = move focused window to group
-            Key(
-                [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=False),
-                desc="Move focused window to group {}".format(i.name),
-            ),
-        ]
+        )
     )
+
+# # Cria grupo "6" APENAS UMA VEZ (fora do loop)
+# groups.append(
+#     Group(
+#         name="6",
+#         label="\uaa5c",
+#         layout="monadtall",
+#         persist=True,
+#         exclusive=True,
+#         matches=[Match(wm_class=["discord", "spotify", "brave"])]
+#     )
+# )
+
+# Keybindings para grupos 1-5
+for group in groups[:-1]:  # Exclui o �ltimo grupo ("6")
+    keys.extend([
+        Key([mod], group.name, lazy.group[group.name].toscreen()),
+        Key([mod, "shift"], group.name, lazy.window.togroup(group.name)),
+    ])
+
+# # Keybinding customizada para o grupo "6"
+# keys.extend([
+#     Key([mod], "6", lazy.group["6"].toscreen()),
+#     Key([mod, "shift"], "6", lazy.window.togroup("6")),
+# ])
 
 colors = colors.Cozytile
 
@@ -365,197 +372,6 @@ def init_widgets_list():
         ]
     return widgets_list
 
-# def init_widgets_list():
-#     widgets_list = [
-
-#                 widget.Spacer(length=15,
-#                     background=colors[9]
-#                 ),
-
-#                 widget.Image(
-#                     filename='~/.config/qtile/Assets/launch_Icon.png',
-#                     margin=2,
-#                     background=colors[9],
-#                     mouse_callbacks={"Button1": power},
-#                 ),
-
-#                 widget.Image(
-#                     filename='~/.config/qtile/Assets/6.png',
-#                 ),
-
-#                 widget.GroupBox(
-#                     #font="SauceCodePro Nerd Font",
-#                     font="font awesome",
-#                     fontsize=16,
-#                     #width=100,
-#                     borderwidth=2,
-#                     highlight_method='block',
-#                     spacing=True,
-#                     #margin=6,
-#                     padding=4,
-#                     center_aligned=True,
-#                     active=colors[2],
-#                     block_highlight_text_color=colors[3],
-#                     highlight_color=colors[0],
-#                     inactive=colors[9],
-#                     foreground=colors[1],
-#                     background=colors[0],
-#                     this_current_screen_border=colors[1],
-#                     this_screen_border=colors[0],
-#                     other_current_screen_border=colors[1],
-#                     other_screen_border=colors[0],
-#                     urgent_border=colors[0],
-#                     rounded=True,
-#                     disable_drag=True,
-#                 ),
-
-#                 widget.Spacer(
-#                     length=8,
-#                     background=colors[0],
-#                 ),
-
-#                 widget.Image(
-#                     filename='~/.config/qtile/Assets/1.png',
-#                 ),
-
-
-#                 widget.CurrentLayoutIcon(
-#                     custom_icon_paths=["~/.config/qtile/Assets/layout"],
-#                     background=colors[0],
-#                     scale=0.50,
-#                 ),
-
-#                 widget.Image(
-#                     filename='~/.config/qtile/Assets/5.png',
-#                 ),
-
-#                 widget.TextBox(
-#                     text=" ",
-#                     font="Font Awesome 6 Free Solid",
-#                     fontsize=13,
-#                     background=colors[9],
-#                     foreground=colors[2],
-#                     mouse_callbacks={"Button1": search},
-#                 ),
-
-#                 widget.TextBox(
-#                     fmt='Search',
-#                     background=colors[9],
-#                     font="SauceCodePro Nerd Font",
-#                     fontsize=13,
-#                     foreground=colors[2],
-#                     mouse_callbacks={"Button1": search},
-#                 ),
-
-#                 widget.Image(
-#                     filename='~/.config/qtile/Assets/4.png',
-#                 ),
-#                 widget.WindowName(
-#                     background=colors[0],
-#                     font="SauceCodePro Nerd Font",
-#                     fontsize=13,
-#                     empty_group_string="Desktop",
-#                     max_chars=130,
-#                     foreground=colors[2],
-#                 ),
-
-#                 widget.Image(
-#                     filename='~/.config/qtile/Assets/3.png',
-#                 ),
-#                 Spotify(
-#                     font="SauceCodePro Nerd Font",
-#                     fontsize=13,
-#                     max_chars=40,
-#                     background=colors[9],
-#                     play_icon='',
-#                     pause_icon='',
-#                     update_interval=0.5,
-#                     format="{icon} {artist} {track} ",
-#                 ),
-#                 widget.Systray(
-#                     background=colors[9],
-#                     fontsize=2,
-#                 ),
-
-#                 widget.TextBox(
-#                     text=' ',
-#                     background=colors[9],
-#                 ),
-
-#                 widget.Image(
-#                     filename='~/.config/qtile/Assets/6.png',
-#                     background=colors[0],
-#                 ),
-
-#                 widget.TextBox(
-#                     text="",
-#                     font="Font Awesome 6 Free Solid",
-#                     fontsize=13,
-#                     background=colors[0],
-#                     foreground=colors[2],
-#                 ),
-
-#                 widget.Memory(
-#                     background=colors[0],
-#                     format='{MemUsed: .0f}{mm}',
-#                     foreground=colors[2],
-#                     font="SauceCodePro Nerd Font",
-#                     fontsize=13,
-#                     update_interval=5,
-#                 ),
-
-#                 widget.Image(
-#                     filename='~/.config/qtile/Assets/2.png',
-#                 ),
-
-#                 widget.Spacer(
-#                     length=8,
-#                     background=colors[0],
-#                 ),
-
-#                 widget.TextBox(
-#                     text=" ",
-#                     font="Font Awesome 6 Free Solid",
-#                     fontsize=13,
-#                     background=colors[0],
-#                     foreground=colors[2],
-#                 ),
-
-#                 widget.Volume(
-#                     font="SauceCodePro Nerd Font",
-#                     fontsize=13,
-#                     background=colors[0],
-#                     foreground=colors[2],
-#                 ),
-
-#                 widget.Image(
-#                     filename='~/.config/qtile/Assets/5.png',
-#                     background=colors[0],
-#                 ),
-
-#                 widget.TextBox(
-#                     text=" ",
-#                     font="Font Awesome 6 Free Solid",
-#                     fontsize=13,
-#                     background=colors[9],
-#                     foreground=colors[2],
-#                 ),
-
-#                 widget.Clock(
-#                     format='%a %d-%m-%y - %I:%M %p',
-#                     background=colors[9],
-#                     foreground=colors[2],
-#                     font="SauceCodePro Nerd Font",
-#                     fontsize=13,
-#                 ),
-
-#                 widget.Spacer(
-#                     length=18,
-#                     background=colors[9],
-#                 ),
-#     ]
-#     return widgets_list
-
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
     return widgets_screen1
@@ -570,9 +386,22 @@ def init_widgets_screen2():
 # For ex: Screen(top=bar.Bar(widgets=init_widgets_screen2(), background="#00000000", size=24)),
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=[0,0,0,0], size=28)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), margin=[0,0,0,0], size=28))]
-
+    return [
+        Screen(
+            top=bar.Bar(
+                widgets=init_widgets_screen1(),
+                margin=[0, 0, 0, 0],
+                size=28
+            ),
+        ),
+        Screen(
+            top=bar.Bar(
+                widgets=init_widgets_screen2(),
+                margin=[0, 0, 0, 0],
+                size=28
+            ),
+        )
+    ]
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
     widgets_list = init_widgets_list()
@@ -661,6 +490,10 @@ wl_input_rules = None
 def start_once():
     home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/autostart.sh'])
+#@hook.subscribe.startup_once
+def _move_group6_to_secondary():
+    # Mova o grupo "6" para o segundo monitor (indice 1)
+    qtile.groups["6"].cmd_toscreen(1)
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
