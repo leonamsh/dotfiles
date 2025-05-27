@@ -15,6 +15,7 @@
 !/i3/
 !/sxhk/
 !/emacs/
+!/nvim/
 !/doom/
 !/zsh/
 # Opcional: inclua o próprio .gitignore se quiser versioná-lo

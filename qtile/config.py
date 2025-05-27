@@ -42,13 +42,14 @@ powerline = {
 
 mod = "mod4"                # Sets mod key to SUPER/WINDOWS
 myTerm = "kitty"            # My terminal of choice
-myBrowser = "floorp"       # My browser of choice
-myBrowser2 = "brave"     # My browser of choice
+myBrowser = "brave"       # My browser of choice
+myBrowser2 = "floorp"     # My browser of choice
 myFiles = "thunar"        # My file manager of choice
 myCode = "code"             # vscode
 myMusic = "flatpak run com.spotify.Client"         # spotify
-myEmacs = "emacs" # The space at the end is IMPORTANT!
-# myEmacs = "emacsclient -c -a 'emacs' " # The space at the end is IMPORTANT!
+myEmacs = "emacsclient -c -a 'emacs' " # The space at the end is IMPORTANT!
+# myEmacs = "emacs" # The space at the end is IMPORTANT!
+myNeovim = "nvim"
 logOut = "sh -c ~/.config/rofi/scripts/power" #logout menu option - about to change it to rofi power script
 # logOut = "sh -c ~/.config/rofi/scripts/power" #logout menu option - about to change it to rofi power script
 # logOut = "archlinux-logout" #logout menu option - about to change it to rofi power script
@@ -84,7 +85,7 @@ keys = [
     Key([mod], "w", lazy.spawn(myBrowser2), desc='Web browser 2'),
     Key([mod], "F1", lazy.spawn(myBrowser), desc="Web browser"),
     Key([mod], "F2", lazy.spawn(myCode), desc="code"),
-    Key([mod], "F3", lazy.spawn(myEmacs), desc="emacs"),
+    Key([mod], "F3", lazy.spawn(myNeovim), desc="nvim"),
     Key([mod], "F4", lazy.spawn(myMusic), desc="spotify"),
     Key([mod], "b", lazy.hide_show_bar(position='all'), desc="Toggles the bar to show/hide"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
@@ -177,8 +178,8 @@ group_names = ["1", "2", "3", "4", "5", "6"]
 #group_labels = ["DEV", "WWW", "SYS", "MUS", "VBOX", "CHAT", "DOC", "VID", "GFX", "MISC"]
 #group_labels = ["", "", "", "", "", "", "𝦝", "", "", "⛨"]
 #group_labels = ["", "", "👁", "", "", "", "✀", "꩜", "", "⎙"]
-# group_labels = ["I", "II", "III", "IV", "V", "꩜"]
-group_labels = ["", "", "", "", "", "꩜"]
+group_labels = ["I", "II", "III", "IV", "V", "VI"]
+# group_labels = ["", "", "", "", "", "꩜"]
 # group_labels = ["", "", "", "꩜", ""]
 
 group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
@@ -207,7 +208,7 @@ for i in range(len(group_names)):
 # )
 
 # Keybindings para grupos 1-5
-for group in groups[:-1]:  # Exclui o �ltimo grupo ("6")
+for group in groups[:-1]:  # Exclui o �ltimo grupo ("6")
     keys.extend([
         Key([mod], group.name, lazy.group[group.name].toscreen()),
         Key([mod, "shift"], group.name, lazy.window.togroup(group.name)),
