@@ -15,7 +15,7 @@ function fish_greeting
 end
 
 # Format man pages
-set -x MANROFFOPT "-c"
+set -x MANROFFOPT -c
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
 # Set settings for https://github.com/franciscolourenco/done
@@ -25,7 +25,7 @@ set -U __done_notification_urgency_level low
 ## Environment setup
 # Apply .profile: use this to put fish compatible .profile stuff in
 if test -f ~/.fish_profile
-  source ~/.fish_profile
+    source ~/.fish_profile
 end
 
 # Add ~/.local/bin to PATH
@@ -42,34 +42,35 @@ if test -d ~/Applications/depot_tools
     end
 end
 
-
 # Functions
 # Functions needed for !! and !$ https://github.com/oh-my-fish/plugin-bang-bang
 function __history_previous_command
-  switch (commandline -t)
-  case "!"
-    commandline -t $history[1]; commandline -f repaint
-  case "*"
-    commandline -i !
-  end
+    switch (commandline -t)
+        case "!"
+            commandline -t $history[1]
+            commandline -f repaint
+        case "*"
+            commandline -i !
+    end
 end
 
 function __history_previous_command_arguments
-  switch (commandline -t)
-  case "!"
-    commandline -t ""
-    commandline -f history-token-search-backward
-  case "*"
-    commandline -i '$'
-  end
+    switch (commandline -t)
+        case "!"
+            commandline -t ""
+            commandline -f history-token-search-backward
+        case "*"
+            commandline -i '$'
+    end
 end
 
-if [ "$fish_key_bindings" = fish_vi_key_bindings ];
-  bind -Minsert ! __history_previous_command
-  bind -Minsert '$' __history_previous_command_arguments
+if [ "$fish_key_bindings" = fish_vi_key_bindings ]
+
+    bind -Minsert ! __history_previous_command
+    bind -Minsert '$' __history_previous_command_arguments
 else
-  bind ! __history_previous_command
-  bind '$' __history_previous_command_arguments
+    bind ! __history_previous_command
+    bind '$' __history_previous_command_arguments
 end
 
 # Fish command history
@@ -103,6 +104,7 @@ alias updspd='/home/lm/.config/autostart/xinputI3.sh'
 alias srcfish='source /home/lm/.config/fish/config.fish'
 alias ffuu='/home/lm/Documentos/git/scripts/arch/full-update.sh && /home/lm/Documentos/git/scripts/arch/update.sh && /home/lm/.config/autostart/xinputI3.sh'
 alias fupd='fupp && upp & updspd'
+alias upd='upp & updspd'
 alias clone='git clone'
 #alias --='--noconfirm --needed'
 #alias ---='--noconfirm'
@@ -110,15 +112,21 @@ alias doomsync='/home/lm/.config/emacs/bin/doom sync'
 alias doomupd='/home/lm/.config/emacs/bin/doom upgrade'
 alias doomdoc='/home/lm/.config/emacs/bin/doom doctor'
 alias doompurge='/home/lm/.config/emacs/bin/doom purge'
+#
+alias nkitty='nvim ~/.config/kitty/kitty.conf'
+alias nalac='nvim ~/.config/alacritty/alacritty.toml'
+alias nfish='nvim ~/.config/fish/config.fish'
+alias nqtile='nvim ~/.config/qtile/config.py'
+alias naula='nvim ~/Documentos/maisPraTi'
+alias nzsh='nvim ~/.zshrc'
 #~export PATH="$HOME/.emacs.d/bin:$PATH"~
-
 
 # Replace ls with eza
 alias ls='eza -al --color=always --group-directories-first --icons' # preferred listing
-alias la='eza -a --color=always --group-directories-first --icons'  # all files and dirs
-alias ll='eza -l --color=always --group-directories-first --icons'  # long format
+alias la='eza -a --color=always --group-directories-first --icons' # all files and dirs
+alias ll='eza -l --color=always --group-directories-first --icons' # long format
 alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
-alias l.="eza -a | grep -e '^\.'"                                     # show only dotfiles
+alias l.="eza -a | grep -e '^\.'" # show only dotfiles
 
 # Common use
 alias grubup="sudo grub-mkconfig -o /boot/grub/grub.cfg"
@@ -138,9 +146,9 @@ alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias hw='hwinfo --short'                                   # Hardware Info
-alias big="expac -H M '%m\t%n' | sort -h | nl"              # Sort installed packages according to size in MB
-alias gitpkg='pacman -Q | grep -i "\-git" | wc -l'          # List amount of -git packages
+alias hw='hwinfo --short' # Hardware Info
+alias big="expac -H M '%m\t%n' | sort -h | nl" # Sort installed packages according to size in MB
+alias gitpkg='pacman -Q | grep -i "\-git" | wc -l' # List amount of -git packages
 alias update='sudo pacman -Syu'
 
 # Get fastest mirrors
@@ -178,15 +186,15 @@ function pomodoro
         return 1
     end
 
-    set -g music_pid ""  # precisa ser global pra trap conseguir acessar
+    set -g music_pid "" # precisa ser global pra trap conseguir acessar
     set -l pomo_type $argv[1]
     set -l duration ""
     set -l music_url "https://www.youtube.com/watch?v=jfKfPfyJRdk"
 
     switch $pomo_type
-        case "trabalho"
+        case trabalho
             set duration 45
-        case "descanso"
+        case descanso
             set duration 5
         case '*'
             echo "Tipo inválido: $pomo_type"
@@ -205,7 +213,7 @@ function pomodoro
     #if set -q music_pid
     #    kill $music_pid 2>/dev/null
     #end
-    
+
     #spd-say "sessão de '$pomo_type' finalizada"
 
     #if type -q notify-send
