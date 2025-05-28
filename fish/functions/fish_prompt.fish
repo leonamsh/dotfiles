@@ -1,1 +1,1 @@
-/home/lm/.local/share/omf/themes/neolambda/fish_prompt.fish
+/home/lm/.local/share/omf/themes/one/fish_prompt.fish

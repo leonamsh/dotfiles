@@ -113,6 +113,8 @@ alias doomupd='/home/lm/.config/emacs/bin/doom upgrade'
 alias doomdoc='/home/lm/.config/emacs/bin/doom doctor'
 alias doompurge='/home/lm/.config/emacs/bin/doom purge'
 #
+alias cdaula='cd ~/Documentos/git/maisPraTi/'
+#
 alias nkitty='nvim ~/.config/kitty/kitty.conf'
 alias nalac='nvim ~/.config/alacritty/alacritty.toml'
 alias nfish='nvim ~/.config/fish/config.fish'
