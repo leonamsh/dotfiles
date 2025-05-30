@@ -1,1 +1,1 @@
-("~/.config/" "~/" "~/Documentos/git/maisPraTi/" "~/.oh-my-zsh/")
+("~/Documentos/git/maisPraTi/" "~/.config/" "~/" "~/.oh-my-zsh/")

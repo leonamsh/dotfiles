@@ -27,11 +27,11 @@
 import os
 import subprocess
 from libqtile import bar, extension, hook, layout, qtile, widget
-from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
+from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 import colors
 from qtile_extras.widget.decorations import PowerLineDecoration, RectDecoration
-from spotify import Spotify
+# from spotify import Spotify
 
 powerline = {
     "decorations": [
