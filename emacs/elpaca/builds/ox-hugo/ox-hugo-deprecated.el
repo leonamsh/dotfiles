@@ -1,1 +1,0 @@
-/home/lm/.config/emacs/elpaca/repos/ox-hugo/ox-hugo-deprecated.el

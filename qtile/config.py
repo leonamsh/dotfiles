@@ -45,11 +45,11 @@ mod = "mod4"                # Sets mod key to SUPER/WINDOWS
 myTerm = "kitty"            # My terminal of choice
 myBrowser = "brave"       # My browser of choice
 myBrowser2 = "firefox"     # My browser of choice
-myFiles = "thunar"        # My file manager of choice
+myFiles = "pcmanfm"        # My file manager of choice
 myCode = "code"             # vscode
 myMusic = "flatpak run com.spotify.Client"         # spotify
-myEmacs = "emacsclient -c -a 'emacs' "  # The space at the end is IMPORTANT!
-# myEmacs = "emacs" # The space at the end is IMPORTANT!
+# myEmacs = "emacsclient -c -a 'emacs' "  # The space at the end is IMPORTANT!
+myEmacs = "emacs" # The space at the end is IMPORTANT!
 myNeovim = "nvim"
 # logout menu option - about to change it to rofi power script
 logOut = "sh -c ~/.config/rofi/scripts/power"

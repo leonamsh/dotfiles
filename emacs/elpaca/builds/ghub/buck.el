@@ -1,1 +1,0 @@
-/home/lm/.config/emacs/elpaca/repos/ghub/lisp/buck.el
