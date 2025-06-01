@@ -1,5 +1,3 @@
-source /usr/share/cachyos-fish-config/cachyos-config.fish
-source /usr/share/cachyos-fish-config/conf.d/done.fish
 # overwrite greeting
 # potentially disabling fastfetch
 #function fish_greeting
@@ -9,7 +7,6 @@ source /usr/share/cachyos-fish-config/conf.d/done.fish
 ## Source from conf.d before our fish config
 
 ## Set values
-## Run fastfetch as welcome message
 function fish_greeting
     colorscript random
 end
@@ -58,7 +55,7 @@ function __history_previous_command_arguments
     switch (commandline -t)
         case "!"
             commandline -t ""
-            commandline -f history-token-search-backward
+            commandline -f history-token-seubuntu-backward
         case "*"
             commandline -i '$'
     end
@@ -94,16 +91,21 @@ function copy
     end
 end
 
+function full_history
+    history | fzf --no-sort | read -l command
+    and commandline $command
+end
+
 ## Useful aliases
 #Leonam
-alias upp='/home/lm/Documentos/git/scripts/arch/update.sh && updspd'
-alias fupp='/home/lm/Documentos/git/scripts/arch/full-update.sh'
+alias upp='/home/lm/Documentos/git/scripts/ubuntu/update.sh'
+alias fupp='/home/lm/Documentos/git/scripts/ubuntu/full-update.sh'
 alias cdgit='cd /home/lm/Documentos/git/'
 alias cdg='cd .config'
 alias updspd='/home/lm/.config/autostart/xinputI3.sh'
 alias srcfish='source /home/lm/.config/fish/config.fish'
-alias ffuu='/home/lm/Documentos/git/scripts/arch/full-update.sh && /home/lm/Documentos/git/scripts/arch/update.sh && /home/lm/.config/autostart/xinputI3.sh'
-alias fupd='fupp && upp & updspd'
+alias ffuu='/home/lm/Documentos/git/scripts/ubuntu/full-update.sh && /home/lm/Documentos/git/scripts/ubuntu/update.sh && /home/lm/.config/autostart/xinputI3.sh'
+#alias fupd='fupp && upp'
 alias upd='upp & updspd'
 alias clone='git clone'
 #alias --='--noconfirm --needed'
@@ -151,16 +153,7 @@ alias egrep='egrep --color=auto'
 alias hw='hwinfo --short' # Hardware Info
 alias big="expac -H M '%m\t%n' | sort -h | nl" # Sort installed packages according to size in MB
 alias gitpkg='pacman -Q | grep -i "\-git" | wc -l' # List amount of -git packages
-alias update='sudo pacman -Syu'
-
-# Get fastest mirrors
-alias mirror="sudo cachyos-rate-mirrors"
-
-# Help people new to Arch
-alias apt='man pacman'
-alias apt-get='man pacman'
-alias please='sudo'
-alias tb='nc termbin.com 9999'
+alias update='sudo apt update'
 
 # Cleanup orphaned packages
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'
