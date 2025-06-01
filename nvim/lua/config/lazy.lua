@@ -61,3 +61,6 @@ require("lazy").setup({
     },
   },
 })
+
+-- ~/.config/nvim/init.lua
+vim.env.PATH = "/usr/bin:" .. vim.env.PATH -- Garante que /usr/bin seja o primeiro no PATH
