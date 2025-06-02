@@ -48,35 +48,24 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
 
-;;(package! name-of-plugin)
+;;; $DOOMDIR/packages.el
 
-(package! evil-tutor)
-(package! nerd-icons)
-(package! pbcopy)
-(package! prettier)
-(package! prettier-js)
-(package! prettier-rc)
-(package! all-the-icons-dired)
-(package! counsel)
+;; Pacotes essenciais
 (package! simpleclip)
 (package! move-text)
 (package! vterm-toggle)
-(package! eshell-toggle)
-(package! neotree)
-(package! projectile)
-(package! all-the-icons-nerd-fonts)
-(package! buffer-move)
-(package! markdown-mode)
-(package! json-mode)
-(package! js2-mode)
-(package! js2-highlight-vars)
-(package! js2hl)
-(package! apheleia)
-(package! exec-path-from-shell)
+(package! apheleia)               ; Formatação assíncrona
+(package! exec-path-from-shell)    ; Resolve problemas de PATH
 
-;;; Set up before-save hooks to format buffer and add/delete imports.
-;; Make sure you don't have other gofmt/goimports hooks enabled.
-(defun lsp-go-install-save-hooks ()
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+;; Pacotes de ícones
+(package! all-the-icons-dired)
+(package! nerd-icons)
+
+;; Pacotes para desenvolvimento web
+(package! prettier-js)             ; Formatação JavaScript/TypeScript
+(package! add-node-modules-path)   ; Resolve módulos node
+
+;; Pacotes opcionais (descomente se necessário)
+; (package! counsel)
+; (package! eslintd-fix)          ; Linter JavaScript
+; (package! docker-compose-mode)  ; Para docker-compose
