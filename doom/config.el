@@ -79,8 +79,8 @@
 ;; CONFIGURAÇÕES BÁSICAS
 ;; ========================
 ;; Fontes
-(setq doom-font (font-spec :family "Space Mono" :size 16)
-      doom-variable-pitch-font (font-spec :family "Space Mono" :size 16)
+(setq doom-font (font-spec :family "BlexMono Nerd Font Mono" :size 16)
+      doom-variable-pitch-font (font-spec :family "BlexMono Nerd Font Mono" :size 16)
       doom-theme 'doom-one
       display-line-numbers-type t)
 
@@ -129,8 +129,9 @@
       ;;        "j" #'dired-jump
       ;;        "p" #'peep-dired)
 
-      (:prefix "f"
-               "c" #'find-file "~/.config/doom/config.el")
+      (:prefix "l"
+               "c" #'(lambda () (interactive) (find-file "~/.config/doom/config.el")) ;;config no linux
+               "C" #'(lambda () (interactive) (find-file "~/.doom.d/config.el"))) ;;config no windows
       ;;        "." #'find-file
       ;;        "r" #'recentf-open-files)
 
