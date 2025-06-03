@@ -47,9 +47,7 @@
 ;; (unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
-
-;;; $DOOMDIR/packages.el
-
+;;
 ;; Pacotes essenciais
 (package! simpleclip)
 (package! move-text)
@@ -64,8 +62,3 @@
 ;; Pacotes para desenvolvimento web
 (package! prettier-js)             ; Formatação JavaScript/TypeScript
 (package! add-node-modules-path)   ; Resolve módulos node
-
-;; Pacotes opcionais (descomente se necessário)
-; (package! counsel)
-; (package! eslintd-fix)          ; Linter JavaScript
-; (package! docker-compose-mode)  ; Para docker-compose
