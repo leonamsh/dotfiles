@@ -1,35 +1,9 @@
--- return {
---   {
---     "folke/snacks.nvim",
---     priority = 1000,
---     lazy = false,
---     ---@type snacks.Config
---     opts = {
---       -- your configuration comes here
---       -- or leave it empty to use the default settings
---       -- refer to the configuration section below
---       bigfile = { enabled = true },
---       dashboard = { enabled = true },
---       explorer = { enabled = true },
---       indent = { enabled = true },
---       input = { enabled = true },
---       picker = { enabled = true },
---       notifier = { enabled = true },
---       quickfile = { enabled = true },
---       scope = { enabled = true },
---       scroll = { enabled = true },
---       statuscolumn = { enabled = true },
---       words = { enabled = true },
---     },
---   },
--- }
-
 return {
   {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
-    -- @type snacks.Config
+    ---@type snacks.Config
     opts = {
       bigfile = { enabled = true },
       dashboard = { enabled = true },
@@ -48,7 +22,7 @@ return {
       words = { enabled = true },
       styles = {
         notification = {
-          -- wo = { wrap = true } -- Wrap notifications
+          wo = { wrap = true }, -- Wrap notifications
         },
       },
     },
@@ -96,7 +70,6 @@ return {
         end,
         desc = "File Explorer",
       },
-
       -- find
       {
         "<leader>fb",
@@ -140,7 +113,6 @@ return {
         end,
         desc = "Recent",
       },
-
       -- git
       {
         "<leader>gb",
@@ -191,7 +163,6 @@ return {
         end,
         desc = "Git Log File",
       },
-
       -- Grep
       {
         "<leader>sb",
@@ -222,7 +193,6 @@ return {
         desc = "Visual selection or word",
         mode = { "n", "x" },
       },
-
       -- search
       {
         '<leader>s"',
@@ -244,6 +214,13 @@ return {
           Snacks.picker.autocmds()
         end,
         desc = "Autocmds",
+      },
+      {
+        "<leader>sb",
+        function()
+          Snacks.picker.lines()
+        end,
+        desc = "Buffer Lines",
       },
       {
         "<leader>sc",
@@ -364,7 +341,6 @@ return {
         end,
         desc = "Colorschemes",
       },
-
       -- LSP
       {
         "gd",
@@ -416,7 +392,6 @@ return {
         end,
         desc = "LSP Workspace Symbols",
       },
-
       -- Other
       {
         "<leader>z",
@@ -445,6 +420,13 @@ return {
           Snacks.scratch.select()
         end,
         desc = "Select Scratch Buffer",
+      },
+      {
+        "<leader>n",
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = "Notification History",
       },
       {
         "<leader>bd",
@@ -535,14 +517,16 @@ return {
       vim.api.nvim_create_autocmd("User", {
         pattern = "VeryLazy",
         callback = function()
+          -- Setup some globals for debugging (lazy-loaded)
           _G.dd = function(...)
             Snacks.debug.inspect(...)
           end
           _G.bt = function()
             Snacks.debug.backtrace()
           end
-          vim.print = _G.dd
+          vim.print = _G.dd -- Override print to use snacks for `:=` command
 
+          -- Create some toggle mappings
           Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
           Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
           Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
