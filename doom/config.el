@@ -32,11 +32,11 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-                                        ;(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-                                        ;(setq display-line-numbers-type t)
+(setq display-line-numbers-type t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -74,67 +74,3 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-
-;; ========================
-;; CONFIGURAÇÕES BÁSICAS
-;; ========================
-;; Fontes
-(setq doom-font (font-spec :family "BlexMono Nerd Font Mono" :size 16)
-      doom-variable-pitch-font (font-spec :family "BlexMono Nerd Font Mono" :size 16)
-      doom-theme 'doom-one
-      display-line-numbers-type t)
-
-;; Set UTF-8 as the default encoding system
-(set-language-environment "UTF-8")
-(prefer-coding-system 'utf-8)
-(setq-default buffer-file-coding-system 'utf-8)
-(setq-default save-buffer-coding-system 'utf-8) ; Prevents prompt on save
-
-;; Additional environment settings
-(setq locale-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-
-;; Clipboard
-(use-package! simpleclip
-  :config (simpleclip-mode 1))
-
-;; ========================
-;; PACOTES ADICIONAIS
-;; ========================
-(use-package! move-text
-  :config (move-text-default-bindings))
-
-(use-package! all-the-icons
-  :if (display-graphic-p))
-
-(use-package! all-the-icons-dired
-  :hook (dired-mode . all-the-icons-dired-mode))
-
-;; Docker
-(use-package! dockerfile-mode
-  :mode "Dockerfile\\'")
-
-;; SQL
-(use-package! sql-indent
-  :hook (sql-mode . sqlind-minor-mode))
-
-;; ========================
-;; ATALHOS SIMPLIFICADOS
-;; ========================
-(map! :leader
-      ;;       (:prefix "d"
-      ;;        "d" #'dired
-      ;;        "j" #'dired-jump
-      ;;        "p" #'peep-dired)
-
-      (:prefix "l"
-               "c" #'(lambda () (interactive) (find-file "~/.config/doom/config.el")) ;;config no linux
-               "C" #'(lambda () (interactive) (find-file "~/.doom.d/config.el"))) ;;config no windows
-      ;;        "." #'find-file
-      ;;        "r" #'recentf-open-files)
-
-      (:prefix "t"
-               "n" #'neotree-toggle
-               "t" #'vterm-toggle))

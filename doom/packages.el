@@ -47,18 +47,3 @@
 ;; (unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
-;;
-;; Pacotes essenciais
-(package! simpleclip)
-(package! move-text)
-(package! vterm-toggle)
-(package! apheleia)               ; Formatação assíncrona
-(package! exec-path-from-shell)    ; Resolve problemas de PATH
-
-;; Pacotes de ícones
-(package! all-the-icons-dired)
-(package! nerd-icons)
-
-;; Pacotes para desenvolvimento web
-(package! prettier-js)             ; Formatação JavaScript/TypeScript
-(package! add-node-modules-path)   ; Resolve módulos node
