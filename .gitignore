@@ -1,8 +1,12 @@
 # Ignora TUDO no diretório .config
 /*
 # Exceto estas pastas (e seus conteúdos)
+# shell
 !/fish/
+!/zsh/
+# terminal
 !/alacritty/
+# window managers
 !/polybar/
 !/hypr/
 !/waybar/
@@ -11,13 +15,13 @@
 !/rofi/
 !/picom/
 !/bspwm/
-!/autostart/
 !/i3/
 !/sxhk/
+# editors
 !/emacs/
-!/fish/
 !/nvim/
 !/doom/
-!/zsh/
+# general
+!/autostart/
 # Opcional: inclua o próprio .gitignore se quiser versioná-lo
 !.gitignore
