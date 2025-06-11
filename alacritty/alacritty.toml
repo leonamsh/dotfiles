@@ -16,19 +16,19 @@ foreground = "#f8f8f2"
 size = 12.0
 
 [font.bold]
-family = "JetBrains Mono NF"
+family = "BlexMono Nerd Font Mono"
 style = "Bold"
 
 [font.bold_italic]
-family = "JetBrains Mono NF"
+family = "BlexMono Nerd Font Mono"
 style = "Bold Italic"
 
 [font.italic]
-family = "JetBrains Mono NF"
+family = "BlexMono Nerd Font Mono"
 style = "Italic"
 
 [font.normal]
-family = "JetBrains Mono NF"
+family = "BlexMono Nerd Font Mono"
 style = "Regular"
 
 [[keyboard.bindings]]
