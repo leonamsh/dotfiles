@@ -13,22 +13,22 @@ background = "#282a36"
 foreground = "#f8f8f2"
 
 [font]
-size = 12.0
+size = 13.0
 
 [font.bold]
-family = "BlexMono Nerd Font Mono"
+family = "Iosevka Nerd Font Mono"
 style = "Bold"
 
 [font.bold_italic]
-family = "BlexMono Nerd Font Mono"
+family = "Iosevka Nerd Font Mono"
 style = "Bold Italic"
 
 [font.italic]
-family = "BlexMono Nerd Font Mono"
+family = "Iosevka Nerd Font Mono"
 style = "Italic"
 
 [font.normal]
-family = "BlexMono Nerd Font Mono"
+family = "Iosevka Nerd Font Mono"
 style = "Regular"
 
 [[keyboard.bindings]]
