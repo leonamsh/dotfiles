@@ -1,5 +1,7 @@
-function hello(who) {
-    console.log(`Hello ${who}, thank you, you are great!`)
+class test {
+    constructor(valor) {
+        function teste(num) {
+            this.num = num
+        }
+    }
 }
-
-hello('audience')
