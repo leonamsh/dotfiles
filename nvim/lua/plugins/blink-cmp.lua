@@ -38,13 +38,48 @@ return {
 			documentation = { auto_show = true },
 			signature = { enabled = true },
 			ghost_text = { enabled = true },
-			menu = { border = "rounded" },
+			menu = {
+				border = "rounded",
+				draw = {
+					components = {
+						kind_icon = {
+							text = function(ctx)
+								local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+								return kind_icon
+							end,
+							-- (optional) use highlights from mini.icons
+							highlight = function(ctx)
+								local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+								return hl
+							end,
+						},
+						kind = {
+							-- (optional) use highlights from mini.icons
+							highlight = function(ctx)
+								local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+								return hl
+							end,
+						},
+					},
+				},
+			},
 		},
 
 		-- Default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer" },
+			default = { "snippets", "lsp", "path", "buffer" },
+			providers = {
+				lsp = {
+					name = "LSP",
+					module = "blink.cmp.sources.lsp",
+					transform_items = function(_, items)
+						return vim.tbl_filter(function(item)
+							return item.kind ~= require("blink.cmp.types").CompletionItemKind.Keyword
+						end, items)
+					end,
+				},
+			},
 			-- sql = {
 			-- 	-- IMPORTANT: use the same name as you would for nvim-cmp
 			-- 	name = "sql",

@@ -5,3 +5,11 @@ class test {
         }
     }
 }
+
+function teste(valor) {
+    if (valor == null) {
+        console.log(valor)
+    } else {
+        console.log('valor é nulo')
+    }
+}
