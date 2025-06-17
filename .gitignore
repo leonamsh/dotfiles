@@ -19,8 +19,11 @@
 !/sxhk/
 # editors
 !/emacs/
-!/nvim/
 !/doom/
+!/nvim/
+!/astronvim/
+!/lazynvim/
+!/nvchad/
 # general
 !/autostart/
 # Opcional: inclua o próprio .gitignore se quiser versioná-lo
