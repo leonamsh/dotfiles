@@ -1,30 +1,34 @@
 # Ignora TUDO no diretório .config
 /*
 # Exceto estas pastas (e seus conteúdos)
-# shell
-!/fish/
-!/zsh/
-# terminal
-!/alacritty/
-# window managers
-!/polybar/
-!/hypr/
-!/waybar/
-!/wlogout/
-!/qtile/
-!/rofi/
-!/picom/
-!/bspwm/
-!/i3/
-!/sxhk/
-# editors
-!/emacs/
-!/doom/
-!/nvim/
-!/astronvim/
-!/lazynvim/
-!/nvchad/
-# general
-!/autostart/
-# Opcional: inclua o próprio .gitignore se quiser versioná-lo
+!.config/
+# Permite arquivos específicos na raiz
+!.zshrc
 !.gitignore
+#
+.config/*
+# shell
+!.config/fish/
+!.config/zsh/
+# terminal
+!.config/alacritty/
+# window managers
+!.config/polybar/
+!.config/hypr/
+!.config/waybar/
+!.config/wlogout/
+!.config/qtile/
+!.config/rofi/
+!.config/picom/
+!.config/bspwm/
+!.config/i3/
+!.config/sxhk/
+# editors
+!.config/emacs/
+!.config/doom/
+!.config/nvim/
+!.config/astronvim/
+!.config/lazynvim/
+!.config/nvchad/
+# general
+!.config/autostart/
