@@ -14,15 +14,9 @@
 !.config/alacritty/
 # window managers
 !.config/polybar/
-!.config/hypr/
-!.config/waybar/
-!.config/wlogout/
 !.config/qtile/
 !.config/rofi/
 !.config/picom/
-!.config/bspwm/
-!.config/i3/
-!.config/sxhk/
 # editors
 !.config/emacs/
 !.config/doom/
