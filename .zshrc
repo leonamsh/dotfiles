@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git fzf-zsh-plugin z sudo zsh-autosuggestions zsh-completions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -116,9 +116,18 @@ setopt HIST_REDUCE_BLANKS   # Remove espaços desnecessários
 setopt INC_APPEND_HISTORY   # Salva os comandos assim que você executa
 setopt SHARE_HISTORY        # Compartilha histórico entre sessões
 
+# Sugestão em cinza
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
+
+# Ativar menu de autocompletion em dropdown estilo menu
+autoload -Uz compinit
+compinit
+zstyle ':completion:*' menu select
 
 ## Useful aliases
 #Leonam
+alias S='sudo pacman -S --noconfirm --needed'
+alias Ss='sudo pacman -Ss'
 alias upp='/home/lm/Documentos/git/scripts/arch/update.sh'
 alias fupp='/home/lm/Documentos/git/scripts/arch/full-update.sh'
 alias cdgit='cd /home/lm/Documentos/git/'
@@ -191,3 +200,5 @@ alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 alias nvima="env NVIM_APPNAME=astronvim nvim"
 alias nvimc="env NVIM_APPNAME=nvchad nvim"
 alias nviml="env NVIM_APPNAME=lazynvim nvim"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
