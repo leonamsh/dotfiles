@@ -1,12 +1,14 @@
 return {
-	{
-		"sainnhe/sonokai",
-		priority = 1000,
-		config = function()
-			vim.g.sonokai_transparent_background = "1"
-			vim.g.sonokai_enable_italic = "1"
-			vim.g.sonokai_style = "andromeda"
-			vim.cmd.colorscheme("sonokai")
-		end,
-	},
+  -- Using Lazy
+  {
+    "navarasu/onedark.nvim",
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      require("onedark").setup({
+        style = "darker",
+      })
+      -- Enable theme
+      require("onedark").load()
+    end,
+  },
 }
