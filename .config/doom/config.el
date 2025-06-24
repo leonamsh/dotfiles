@@ -32,15 +32,15 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+;; ( setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+;;(setq display-line-numbers-type t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+;;(setq org-directory "~/org/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -74,3 +74,83 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+;; ==============================
+;; 🎨 Aparência
+;; ==============================
+(setq doom-theme 'doom-one)
+(setq display-line-numbers-type 'relative)
+
+(setq doom-font (font-spec :family "JetBrains Mono" :size 15)
+      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
+      doom-big-font (font-spec :family "JetBrains Mono" :size 24))
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
+
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+;; ==============================
+;; 🧠 Completions: Corfu + Cape
+;; ==============================
+(after! lsp-mode
+  (setq lsp-completion-provider :none)) ;; Desativa company para evitar sobreposição
+
+(after! corfu
+  (setq corfu-auto t
+        corfu-auto-delay 0.1
+        corfu-preview-current nil
+        corfu-quit-no-match 'separator
+        corfu-quit-at-boundary nil))
+
+;; (use-package! cape
+;;   :init
+;;   (add-to-list 'completion-at-point-functions #'cape-file)
+;;   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+;;   (add-to-list 'completion-at-point-functions #'cape-history))
+
+;; ==============================
+;; 🧰 LSP UI e navegação
+;; ==============================
+(after! lsp-ui
+  (setq lsp-ui-doc-enable t
+        lsp-ui-doc-show-with-cursor t
+        lsp-ui-doc-position 'at-point
+        lsp-ui-sideline-enable t
+        lsp-ui-sideline-show-hover t
+        lsp-ui-sideline-show-code-actions t))
+
+(setq lsp-headerline-breadcrumb-enable t) ;; Mostra função atual no topo
+
+;; ==============================
+;; 💾 Format on save
+;; ==============================
+(setq +format-on-save-enabled-modes
+      '(js-ts-mode tsx-ts-mode typescript-ts-mode css-ts-mode json-ts-mode html-ts-mode web-mode))
+
+;; ==============================
+;; 🗂️ Treemacs (explorador de arquivos)
+;; ==============================
+(setq doom-themes-treemacs-theme "doom-colors")
+(after! treemacs
+  (treemacs-follow-mode t)
+  (treemacs-filewatch-mode t)
+  (treemacs-git-mode 'deferred))
+
+;; ==============================
+;; 🧪 DAP (Debug Adapter Protocol)
+;; ==============================
+;; (use-package! dap-mode
+;;   :after lsp-mode
+;;   :config
+;;   (require 'dap-node)
+;;   (dap-node-setup)) ;; baixa adaptador JS/TS
+
+;; ==============================
+;; 🧠 Outras boas práticas
+;; ==============================
+(setq doom-modeline-project-detection 'auto) ;; Mostra nome do projeto na modeline

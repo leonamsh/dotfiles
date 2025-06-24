@@ -140,6 +140,7 @@ alias ffuu='~/scripts/arch/full-update.sh && ~/scripts/arch/update.sh && ~/.conf
 alias fupd='fupp && upp'
 alias upd='upp & updspd'
 alias clone='git clone'
+alias cddev='cd /run/media/development/'
 #alias --='--noconfirm --needed'
 #alias ---='--noconfirm'
 alias doomsync='~/.config/emacs/bin/doom sync'

@@ -21,6 +21,7 @@
 !.config/emacs/
 !.config/doom/
 !.config/nvim/
+!.config/nvim.bak/
 !.config/astronvim/
 !.config/lazynvim/
 !.config/nvchad/

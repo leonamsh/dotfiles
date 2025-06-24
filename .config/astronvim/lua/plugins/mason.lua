@@ -22,6 +22,32 @@ return {
 
         -- install any other package
         "tree-sitter-cli",
+        -- leonam
+        -- javascript
+        "eslint_d",
+        "eslint",
+        "prettierd",
+        "prettier",
+        "ts_ls",
+        "vtsls",
+        -- lua
+        "luaformatter",
+        "lua_ls",
+        -- markdown
+        "marksman",
+        "mdformat",
+        "markdown_oxide",
+        -- python
+        "pylint",
+        "pyright",
+        -- html and css
+        "html",
+        "htmlbeautifier",
+        "superhtml",
+        "cssls",
+        "ast-grep",
+        "css_variables",
+        "cssmodules_ls",
       },
     },
   },

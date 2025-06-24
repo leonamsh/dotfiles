@@ -5,7 +5,7 @@ return {
     -- 👇 in this section, choose your own keymappings!
     {
       "<leader>c",
-      "<cmd>Yazi<cr>",
+      "<cmd>Yazi<cW>",
       desc = "Open yazi at the current file",
     },
     {
