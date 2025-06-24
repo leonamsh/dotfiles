@@ -366,3 +366,6 @@
 
 (use-package all-the-icons-dired
   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+
+(setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/.npm-global/bin")))
+(add-to-list 'exec-path (expand-file-name "~/.npm-global/bin"))

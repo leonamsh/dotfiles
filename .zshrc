@@ -204,3 +204,4 @@ alias nvimc="env NVIM_APPNAME=nvchad nvim"
 alias nviml="env NVIM_APPNAME=lazynvim nvim"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="$HOME/.npm-global/bin:$PATH"
