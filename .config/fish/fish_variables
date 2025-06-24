@@ -2,7 +2,7 @@
 # VERSION: 3.0
 SETUVAR __done_min_cmd_duration:10000
 SETUVAR __done_notification_urgency_level:low
-SETUVAR __fish_initialized:3800\x0d
+SETUVAR __fish_initialized:3800
 SETUVAR fish_color_autosuggestion:brblack\x0d
 SETUVAR fish_color_cancel:\x2dr\x0d
 SETUVAR fish_color_command:normal\x0d
@@ -25,7 +25,7 @@ SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrbl
 SETUVAR fish_color_status:red\x0d
 SETUVAR fish_color_user:brgreen\x0d
 SETUVAR fish_color_valid_path:\x2d\x2dunderline\x0d
-SETUVAR fish_key_bindings:fish_default_key_bindings\x0d
+SETUVAR fish_key_bindings:fish_default_key_bindings
 SETUVAR fish_pager_color_completion:normal\x0d
 SETUVAR fish_pager_color_description:yellow\x1e\x2di\x0d
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline\x0d
