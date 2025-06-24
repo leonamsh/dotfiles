@@ -166,8 +166,7 @@ Returns OUTPUT."
                  (if (listp level)
                      (memq doom-print-minimum-level level)
                    (>= (get level 'print-level)
-                       (or (get doom-print-minimum-level 'print-level)
-                           9999)))))
+                       (get doom-print-minimum-level 'print-level)))))
     (when format
       (setq output (doom-print--format "%s" output)))
     (princ output stream)
