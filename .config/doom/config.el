@@ -32,15 +32,18 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-;; ( setq doom-theme 'doom-one)
+(setq doom-font (font-spec :family "JetBrains Mono" :size 16)
+      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 16))
+
+(setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-;;(setq display-line-numbers-type t)
+(setq display-line-numbers-type t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-;;(setq org-directory "~/org/")
+(setq org-directory "~/org/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -74,83 +77,292 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-;; ==============================
-;; 🎨 Aparência
-;; ==============================
-(setq doom-theme 'doom-one)
-(setq display-line-numbers-type 'relative)
 
-(setq doom-font (font-spec :family "JetBrains Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
-      doom-big-font (font-spec :family "JetBrains Mono" :size 24))
-(after! doom-themes
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t))
-(custom-set-faces!
-  '(font-lock-comment-face :slant italic)
-  '(font-lock-keyword-face :slant italic))
-
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-
-;; ==============================
-;; 🧠 Completions: Corfu + Cape
-;; ==============================
+;; source: https://nayak.io/posts/golang-development-doom-emacs/
+;; golang formatting set up
+;; use gofumpt
 (after! lsp-mode
-  (setq lsp-completion-provider :none)) ;; Desativa company para evitar sobreposição
+  (setq  lsp-go-use-gofumpt t)
+  )
 
-(after! corfu
-  (setq corfu-auto t
-        corfu-auto-delay 0.1
-        corfu-preview-current nil
-        corfu-quit-no-match 'separator
-        corfu-quit-at-boundary nil))
+;; gotta make emacs realod init.el every start. idk how to do it thou D:
+;; (load! "~/.doom.d/init.el")
+;; automatically organize imports
+(add-hook 'go-mode-hook #'lsp-deferred)
+;; Make sure you don't have other goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
-;; (use-package! cape
-;;   :init
-;;   (add-to-list 'completion-at-point-functions #'cape-file)
-;;   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-;;   (add-to-list 'completion-at-point-functions #'cape-history))
+;; enable all analyzers; not done by default
+(after! lsp-mode
+  (setq  lsp-go-analyses '((fieldalignment . t)
+                           (nilness . t)
+                           (shadow . t)
+                           (unusedparams . t)
+                           (unusedwrite . t)
+                           (useany . t)
+                           (unusedvariable . t)))
+  )
+;; use system clipboard
+;; (require 'pbcopy)
+;; (turn-on-pbcopy)
 
-;; ==============================
-;; 🧰 LSP UI e navegação
-;; ==============================
-(after! lsp-ui
-  (setq lsp-ui-doc-enable t
-        lsp-ui-doc-show-with-cursor t
-        lsp-ui-doc-position 'at-point
-        lsp-ui-sideline-enable t
-        lsp-ui-sideline-show-hover t
-        lsp-ui-sideline-show-code-actions t))
+;;
+(require 'simpleclip)
+(simpleclip-mode 1)
 
-(setq lsp-headerline-breadcrumb-enable t) ;; Mostra função atual no topo
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
 
-;; ==============================
-;; 💾 Format on save
-;; ==============================
-(setq +format-on-save-enabled-modes
-      '(js-ts-mode tsx-ts-mode typescript-ts-mode css-ts-mode json-ts-mode html-ts-mode web-mode))
+;; Keybindings com map!
+(map! :leader
+      :desc "Counsel M-x" "SPC" #'counsel-M-x
+      :desc "Find file" "." #'find-file
+      :desc "Perspective" "=" #'perspective-map
+      :desc "Comment lines" "TAB TAB" #'comment-line
+      :desc "Universal argument" "u" #'universal-argument)
 
-;; ==============================
-;; 🗂️ Treemacs (explorador de arquivos)
-;; ==============================
-(setq doom-themes-treemacs-theme "doom-colors")
-(after! treemacs
-  (treemacs-follow-mode t)
-  (treemacs-filewatch-mode t)
-  (treemacs-git-mode 'deferred))
+;; Buffer/bookmark bindings
+(map! :leader
+      :prefix "b"
+      :desc "Switch to buffer" "b" #'switch-to-buffer
+      :desc "Create indirect buffer copy" "c" #'clone-indirect-buffer
+      :desc "Clone indirect buffer other window" "C" #'clone-indirect-buffer-other-window
+      :desc "Delete bookmark" "d" #'bookmark-delete
+      :desc "Ibuffer" "i" #'ibuffer
+      :desc "Kill current buffer" "k" #'kill-current-buffer
+      :desc "Kill multiple buffers" "K" #'kill-some-buffers
+      :desc "List bookmarks" "l" #'list-bookmarks
+      :desc "Set bookmark" "m" #'bookmark-set
+      :desc "Next buffer" "n" #'next-buffer
+      :desc "Previous buffer" "p" #'previous-buffer
+      :desc "Reload buffer" "r" #'revert-buffer
+      :desc "Rename buffer" "R" #'rename-buffer
+      :desc "Save buffer" "s" #'basic-save-buffer
+      :desc "Save multiple buffers" "S" #'save-some-buffers
+      :desc "Save bookmarks" "w" #'bookmark-save)
 
-;; ==============================
-;; 🧪 DAP (Debug Adapter Protocol)
-;; ==============================
-;; (use-package! dap-mode
-;;   :after lsp-mode
-;;   :config
-;;   (require 'dap-node)
-;;   (dap-node-setup)) ;; baixa adaptador JS/TS
+;; Dired bindings
+(map! :leader
+      :prefix "d"
+      :desc "Open maisPraTi folder" "A" (lambda () (interactive) (neotree-dir "~/Documentos/git/maisPraTi/"))
+      :desc "Open dired" "d" #'dired
+      :desc "Open doom folder" "D" (lambda () (interactive) (neotree-dir "~/.config/.doom.d/"))
+      :desc "Dired jump" "j" #'dired-jump
+      :desc "Open neotree" "n" #'neotree-dir
+      :desc "Peep-dired" "p" #'peep-dired
+      :desc "Open teste producao" "P" (lambda () (interactive) (dired "i:/Teste_Producao/")))
 
-;; ==============================
-;; 🧠 Outras boas práticas
-;; ==============================
-(setq doom-modeline-project-detection 'auto) ;; Mostra nome do projeto na modeline
+;; Eshell/Evaluate bindings
+(map! :leader
+      :prefix "e"
+      :desc "Evaluate buffer" "b" #'eval-buffer
+      :desc "Evaluate defun" "d" #'eval-defun
+      :desc "Evaluate expression" "e" #'eval-expression
+      :desc "Eshell history" "h" #'counsel-esh-history
+      :desc "Evaluate last sexp" "l" #'eval-last-sexp
+      :desc "Evaluate region" "r" #'eval-region
+      :desc "Reload EWW" "R" #'eww-reload
+      :desc "Eshell" "s" #'eshell
+      :desc "EWW browser" "w" #'eww)
+
+;; File bindings
+(map! :leader
+      :prefix "f"
+      :desc "Open alacritty config" "a" (lambda () (interactive) (find-file "~/.config/alacritty/alacritty.toml"))
+      :desc "Open emacs config" "c" (lambda () (interactive) (find-file "~/.doom.d/config.el"))
+      :desc "Open user-emacs-directory" "e" (lambda () (interactive) (dired "~/.doom.d/custom.el"))
+      :desc "Find grep dired" "d" #'find-grep-dired
+      :desc "Open fish config" "f" (lambda () (interactive) (find-file "~/.config/fish/config.fish"))
+      :desc "Search current file" "g" #'counsel-grep-or-swiper
+      :desc "Open hyprland config" "h" (lambda () (interactive) (find-file "~/.config/hypr/hyprland.conf"))
+      :desc "Open init.el" "i" (lambda () (interactive) (find-file "~/.doom.d/init.el"))
+      :desc "Jump to file" "j" #'counsel-file-jump
+      :desc "Open kitty config" "k" (lambda () (interactive) (find-file "~/.config/kitty/kitty.conf"))
+      :desc "Locate file" "l" #'counsel-locate
+      :desc "Open qtile config" "q" (lambda () (interactive) (find-file "~/.config/qtile/config.py"))
+      :desc "Find recent files" "r" #'counsel-recentf
+      :desc "Sudo find file" "u" #'sudo-edit-find-file
+      :desc "Sudo edit file" "U" #'sudo-edit
+      :desc "Open zshrc" "z" (lambda () (interactive) (find-file "~/.zshrc")))
+
+;; Git bindings
+(map! :leader
+      :prefix "g"
+      :desc "Magit dispatch" "/" #'magit-dispatch
+      :desc "Magit file dispatch" "." #'magit-file-dispatch
+      :desc "Switch branch" "b" #'magit-branch-checkout
+      :desc "Create branch and checkout" "c b" #'magit-branch-and-checkout
+      :desc "Create commit" "c c" #'magit-commit-create
+      :desc "Create fixup commit" "c f" #'magit-commit-fixup
+      :desc "Clone repo" "C" #'magit-clone
+      :desc "Show commit" "f c" #'magit-show-commit
+      :desc "Magit find file" "f f" #'magit-find-file
+      :desc "Find gitconfig" "f g" #'magit-find-git-config-file
+      :desc "Git fetch" "F" #'magit-fetch
+      :desc "Magit status" "g" #'magit-status
+      :desc "Initialize repo" "i" #'magit-init
+      :desc "Buffer log" "l" #'magit-log-buffer-file
+      :desc "Revert file" "r" #'vc-revert
+      :desc "Stage file" "s" #'magit-stage-file
+      :desc "Time machine" "t" #'git-timemachine
+      :desc "Unstage file" "u" #'magit-unstage-file)
+
+;; Help bindings
+(map! :leader
+      :prefix "h"
+      :desc "Apropos" "a" #'counsel-apropos
+      :desc "Describe bindings" "b" #'describe-bindings
+      :desc "Describe char" "c" #'describe-char
+      :desc "About Emacs" "d a" #'about-emacs
+      :desc "View debugging" "d d" #'view-emacs-debugging
+      :desc "View FAQ" "d f" #'view-emacs-FAQ
+      :desc "Emacs manual" "d m" #'info-emacs-manual
+      :desc "View news" "d n" #'view-emacs-news
+      :desc "Describe distribution" "d o" #'describe-distribution
+      :desc "View problems" "d p" #'view-emacs-problems
+      :desc "View todo" "d t" #'view-emacs-todo
+      :desc "Describe no warranty" "d w" #'describe-no-warranty
+      :desc "View messages" "e" #'view-echo-area-messages
+      :desc "Describe function" "f" #'describe-function
+      :desc "Describe face" "F" #'describe-face
+      :desc "Describe GNU Project" "g" #'describe-gnu-project
+      :desc "Info" "i" #'info
+      :desc "Describe input method" "I" #'describe-input-method
+      :desc "Describe key" "k" #'describe-key
+      :desc "View keystrokes" "l" #'view-lossage
+      :desc "Describe language" "L" #'describe-language-environment
+      :desc "Describe mode" "m" #'describe-mode
+      :desc "Reload config" "r r" (lambda () (interactive) (load-file "~/.config/.doom.d/init.el"))
+      :desc "Reload config windows" "r w" (lambda () (interactive) (load-file "~/.doom.d/init.el"))
+      :desc "Load theme" "t" #'load-theme
+      :desc "Describe variable" "v" #'describe-variable
+      :desc "Where is" "w" #'where-is
+      :desc "Describe command" "x" #'describe-command)
+
+;; Org bindings
+(map! :leader
+      :prefix "m"
+      :desc "Org agenda" "a" #'org-agenda
+      :desc "Org export" "e" #'org-export-dispatch
+      :desc "Toggle item" "i" #'org-toggle-item
+      :desc "Org todo" "t" #'org-todo
+      :desc "Babel tangle" "B" #'org-babel-tangle
+      :desc "Todo list" "T" #'org-todo-list
+      :desc "Insert hline" "b -" #'org-table-insert-hline
+      :desc "Time stamp" "d t" #'org-time-stamp
+      :desc "move line up" "u" #'move-line-up
+      :desc "move line down" "d" #'move-line-down
+      :desc "duplicate line" "D" #'duplicate-dwim)
+
+;; Open bindings
+(map! :leader
+      :prefix "o"
+      :desc "Dashboard" "d" #'dashboard-open
+      :desc "Elfeed" "e" #'elfeed
+      :desc "New frame" "f" #'make-frame
+      :desc "Select frame" "F" #'select-frame-by-name)
+
+;; Projectile bindings (mantido como estava)
+(map! :leader
+      :desc "Projectile" "p" #'projectile-command-map)
+
+;; Search bindings
+(map! :leader
+      :prefix "s"
+      :desc "Dictionary search" "d" #'dictionary-search
+      :desc "Man pages" "m" #'man
+      :desc "TLDR" "t" #'tldr
+      :desc "Woman" "w" #'woman)
+
+;; Toggle bindings
+(map! :leader
+      :prefix "t"
+      :desc "Toggle eshell" "e" #'eshell-toggle
+      :desc "Toggle flycheck" "f" #'flycheck-mode
+      :desc "Toggle line numbers" "l" #'display-line-numbers-mode
+      :desc "Toggle neotree" "n" #'neotree-toggle
+      :desc "Toggle org mode" "o" #'org-mode
+      :desc "Toggle rainbow" "r" #'rainbow-mode
+      :desc "Toggle truncate lines" "t" #'visual-line-mode
+      :desc "Toggle vterm" "v" #'vterm-toggle
+      :desc "Package install" "p" #'package-install)
+
+;; Window bindings
+(map! :leader
+      :prefix "w"
+      :desc "Close window" "c" #'evil-window-delete
+      :desc "New window" "n" #'evil-window-new
+      :desc "Split window" "s" #'evil-window-split
+      :desc "Vsplit window" "v" #'evil-window-vsplit
+      :desc "Window left" "h" #'evil-window-left
+      :desc "Window down" "j" #'evil-window-down
+      :desc "Window up" "k" #'evil-window-up
+      :desc "Window right" "l" #'evil-window-right
+      :desc "Next window" "w" #'evil-window-next
+      :desc "Buffer move left" "H" #'buf-move-left
+      :desc "Buffer move down" "J" #'buf-move-down
+      :desc "Buffer move up" "K" #'buf-move-up
+      :desc "Buffer move right" "L" #'buf-move-right)
+
+;; Configurações adicionais (mantidas da sua configuração original)
+(use-package which-key
+  :init (which-key-mode 1)
+  :diminish
+  :config
+  (setq which-key-side-window-location 'bottom
+        which-key-sort-order #'which-key-key-order-alpha
+        which-key-allow-imprecise-window-fit nil
+        which-key-sort-uppercase-first nil
+        which-key-add-column-padding 1
+        which-key-max-display-columns nil
+        which-key-min-display-lines 6
+        which-key-side-window-slot -10
+        which-key-side-window-max-height 0.25
+        which-key-idle-delay 0.8
+        which-key-max-description-length 25
+        which-key-separator " → "))
+
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+(move-text-default-bindings)
+
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+
+(use-package which-key
+  :init
+  (which-key-mode 1)
+  :diminish
+  :config
+  (setq which-key-side-window-location 'bottom
+	which-key-sort-order #'which-key-key-order-alpha
+	which-key-allow-imprecise-window-fit nil
+	which-key-sort-uppercase-first nil
+	which-key-add-column-padding 1
+	which-key-max-display-columns nil
+	which-key-min-display-lines 6
+	which-key-side-window-slot -10
+	which-key-side-window-max-height 0.25
+	which-key-idle-delay 0.8
+	which-key-max-description-length 25
+	which-key-allow-imprecise-window-fit nil
+	which-key-separator " → " ))
+
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)) ;;To ensure Emacs always starts with js2-mode for .js files
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode)) ;;To ensure Emacs always starts with js2-mode for .js files
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode)) ;;To ensure Emacs always starts with js2-mode for .js files
+
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
