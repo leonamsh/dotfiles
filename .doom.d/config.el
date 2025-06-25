@@ -32,8 +32,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-font (font-spec :family "JetBrains Mono" :size 16)
-      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 16))
+(setq doom-font (font-spec :family "BlexMono Nerd Font Mono" :size 16)
+      doom-variable-pitch-font (font-spec :family "BlexMono Nerd Font Mono" :size 16))
 
 (setq doom-theme 'doom-one)
 
