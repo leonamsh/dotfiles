@@ -126,38 +126,50 @@ zstyle ':completion:*' menu select
 
 ## Useful aliases
 #Leonam
+###############################################
+# updates #####################################
+###############################################
 alias S='sudo pacman -S --noconfirm --needed'
 alias Ss='sudo pacman -Ss'
+alias updspd='~/.config/autostart/xinputI3.sh'
 alias upp='/run/media/development/scripts/arch/update.sh'
 alias fupp='/run/media/development/scripts/arch/full-update.sh'
 alias limpao='/run/media/development/scripts/arch/update-clean-arch.sh'
-alias cdgit='cd /'
 alias cdg='cd .config'
-alias updspd='~/.config/autostart/xinputI3.sh'
 alias srcfish='source ~/.config/fish/config.fish'
 alias srczsh='source ~/.zshrc'
-alias ffuu='/run/media/development/scripts/arch/full-update.sh && /run/media/development/scripts/arch/update.sh && /run/media/development/scripts/set-monitor-systemd/install.sh'
-alias fupd='fupp && upp'
+alias fupd='fupp && upp && updspd'
 alias upd='upp & updspd'
 alias clone='git clone'
 alias cddev='cd /run/media/development/'
-#alias --='--noconfirm --needed'
-#alias ---='--noconfirm'
+###############################################
+# doom aliases ################################
+###############################################
 alias doomsync='~/.config/emacs/bin/doom sync'
 alias doomupd='~/.config/emacs/bin/doom upgrade'
 alias doomdoc='~/.config/emacs/bin/doom doctor'
 alias doompurge='~/.config/emacs/bin/doom purge'
-#
-alias cdaula='cd ~/Documentos/git/maisPraTi/'
-#
+alias dinstall='emacs -nw /run/media/development/scripts/arch/post-install.sh'
+###############################################
+# change directory aliases ####################
+###############################################
+alias cdaula='cd /run/media/development/maisPraTi/'
+###############################################
+# nvim aliases#################################
+###############################################
 alias nkitty='nvim ~/.config/kitty/kitty.conf'
 alias nalac='nvim ~/.config/alacritty/alacritty.toml'
 alias nfish='nvim ~/.config/fish/config.fish'
 alias nqtile='nvim ~/.config/qtile/config.py'
 alias naula='nvim ~/Documentos/maisPraTi'
 alias nzsh='nvim ~/.zshrc'
-#~export PATH="$HOME/.emacs.d/bin:$PATH"~
-
+alias ninstall='nvim /run/media/development/scripts/arch/post-install.sh'
+alias nvima="env NVIM_APPNAME=astronvim nvim"
+alias nvimc="env NVIM_APPNAME=nvchad nvim"
+alias nviml="env NVIM_APPNAME=lazynvim nvim"
+###############################################
+# other aliases ###############################
+###############################################
 # Replace ls with eza
 alias ls='eza -al --color=always --group-directories-first --icons' # preferred listing
 alias la='eza -a --color=always --group-directories-first --icons' # all files and dirs
@@ -196,12 +208,6 @@ alias jctl="journalctl -p 3 -xb"
 
 # Recent installed packages
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
-
-#neovim
-
-alias nvima="env NVIM_APPNAME=astronvim nvim"
-alias nvimc="env NVIM_APPNAME=nvchad nvim"
-alias nviml="env NVIM_APPNAME=lazynvim nvim"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH="$HOME/.npm-global/bin:$PATH"

@@ -27,4 +27,5 @@
 !.config/nvchad/
 # general
 !.config/autostart/
+!.local/share/fonts/
 *Zone.Identifier*

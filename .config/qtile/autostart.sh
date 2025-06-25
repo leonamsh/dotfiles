@@ -4,19 +4,21 @@ COLORSCHEME=DoomOne
 
 ### AUTOSTART PROGRAMS ###
 #starting utility applications at boot time
+~/.config/autostart/xinputI3.sh &
+~/.config/autostart/screenResolution.sh &
 variety &
 xfce4-power-manager &
 numlockx on &
-# feh --bg-fill --randomize ~/Documentos/git/walls/abstract ~/Documentos/git/walls/abstract/
 killall rofi &
 numlockx on &
 lxsession &
-#picom --daemon &
+picom --daemon &
 /usr/bin/emacs --daemon &
 nm-applet &
 "$HOME"/.screenlayout/layout.sh &
-# "$HOME"/home/lm/.config/qtile/sxhkd/sxhkdrc &
 sleep 1
+# "$HOME"/home/lm/.config/qtile/sxhkd/sxhkdrc &
+# feh --bg-fill --randomize ~/Documentos/git/walls/abstract ~/Documentos/git/walls/abstract/
 # conky -c "$HOME"/.config/conky/qtile/01/"$COLORSCHEME".conf || echo "Couldn't start conky."
 
 ### UNCOMMENT ONLY ONE OF THE FOLLOWING THREE OPTIONS! ###
@@ -26,8 +28,8 @@ sleep 1
 # find /usr/share/backgrounds/dtos-backgrounds/ -type f | shuf -n 1 | xargs xwallpaper --stretch &
 # 3. Uncomment to set wallpaper with nitrogen
 # nitrogen --restore &
-$HOME/.config/autostart/xinputI3.sh &
-xrandr --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate normal &
+# $HOME/.config/autostart/xinputI3.sh &
+# xrandr --output HDMI-A-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DisplayPort-0 --mode 1440x900 --pos 1920x0 --rotate normal &
 
 #start sxhkd to replace Qtile native key-bindings
 # run sxhkd -c /home/lm/.config/qtile/sxhkd/sxhkdrc &

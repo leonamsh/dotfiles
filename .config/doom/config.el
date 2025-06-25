@@ -32,8 +32,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-font (font-spec :family "JetBrains Mono" :size 16)
-      doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 16))
+(setq doom-font (font-spec :family "Iosevka Nerd Font Mono" :size 18)
+      doom-variable-pitch-font (font-spec :family "Iosevka Nerd Font Mono" :size 18))
 
 (setq doom-theme 'doom-one)
 
@@ -173,8 +173,10 @@
 (map! :leader
       :prefix "f"
       :desc "Open alacritty config" "a" (lambda () (interactive) (find-file "~/.config/alacritty/alacritty.toml"))
-      :desc "Open emacs config" "c" (lambda () (interactive) (find-file "~/.doom.d/config.el"))
-      :desc "Open user-emacs-directory" "e" (lambda () (interactive) (dired "~/.doom.d/custom.el"))
+      :desc "Open emacs config linux" "c" (lambda () (interactive) (find-file "~/.config/doom/config.el"))
+      :desc "Open emacs config windows" "C" (lambda () (interactive) (find-file "~/.doom.d/config.el"))
+      :desc "Open emacs config on dired in linux" "e" (lambda () (interactive) (dired "~/.config/doom"))
+      :desc "Open emacs config on dired in windows" "E" (lambda () (interactive) (dired "~/.doom.d"))
       :desc "Find grep dired" "d" #'find-grep-dired
       :desc "Open fish config" "f" (lambda () (interactive) (find-file "~/.config/fish/config.fish"))
       :desc "Search current file" "g" #'counsel-grep-or-swiper

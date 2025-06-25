@@ -42,7 +42,7 @@ powerline = {
 }
 
 mod = "mod4"                # Sets mod key to SUPER/WINDOWS
-myTerm = "kitty"            # My terminal of choice
+myTerm = "alacritty"            # My terminal of choice
 myBrowser = "brave"       # My browser of choice
 myBrowser2 = "firefox"     # My browser of choice
 myFiles = "pcmanfm"        # My file manager of choice
@@ -52,7 +52,8 @@ myMusic = "flatpak run com.spotify.Client"         # spotify
 myEmacs = "emacs" # The space at the end is IMPORTANT!
 myNeovim = "nvim"
 # logout menu option - about to change it to rofi power script
-logOut = "sh -c ~/.config/rofi/scripts/power"
+# logOut = "sh -c ~/.config/rofi/scripts/power"
+logOut = "wlogout"
 # logOut = "sh -c ~/.config/rofi/scripts/power" #logout menu option - about to change it to rofi power script
 # logOut = "archlinux-logout" #logout menu option - about to change it to rofi power script
 
@@ -540,6 +541,7 @@ wl_input_rules = None
 @hook.subscribe.startup_once
 def start_once():
     home = os.path.expanduser('~')
+    #subprocess.call([home + '/.config/qtile/scripts/autostart.sh'])
     subprocess.call([home + '/.config/qtile/autostart.sh'])
 # @hook.subscribe.startup_once
 
