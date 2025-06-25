@@ -5,7 +5,7 @@
 # Permite arquivos específicos na raiz
 !.zshrc
 !.gitignore
-#
+# ignora tudo dentro de .config, exceto as pastas e arquivos listados abaixo
 .config/*
 # shell
 !.config/fish/
@@ -29,3 +29,6 @@
 !.config/autostart/
 !.local/share/fonts/
 *Zone.Identifier*
+# windows stuff
+!.doom.d/
+!.emacs.d/
