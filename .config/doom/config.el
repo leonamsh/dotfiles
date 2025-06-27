@@ -32,14 +32,27 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-font (font-spec :family "Iosevka Nerd Font Mono" :size 18)
-      doom-variable-pitch-font (font-spec :family "Iosevka Nerd Font Mono" :size 18))
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Configuracao de Fontes                                                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+(setq doom-font (font-spec :family "MesloLGS Nerd Font" :size 16)
+      doom-variable-pitch-font (font-spec :family "MesloLGS Nerd Font" :size 16))
 
 (setq doom-theme 'doom-one)
-
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Configuracao de display                                                   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(setq display-line-numbers-type 'relative) ;; ou 'visual se preferir
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -81,19 +94,14 @@
 ;; source: https://nayak.io/posts/golang-development-doom-emacs/
 ;; golang formatting set up
 ;; use gofumpt
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Configuracao de LSP                                                       ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 (after! lsp-mode
   (setq  lsp-go-use-gofumpt t)
   )
-
-;; gotta make emacs realod init.el every start. idk how to do it thou D:
-;; (load! "~/.doom.d/init.el")
-;; automatically organize imports
-(add-hook 'go-mode-hook #'lsp-deferred)
-;; Make sure you don't have other goimports hooks enabled.
-(defun lsp-go-install-save-hooks ()
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-
 ;; enable all analyzers; not done by default
 (after! lsp-mode
   (setq  lsp-go-analyses '((fieldalignment . t)
@@ -104,19 +112,85 @@
                            (useany . t)
                            (unusedvariable . t)))
   )
-;; use system clipboard
-;; (require 'pbcopy)
-;; (turn-on-pbcopy)
-
+(after! lsp-ui
+  (setq lsp-ui-doc-enable t
+        lsp-ui-doc-show-with-cursor t
+        lsp-ui-doc-position 'at-point
+        lsp-ui-sideline-enable t
+        lsp-ui-sideline-show-code-actions t
+        lsp-ui-sideline-show-hover t))
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Configuracao de Clipboard                                                 ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 (require 'simpleclip)
 (simpleclip-mode 1)
-
+(move-text-default-bindings)
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Configuracao de linguagem                                                 ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
+(set-language-environment "UTF-8")
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Configuracao de atalhos(which-key)                                        ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Configurações adicionais (mantidas da sua configuração original)
+(use-package which-key
+  :init (which-key-mode 1)
+  :diminish
+  :config
+  (setq which-key-side-window-location 'bottom
+        which-key-sort-order #'which-key-key-order-alpha
+        which-key-allow-imprecise-window-fit nil
+        which-key-sort-uppercase-first nil
+        which-key-add-column-padding 1
+        which-key-max-display-columns nil
+        which-key-min-display-lines 6
+        which-key-side-window-slot -10
+        which-key-side-window-max-height 0.25
+        which-key-idle-delay 0.8
+        which-key-max-description-length 25
+        which-key-separator " \u2192 "))
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Configuracao de nerd icons (for modeline)                                 ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
 
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Configuracao de 'modes' para programacao                                  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)) ;;To ensure Emacs always starts with js2-mode for .js files
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode)) ;;To ensure Emacs always starts with js2-mode for .js files
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode)) ;;To ensure Emacs always starts with js2-mode for .js files
+
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Configuracao de atalhos(keymaps)                                          ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; Keybindings com map!
 (map! :leader
       :desc "Counsel M-x" "SPC" #'counsel-M-x
@@ -173,10 +247,8 @@
 (map! :leader
       :prefix "f"
       :desc "Open alacritty config" "a" (lambda () (interactive) (find-file "~/.config/alacritty/alacritty.toml"))
-      :desc "Open emacs config linux" "c" (lambda () (interactive) (find-file "~/.config/doom/config.el"))
-      :desc "Open emacs config windows" "C" (lambda () (interactive) (find-file "~/.doom.d/config.el"))
-      :desc "Open emacs config on dired in linux" "e" (lambda () (interactive) (dired "~/.config/doom"))
-      :desc "Open emacs config on dired in windows" "E" (lambda () (interactive) (dired "~/.doom.d"))
+      :desc "Open emacs config" "c" (lambda () (interactive) (find-file "~/.doom.d/config.el"))
+      :desc "Open user-emacs-directory" "e" (lambda () (interactive) (dired "~/.doom.d/custom.el"))
       :desc "Find grep dired" "d" #'find-grep-dired
       :desc "Open fish config" "f" (lambda () (interactive) (find-file "~/.config/fish/config.fish"))
       :desc "Search current file" "g" #'counsel-grep-or-swiper
@@ -238,8 +310,8 @@
       :desc "View keystrokes" "l" #'view-lossage
       :desc "Describe language" "L" #'describe-language-environment
       :desc "Describe mode" "m" #'describe-mode
-      :desc "Reload config" "r r" (lambda () (interactive) (load-file "~/.config/.doom.d/init.el"))
-      :desc "Reload config windows" "r w" (lambda () (interactive) (load-file "~/.doom.d/init.el"))
+      :desc "Reload config" "r r" (lambda () (interactive) (load-file "~/.config/doom/init.el"))
+      :desc "Reload config windows" "r w" (lambda () (interactive) (load-file "~/doom/init.el"))
       :desc "Load theme" "t" #'load-theme
       :desc "Describe variable" "v" #'describe-variable
       :desc "Where is" "w" #'where-is
@@ -309,65 +381,3 @@
       :desc "Buffer move down" "J" #'buf-move-down
       :desc "Buffer move up" "K" #'buf-move-up
       :desc "Buffer move right" "L" #'buf-move-right)
-
-;; ConfiguraÃ§Ãµes adicionais (mantidas da sua configuraÃ§Ã£o original)
-(use-package which-key
-  :init (which-key-mode 1)
-  :diminish
-  :config
-  (setq which-key-side-window-location 'bottom
-        which-key-sort-order #'which-key-key-order-alpha
-        which-key-allow-imprecise-window-fit nil
-        which-key-sort-uppercase-first nil
-        which-key-add-column-padding 1
-        which-key-max-display-columns nil
-        which-key-min-display-lines 6
-        which-key-side-window-slot -10
-        which-key-side-window-max-height 0.25
-        which-key-idle-delay 0.8
-        which-key-max-description-length 25
-        which-key-separator " â†’ "))
-
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-
-(move-text-default-bindings)
-
-(use-package all-the-icons
-  :ensure t
-  :if (display-graphic-p))
-
-(use-package all-the-icons-dired
-  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
-
-(use-package which-key
-  :init
-  (which-key-mode 1)
-  :diminish
-  :config
-  (setq which-key-side-window-location 'bottom
-	which-key-sort-order #'which-key-key-order-alpha
-	which-key-allow-imprecise-window-fit nil
-	which-key-sort-uppercase-first nil
-	which-key-add-column-padding 1
-	which-key-max-display-columns nil
-	which-key-min-display-lines 6
-	which-key-side-window-slot -10
-	which-key-side-window-max-height 0.25
-	which-key-idle-delay 0.8
-	which-key-max-description-length 25
-	which-key-allow-imprecise-window-fit nil
-	which-key-separator " â†’ " ))
-
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)) ;;To ensure Emacs always starts with js2-mode for .js files
-(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode)) ;;To ensure Emacs always starts with js2-mode for .js files
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode)) ;;To ensure Emacs always starts with js2-mode for .js files
-
-(use-package all-the-icons
-  :ensure t
-  :if (display-graphic-p))
-
-(use-package all-the-icons-dired
-  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
-
-(setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name "~/.npm-global/bin")))
-(add-to-list 'exec-path (expand-file-name "~/.npm-global/bin"))

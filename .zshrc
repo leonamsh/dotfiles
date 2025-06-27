@@ -139,7 +139,7 @@ alias cdg='cd .config'
 alias srcfish='source ~/.config/fish/config.fish'
 alias srczsh='source ~/.zshrc'
 alias fupd='fupp && upp && updspd'
-alias upd='upp & updspd'
+alias upd='fupp & updspd'
 alias clone='git clone'
 alias cddev='cd /run/media/development/'
 ###############################################
@@ -150,6 +150,7 @@ alias doomupd='~/.config/emacs/bin/doom upgrade'
 alias doomdoc='~/.config/emacs/bin/doom doctor'
 alias doompurge='~/.config/emacs/bin/doom purge'
 alias dinstall='emacs -nw /run/media/development/scripts/arch/post-install.sh'
+alias emacs='emacs -nw'
 ###############################################
 # change directory aliases ####################
 ###############################################
