@@ -131,15 +131,12 @@ zstyle ':completion:*' menu select
 ###############################################
 alias S='sudo pacman -S --noconfirm --needed'
 alias Ss='sudo pacman -Ss'
-alias updspd='~/.config/autostart/xinputI3.sh'
-alias upp='/run/media/development/scripts/arch/update.sh'
-alias fupp='/run/media/development/scripts/arch/full-update.sh'
+alias upds='~/.config/autostart/xinputI3.sh'
+alias update='/run/media/development/scripts/arch/full-update.sh'
 alias limpao='/run/media/development/scripts/arch/update-clean-arch.sh'
 alias cdg='cd .config'
 alias srcfish='source ~/.config/fish/config.fish'
 alias srczsh='source ~/.zshrc'
-alias fupd='fupp && upp && updspd'
-alias upd='fupp & updspd'
 alias clone='git clone'
 alias cddev='cd /run/media/development/'
 ###############################################
@@ -199,7 +196,6 @@ alias egrep='egrep --color=auto'
 alias hw='hwinfo --short' # Hardware Info
 alias big="expac -H M '%m\t%n' | sort -h | nl" # Sort installed packages according to size in MB
 alias gitpkg='pacman -Q | grep -i "\-git" | wc -l' # List amount of -git packages
-alias update='sudo apt update'
 
 # Cleanup orphaned packages
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'

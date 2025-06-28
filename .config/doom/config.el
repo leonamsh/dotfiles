@@ -37,8 +37,8 @@
 ;; Configuracao de Fontes                                                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-(setq doom-font (font-spec :family "MesloLGS Nerd Font" :size 16)
-      doom-variable-pitch-font (font-spec :family "MesloLGS Nerd Font" :size 16))
+(setq doom-font (font-spec :family "MesloLGS Nerd Font" :size 15)
+      doom-variable-pitch-font (font-spec :family "MesloLGS Nerd Font" :size 15))
 
 (setq doom-theme 'doom-one)
 ;;
