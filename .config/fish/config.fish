@@ -19,7 +19,7 @@
 function fish_greeting
     colorscript random
 end
-
+set -g theme_svn_prompt_enabled yes
 # Format man pages
 set -x MANROFFOPT -c
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
@@ -105,74 +105,6 @@ function full_history
     and commandline $command
 end
 
-## Useful aliases
-#Leonam
-alias upp='/home/lm/Documentos/git/scripts/arch/update.sh'
-alias fupp='/home/lm/Documentos/git/scripts/arch/full-update.sh'
-alias cdgit='cd /home/lm/Documentos/git/'
-alias cdg='cd .config'
-alias updspd='/home/lm/.config/autostart/xinputI3.sh'
-alias srcfish='source /home/lm/.config/fish/config.fish'
-alias ffuu='/home/lm/Documentos/git/scripts/arch/full-update.sh && /home/lm/Documentos/git/scripts/arch/update.sh && /home/lm/.config/autostart/xinputI3.sh'
-alias fupd='fupp && upp'
-alias upd='upp & updspd'
-alias clone='git clone'
-#alias --='--noconfirm --needed'
-#alias ---='--noconfirm'
-alias doomsync='/home/lm/.config/emacs/bin/doom sync'
-alias doomupd='/home/lm/.config/emacs/bin/doom upgrade'
-alias doomdoc='/home/lm/.config/emacs/bin/doom doctor'
-alias doompurge='/home/lm/.config/emacs/bin/doom purge'
-#
-alias cdaula='cd ~/Documentos/git/maisPraTi/'
-#
-alias nkitty='nvim ~/.config/kitty/kitty.conf'
-alias nalac='nvim ~/.config/alacritty/alacritty.toml'
-alias nfish='nvim ~/.config/fish/config.fish'
-alias nqtile='nvim ~/.config/qtile/config.py'
-alias naula='nvim ~/Documentos/maisPraTi'
-alias nzsh='nvim ~/.zshrc'
-#~export PATH="$HOME/.emacs.d/bin:$PATH"~
-
-# Replace ls with eza
-alias ls='eza -al --color=always --group-directories-first --icons' # preferred listing
-alias la='eza -a --color=always --group-directories-first --icons' # all files and dirs
-alias ll='eza -l --color=always --group-directories-first --icons' # long format
-alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
-alias l.="eza -a | grep -e '^\.'" # show only dotfiles
-
-# Common use
-alias grubup="sudo grub-mkconfig -o /boot/grub/grub.cfg"
-alias fixpacman="sudo rm /var/lib/pacman/db.lck"
-alias tarnow='tar -acf '
-alias untar='tar -zxvf '
-alias wget='wget -c '
-alias psmem='ps auxf | sort -nr -k 4'
-alias psmem10='ps auxf | sort -nr -k 4 | head -10'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias hw='hwinfo --short' # Hardware Info
-alias big="expac -H M '%m\t%n' | sort -h | nl" # Sort installed packages according to size in MB
-alias gitpkg='pacman -Q | grep -i "\-git" | wc -l' # List amount of -git packages
-alias update='sudo apt update'
-
-# Cleanup orphaned packages
-alias cleanup='sudo pacman -Rns (pacman -Qtdq)'
-
-# Get the error messages from journalctl
-alias jctl="journalctl -p 3 -xb"
-
-# Recent installed packages
-alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
-
 # study stream aliases (Fish shell version)
 # shell /usr/bin/fish
 # Requer https://github.com/caarlos0/timer e o comando spd-say
@@ -229,3 +161,96 @@ alias wo='pomodoro trabalho'
 alias br='pomodoro descanso'
 
 set -gx PATH ~/.npm-global/bin $PATH
+
+function cleanup --description "Remove orphaned packages"
+    set ORPHANS (pacman -Qdtq)
+    if test -n "$ORPHANS"
+        echo "Removing: $ORPHANS"
+        sudo pacman -Rs $ORPHANS
+    else
+        echo "No orphaned packages to remove."
+    end
+end
+
+## Useful aliases
+#Leonam
+###############################################
+# updates #####################################
+###############################################
+alias S='sudo pacman -S --noconfirm --needed'
+alias Ss='sudo pacman -Ss'
+alias upds='~/.config/autostart/xinputI3.sh'
+alias update='/run/media/development/scripts/arch/full-update.sh'
+alias limpao='/run/media/development/scripts/arch/update-clean-arch.sh'
+alias cdg='cd .config'
+alias srcfish='source ~/.config/fish/config.fish'
+alias srczsh='source ~/.zshrc'
+alias clone='git clone'
+alias cddev='cd /run/media/development/'
+###############################################
+# doom aliases ################################
+###############################################
+alias doomsync='~/.config/emacs/bin/doom sync'
+alias doomupd='~/.config/emacs/bin/doom upgrade'
+alias doomdoc='~/.config/emacs/bin/doom doctor'
+alias doompurge='~/.config/emacs/bin/doom purge'
+alias dinstall='emacs -nw /run/media/development/scripts/arch/post-install.sh'
+alias emacs='emacs -nw'
+###############################################
+# change directory aliases ####################
+###############################################
+alias cdaula='cd /run/media/development/maisPraTi/'
+###############################################
+# nvim aliases#################################
+###############################################
+alias nkitty='nvim ~/.config/kitty/kitty.conf'
+alias nalac='nvim ~/.config/alacritty/alacritty.toml'
+alias nfish='nvim ~/.config/fish/config.fish'
+alias nqtile='nvim ~/.config/qtile/config.py'
+alias naula='nvim ~/Documentos/maisPraTi'
+alias nzsh='nvim ~/.zshrc'
+alias ninstall='nvim /run/media/development/scripts/arch/post-install.sh'
+alias nvima="env NVIM_APPNAME=astronvim nvim"
+alias nvimc="env NVIM_APPNAME=nvchad nvim"
+alias nviml="env NVIM_APPNAME=lazynvim nvim"
+###############################################
+# other aliases ###############################
+###############################################
+# Replace ls with eza
+alias ls='eza -al --color=always --group-directories-first --icons' # preferred listing
+alias la='eza -a --color=always --group-directories-first --icons' # all files and dirs
+alias ll='eza -l --color=always --group-directories-first --icons' # long format
+alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
+alias l.="eza -a | grep -e '^\.'" # show only dotfiles
+
+# Common use
+alias grubup="sudo grub-mkconfig -o /boot/grub/grub.cfg"
+alias fixpacman="sudo rm /var/lib/pacman/db.lck"
+alias tarnow='tar -acf '
+alias untar='tar -zxvf '
+alias wget='wget -c '
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias hw='hwinfo --short' # Hardware Info
+alias big="expac -H M '%m\t%n' | sort -h | nl" # Sort installed packages according to size in MB
+alias gitpkg='pacman -Q | grep -i "\-git" | wc -l' # List amount of -git packages
+
+# Cleanup orphaned packages
+# alias cleanup='sudo pacman -Rs $(sudo pacman -Qdtq)'
+# alias cleanup='ORPHANS=$(sudo pacman -Qdtq); if [ -n "$ORPHANS" ]; then sudo pacman -Rs $ORPHANS; else echo "No orphaned packages to remove."; fi'
+
+# Get the error messages from journalctl
+alias jctl="journalctl -p 3 -xb"
+
+# Recent installed packages
+alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"

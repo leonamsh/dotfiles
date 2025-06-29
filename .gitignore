@@ -12,6 +12,7 @@
 !.config/zsh/
 # terminal
 !.config/alacritty/
+!.config/kitty/
 # window managers
 !.config/polybar/
 !.config/qtile/

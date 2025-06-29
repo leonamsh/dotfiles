@@ -198,7 +198,8 @@ alias big="expac -H M '%m\t%n' | sort -h | nl" # Sort installed packages accordi
 alias gitpkg='pacman -Q | grep -i "\-git" | wc -l' # List amount of -git packages
 
 # Cleanup orphaned packages
-alias cleanup='sudo pacman -Rns (pacman -Qtdq)'
+# alias cleanup='sudo pacman -Rs $(sudo pacman -Qdtq)'
+alias cleanup='ORPHANS=$(sudo pacman -Qdtq); if [ -n "$ORPHANS" ]; then sudo pacman -Rs $ORPHANS; else echo "No orphaned packages to remove."; fi'
 
 # Get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
