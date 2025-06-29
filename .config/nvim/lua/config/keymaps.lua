@@ -18,3 +18,9 @@ vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Mover para janela da esquerda" 
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Mover para janela da direita" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Mover para janela abaixo" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Mover para janela acima" })
+
+-- file_browser keymaps
+vim.keymap.set("n", "<space>f;", ":Telescope file_browser<CR>")
+
+-- open file_browser with the path of the current buffer
+vim.keymap.set("n", "<space>f:", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
