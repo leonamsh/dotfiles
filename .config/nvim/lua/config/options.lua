@@ -56,9 +56,9 @@ opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 opt.scrolloff = 10
 
 -- Clipboard (scheduled to avoid startup performance impact)
--- vim.schedule(function()
---   vim.opt.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim
--- end)
+vim.schedule(function()
+  vim.opt.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim
+end)
 
 -- vim.g.neovide_opacity = 0.9
 -- vim.g.neovide_normal_opacity = 0.9

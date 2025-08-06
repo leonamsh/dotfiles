@@ -40,7 +40,7 @@ wezterm.on("augment-command-palette", function()
 	}
 end)
 
-config.default_prog = { "zsh" }
+config.default_prog = { "fish" }
 
 config.window_close_confirmation = "NeverPrompt"
 
