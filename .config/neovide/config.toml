@@ -15,9 +15,9 @@ vsync = true
 wsl = false
 
 [font]
-normal = "BlexMono Nerd Font Mono"
+# normal = "BlexMono Nerd Font Mono"
 # normal = "Inconsolata Nerd Font Mono"
-# normal = "0xProto Nerd Font"
+normal = "0xProto Nerd Font"
 # normal = "CaskaydiaCove Nerd Font Mono"
 # normal = "DMMono Nerd Font"
 

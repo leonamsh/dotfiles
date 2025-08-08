@@ -84,7 +84,7 @@
 ;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Configuracao de Clipboard                                                 ;;
+;; Configuracao de Clipboard
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 (require 'simpleclip)
@@ -92,6 +92,15 @@
 (move-text-default-bindings)
 
 (use-package move-text :config (move-text-default-bindings))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; undo-tree
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(global-undo-tree-mode t)
+(use-package! undo-tree
+  :config
+  (add-hook 'evil-local-mode-hook #'turn-on-undo-tree-mode))
 
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -175,8 +184,8 @@
 
 ;; Ativar o LSP para os modos relevantes (TypeScript, JavaScript, JSON)
 (add-hook 'typescript-mode-hook #'lsp)
-;; (add-hook 'js-mode-hook #'lsp)
-;; (add-hook 'json-mode-hook #'lsp) ;; Útil para arquivos JSON de configuração
+(add-hook 'js-mode-hook #'lsp)
+(add-hook 'json-mode-hook #'lsp) ;; Útil para arquivos JSON de configuração
 
 ;; (setq lsp-log-io t) ;; Descomente esta linha para depurar o LSP-mode, útil se algo não estiver funcionando
 
@@ -220,26 +229,6 @@
         lsp-ui-sideline-show-hover t
         lsp-ui-sideline-show-code-actions t))
 
-;; Para JavaScript/TypeScript, certifique-se de que o Yasnippet
-;; tem snippets para esses modos. O Doom já deve fornecer,
-;; mas você pode adicionar os seus próprios em ~/.doom.d/snippets/javascript-mode/
-;; ou ~/.doom.d/snippets/js2-mode/.
-
-;; accept completion from copilot and fallback to company
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("<tab>" . 'copilot-accept-completion)
-              ("<backtab>" . 'copilot-accept-completion)
-              ("TAB" . 'copilot-accept-completion)
-              ("C-TAB" . 'copilot-accept-completion-by-word)
-              ("C-<tab>" . 'copilot-accept-completion-by-word))
-  :config
-  (add-to-list 'copilot-indentation-alist '(prog-mode 2))
-  (add-to-list 'copilot-indentation-alist '(org-mode 2))
-  (add-to-list 'copilot-indentation-alist '(text-mode 2))
-  (add-to-list 'copilot-indentation-alist '(closure-mode 2))
-  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Configuracao de atalhos(keymaps)                                          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
