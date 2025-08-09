@@ -40,13 +40,11 @@ wezterm.on("augment-command-palette", function()
 	}
 end)
 
-config.default_prog = { "fish" }
-if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	-- Configuração para Windows
-	config.default_prog = { "pwsh" }
+if wezterm.target_triple:find("windows") then
+	config.default_prog = { "pwsh.exe" }
 else
-	-- Configuração para Linux (e outros sistemas)
-	config.default_prog = { "fish" }
+	-- Run fastfetch first, then execute fish
+	config.default_prog = { "/bin/sh", "-c", "fastfetch; exec fish" }
 end
 
 config.window_close_confirmation = "NeverPrompt"

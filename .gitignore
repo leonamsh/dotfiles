@@ -33,6 +33,8 @@
 !.config/wezterm/
 !.config/yazi/
 !mimeapps.list
+!.config/fastfetch/
+!.config/fish/
 
 # arquivos ou pastas fora do .config
 !.local/share/fonts/
