@@ -43,8 +43,8 @@ powerline = {
 
 mod = "mod4"  # Sets mod key to SUPER/WINDOWS
 myTerm = "wezterm"  # My terminal of choice
-myBrowser = "brave-nightly"  # My browser of choice
-myBrowser2 = "firefox"  # My browser of choice
+myBrowser = "brave"  # My browser of choice
+myBrowser2 = "firefox-developer-edition"  # My browser of choice
 myFiles = "nautilus"  # My file manager of choice
 myCode = "code"  # vscode
 myMusic = "flatpak run com.spotify.Client"  # spotify
@@ -299,7 +299,9 @@ layouts = [
     layout.Max(**layout_theme),
 ]
 
-widget_defaults = dict(font="Ubuntu", fontsize=12, padding=0, background=colors[0])
+widget_defaults = dict(
+    font="0xProto Nerd Font Mono", fontsize=12, padding=0, background=colors[0]
+)
 
 
 def search():
@@ -322,17 +324,17 @@ extension_defaults = widget_defaults.copy()
 
 def init_widgets_list():
     widgets_list = [
-        widget.Spacer(length=8),
+        widget.Spacer(length=5),
         widget.Image(
             filename="~/.config/qtile/Assets/launch_Icon.png",
             scale="False",
             mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("qtilekeys-yad")},
         ),
-        widget.Prompt(font="Ubuntu Mono", fontsize=14, foreground=colors[1]),
+        widget.Prompt(font="0xProto Nerd Font Mono", fontsize=10, foreground=colors[1]),
         widget.GroupBox(
-            fontsize=15,
+            fontsize=10,
             margin_y=5,
-            margin_x=14,
+            margin_x=8,
             padding_y=0,
             padding_x=2,
             borderwidth=3,
@@ -351,21 +353,29 @@ def init_widgets_list():
         ),
         widget.LaunchBar(
             progs=[
-                ("🦁", "brave", "Brave web browser"),
-                ("🚀", "kitty", "Alacritty terminal"),
+                ("🦁", "firefox-developer-edition", "Web Browser"),
+                ("🚀", "wezterm", "Terminal"),
                 ("📁", "thunar", "PCManFM file manager"),
                 ("🎸", "com.spotify.Client", "Spotify"),
             ],
             fontsize=12,
-            padding=12,
+            padding=5,
             foreground=colors[3],
         ),
         widget.TextBox(
-            text="|", font="Ubuntu Mono", foreground=colors[9], padding=2, fontsize=14
+            text="|",
+            font="0xProto Nerd Font Mono",
+            foreground=colors[9],
+            padding=2,
+            fontsize=14,
         ),
         widget.CurrentLayout(foreground=colors[8], padding=5),
         widget.TextBox(
-            text="|", font="Ubuntu Mono", foreground=colors[9], padding=2, fontsize=14
+            text="|",
+            font="0xProto Nerd Font Mono",
+            foreground=colors[9],
+            padding=2,
+            fontsize=14,
         ),
         widget.WindowName(foreground=colors[6], padding=8, max_chars=40),
         widget.GenPollText(
