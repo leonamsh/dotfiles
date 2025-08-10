@@ -11,7 +11,7 @@ xfce4-power-manager &
 numlockx on &
 killall rofi &
 killall picom &
-numlockx on &
+dunst &
 lxsession &
 # picom --daemon &
 /usr/bin/emacs --daemon &

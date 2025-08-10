@@ -45,7 +45,7 @@ mod = "mod4"  # Sets mod key to SUPER/WINDOWS
 myTerm = "wezterm"  # My terminal of choice
 myBrowser = "brave"  # My browser of choice
 myBrowser2 = "firefox-developer-edition"  # My browser of choice
-myFiles = "nautilus"  # My file manager of choice
+myFiles = "thunar"  # My file manager of choice
 myCode = "code"  # vscode
 myMusic = "flatpak run com.spotify.Client"  # spotify
 # myEmacs = "emacsclient -c -a 'emacs' "  # The space at the end is IMPORTANT!
@@ -100,7 +100,7 @@ keys = [
     ),
     Key([mod, "control"], "r", lazy.spawn("systemctl reboot"), desc="System Reboot"),
     Key([mod, "control"], "p", lazy.spawn("systemctl suspend"), desc="System Suspend"),
-    Key([mod], "w", lazy.spawn(myBrowser2), desc="Web browser 2"),
+    Key([mod, "shift"], "w", lazy.spawn(myBrowser2), desc="Web browser 2"),
     Key([mod], "F1", lazy.spawn(myBrowser), desc="Web browser"),
     Key([mod], "F2", lazy.spawn(myCode), desc="code"),
     Key([mod], "F3", lazy.spawn(myNeovim), desc="nvim"),
@@ -112,7 +112,7 @@ keys = [
         desc="Toggles the bar to show/hide",
     ),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod, "shift"], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "shift"], "x", lazy.spawn("dm-logout -r"), desc="Logout menu"),
     Key([mod], "x", lazy.spawn(logOut), desc="power menu"),
