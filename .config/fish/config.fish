@@ -191,6 +191,10 @@ function nqtile
     nvim ~/.config/qtile/config.py $argv
 end
 
+function ni3
+    nvim ~/.config/i3/config $argv
+end
+
 function nzsh
     nvim ~/.zshrc $argv
 end

@@ -29,6 +29,8 @@ config.window_padding = {
 }
 config.window_background_image = constants.bg_image
 
+config.enable_wayland = false
+
 -- Miscellaneous settings
 config.max_fps = 120
 config.prefer_egl = true

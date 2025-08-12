@@ -9,7 +9,7 @@ set $files thunar
 set $code code
 set $music flatpak run com.spotify.Client
 set $emacs emacs
-set $nvim nvim
+set $nvim neovide
 set $logout wlogout
 
 # Atalhos de teclado
@@ -126,6 +126,10 @@ for_window [title="tastytrade"] floating enable
 for_window [title="tastytrade - Portfolio Report"] floating enable
 for_window [class="tasty.javafx.launcher.LauncherFxApp"] floating enable
 
+
+for_window [title="Guild Wars 2"] fullscreen enable
+
+
 default_border pixel
 default_floating_border pixel
 
@@ -135,15 +139,21 @@ gaps inner 8
 gaps outer -5
 
 # manage monitors
-workspace 1 output HDMI-A-0
-workspace 2 output DisplayPort-0
-exec_always --no-startup-id sh -c "sleep 1 && ~/.config/autostart/screenResolution.sh"
+
+# Saídas fixas para workspaces
+# workspace ws1 output HDMI-A-0
+# workspace ws2 output DisplayPort-0
+
+# Programas que precisam sempre reiniciar com reload
+exec_always --no-startup-id sh -c "sleep 1 && ~/.config/autostart/screenResolution.sh && i3-msg 'workspace 1; workspace 2'"
 exec_always --no-startup-id sh -c "sleep 1 && ~/.config/autostart/xinputI3.sh"
 exec_always --no-startup-id sh -c "sleep 1 && ~/.config/polybar/launch.sh"
-exec --no-startup-id variety
+exec_always --no-startup-id variety
+exec_always --no-startup-id dunst
+
+# Programas que iniciam apenas uma vez
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id numlockx on
-exec --no-startup-id dunst
 exec --no-startup-id lxsession 
 # exec --no-startup-id nm-applet
 exec --no-startup-id libinput-gestures-setup start
@@ -168,5 +178,9 @@ mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff" {
 
 bindsym $mod+Shift+e mode "(S)uspend, (L)ogout, (R)eboot, (P)oweroff"
 
-workspace 1 output HDMI-A-0
-workspace 2 output DisplayPort-0
+# Impedir que janelas de notificação roubem foco
+for_window [window_role="popup"] focus no
+for_window [window_role="bubble"] focus no
+for_window [title="Notification"] focus no
+for_window [class="Dunst"] focus no
+for_window [urgent=latest] focus no
