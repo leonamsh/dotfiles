@@ -211,16 +211,8 @@ function nvimz
     env NVIM_APPNAME=nvim-lazar nvim $argv
 end
 
-function nvima
-    env NVIM_APPNAME=astronvim nvim $argv
-end
-
-function nvimc
-    env NVIM_APPNAME=nvchad nvim $argv
-end
-
-function nviml
-    env NVIM_APPNAME=lazynvim nvim $argv
+function vk
+    env NVIM_APPNAME=nvim-kickstart nvim $argv
 end
 
 # ------------------------------
