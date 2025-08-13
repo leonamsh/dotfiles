@@ -117,8 +117,12 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "shift"], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "shift"], "x", lazy.spawn("dm-logout -r"), desc="Logout menu"),
-    Key([mod], "x", lazy.spawn(logOut), desc="power menu"),
+    Key(
+        [mod, "shift"],
+        "x",
+        lazy.spawn("sh -c /home/lm/.config/qtile/scripts/dm-logout.sh"),
+        desc="logout menu",
+    ),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # Switch between windows
     # Some layouts like 'monadtall' only need to use j/k to move
