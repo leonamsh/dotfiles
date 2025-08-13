@@ -11,6 +11,7 @@ text/x-lua=neovide.desktop
 x-scheme-handler/http=vivaldi.desktop;com.brave.Browser.desktop;com.vivaldi.Vivaldi.desktop;
 x-scheme-handler/https=vivaldi.desktop;com.brave.Browser.desktop;com.vivaldi.Vivaldi.desktop;
 x-scheme-handler/chrome=vivaldi.desktop;
+image/jpeg=org.kde.gwenview.desktop;
 
 [Default Applications]
 application/json=neovide.desktop;
@@ -35,3 +36,4 @@ x-scheme-handler/http=vivaldi.desktop
 x-scheme-handler/https=vivaldi.desktop
 x-scheme-handler/terminal=org.wezfurlong.wezterm.desktop
 x-scheme-handler/unknown=brave-browser.desktop
+image/jpeg=org.kde.gwenview.desktop
