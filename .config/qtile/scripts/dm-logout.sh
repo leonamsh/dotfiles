@@ -20,8 +20,8 @@ case "$choice" in
   ${LOCKER}
   ;;
 "Sair")
-  # A maneira mais segura de sair do Qtile é com qtile-cmd
-  qtile-cmd -o cmd -f shutdown
+  # Comando para encerrar o Qtile, voltando para o gerenciador de login
+  qtile cmd-obj -o cmd -f shutdown
   ;;
 "Reiniciar")
   # Comando do systemd para reiniciar o sistema

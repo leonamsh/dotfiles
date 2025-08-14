@@ -187,6 +187,10 @@ function nfish
     nvim ~/.config/fish/config.fish $argv
 end
 
+function nhypr
+    nvim ~/.config/hypr/config/keybinds.conf $argv
+end
+
 function nqtile
     nvim ~/.config/qtile/config.py $argv
 end

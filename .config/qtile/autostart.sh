@@ -13,6 +13,7 @@ killall rofi &
 killall picom &
 dunst &
 lxsession &
+steam -silent &
 # picom --daemon &
 /usr/bin/emacs --daemon &
 nm-applet &
