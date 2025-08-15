@@ -293,7 +293,7 @@ layout_theme = {
 
 layouts = [
     layout.MonadTall(**layout_theme),
-    layout.Tile(**layout_theme),
+    # layout.Tile(**layout_theme),
     # layout.Max(**layout_theme),
 ]
 
