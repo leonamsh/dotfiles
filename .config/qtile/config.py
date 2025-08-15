@@ -266,6 +266,11 @@ for name, label in zip(group_names, group_labels):
 
 # Cria grupos 1-5
 for i in range(len(group_names)):
+    # Define a lista de 'matches' para cada grupo
+    matches = None
+    if group_names[i] == "2":
+        # Se o grupo for o '2', adiciona a regra para o Vivaldi
+        matches = [Match(wm_class="Vivaldi-stable")]
     groups.append(
         Group(
             name=group_names[i],
@@ -344,7 +349,7 @@ def init_widgets_list():
         separator(),
         widget.LaunchBar(
             progs=[
-                ("🦁", "firefox-developer-edition", "Web Browser"),
+                ("🦁", "vivaldi-stable", "Web Browser"),
                 ("🚀", "wezterm", "Terminal"),
                 ("📁", "thunar", "PCManFM file manager"),
                 ("🎸", "com.spotify.Client", "Spotify"),
