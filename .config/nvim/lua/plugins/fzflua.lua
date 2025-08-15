@@ -32,7 +32,7 @@ return {
                 -- title         = "Title",
                 -- title_pos     = "center",        -- 'left', 'center' or 'right'
                 -- title_flags   = false,           -- uncomment to disable title flags
-                fullscreen = false, -- start fullscreen?
+                fullscreen = false, -- start fullscreen
                 -- enable treesitter highlighting for the main fzf window will only have
                 -- effect where grep like results are present, i.e. "file:line:col:text"
                 -- due to highlight color collisions will also override `fzf_colors`

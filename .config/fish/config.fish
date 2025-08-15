@@ -152,6 +152,14 @@ function naula
     nvim /run/media/lm/dev/maisPraTi/ $argv
 end
 
+function cdprojeto
+    cd /run/media/lm/dev/projeto-mercado-frontend/
+end
+
+function nprojeto
+    nvim /run/media/lm/dev/projeto-mercado-frontend/
+end
+
 # ------------------------------
 # Aliases do Nvim 
 # ------------------------------

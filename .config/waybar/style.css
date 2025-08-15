@@ -1,116 +1,61 @@
-/*
- ********************************************
- *░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░*
- *░░█▀█░█░░░█░█░█▀▀░░░█░█░█░░░▀█▀░█▀▄░█▀█░░*
- *░░█▀▀░█░░░█░█░▀▀█░░░█░█░█░░░░█░░█▀▄░█▀█░░*
- *░░▀░░░▀▀▀░▀▀▀░▀▀▀░░░▀▀▀░▀▀▀░░▀░░▀░▀░▀░▀░░*
- *░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░*
- ********************************************
- */
-
+/* Seu CSS atual adaptado — pode colar o arquivo que você já usa */
 * {
   border: none;
   border-radius: 0;
   font-family: Nerd Font Hack;
   font-size: 10px;
   min-height: 14px;
+  margin: 1 3;
 }
-
 window#waybar {
   background: transparent;
 }
-
 window#waybar.hidden {
   opacity: 0.2;
 }
-
 #window {
   margin-top: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 0 16px;
   border-radius: 16px;
-  transition: none;
-  /* color: #f8f8f2; */
-  /* background: #282a36; */
   color: transparent;
   background: transparent;
 }
-
-window#waybar.termite #window,
-window#waybar.Firefox #window,
-window#waybar.Navigator #window,
-window#waybar.PCSX2 #window {
-  color: #4d4d4d;
-  background: #e6e6e6;
-}
-
 #workspaces {
-  margin-top: 8px;
-  margin-left: 12px;
-  margin-bottom: 0;
   padding: 0 5px;
   border-radius: 16px;
   background: #282a36;
-  transition: none;
 }
-
 #workspaces button {
-  transition: none;
   color: #f8f8f2;
   background: transparent;
   font-size: 16px;
 }
-
 #workspaces button.focused {
   color: #9aedfe;
 }
-
 #workspaces button:hover {
-  transition: none;
-  box-shadow: inherit;
-  text-shadow: inherit;
   color: #ff79c6;
 }
-
 #workspaces button.active {
   color: #50fa7b;
 }
-
 #workspaces button.urgent {
   background: #ffb3ba;
-  color: white;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: steps(12);
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  color: #fff;
+  animation: blink 0.5s steps(12) infinite alternate;
 }
-
 #custom-spotify {
-  margin-top: 8px;
-  margin-left: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-bottom: 0;
+  padding: 0 16px;
   border-radius: 16px;
-  transition: none;
   color: #f8f8f2;
   background: #6272a4;
 }
-
 #mpd {
-  margin-top: 8px;
-  margin-left: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-bottom: 0;
+  padding: 0 16px;
   border-radius: 16px;
-  background: #282a36;
-  transition: none;
   color: #4d4d4d;
   background: #5af78e;
 }
-
 #mpd.disconnected,
 #mpd.stopped {
   color: #f8f8f2;
@@ -118,86 +63,46 @@ window#waybar.PCSX2 #window {
 }
 
 #network {
-  margin-top: 8px;
-  margin-left: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-bottom: 0;
-  border-radius: 16px;
-  transition: none;
   color: #4d4d4d;
   background: #bd93f9;
-}
-
-#pulseaudio {
-  margin-top: 8px;
-  margin-left: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-bottom: 0;
+  padding: 0 16px;
   border-radius: 16px;
   transition: none;
+}
+#pulseaudio {
   color: #4d4d4d;
   background: #9aedfe;
-}
-
-#temperature {
-  margin-top: 8px;
-  margin-left: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-bottom: 0;
+  padding: 0 16px;
   border-radius: 16px;
-  transition: none;
+}
+#temperature {
   color: #4d4d4d;
   background: #5af78e;
-}
-
-#cpu {
-  margin-top: 8px;
-  margin-left: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-bottom: 0;
+  padding: 0 16px;
   border-radius: 16px;
-  transition: none;
+}
+#cpu {
   color: #4d4d4d;
   background: #f1fa8c;
-}
-
-#memory {
-  margin-top: 8px;
-  margin-left: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-bottom: 0;
+  padding: 0 16px;
   border-radius: 16px;
-  transition: none;
+}
+#memory {
   color: #4d4d4d;
   background: #ff6e67;
-}
-
-#clock {
-  margin-top: 8px;
-  margin-left: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-bottom: 0;
+  padding: 0 16px;
   border-radius: 16px;
-  transition: none;
+}
+#clock {
   color: #f8f8f2;
   background: #282a36;
-}
-
-#custom-power {
-  margin-top: 8px;
-  margin-left: 8px;
-  margin-right: 12px;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-bottom: 0;
+  padding: 0 16px;
   border-radius: 16px;
-  transition: none;
+}
+#custom-power {
   color: #4d4d4d;
   background: #ffb86c;
+  /* padding-left: 3px; */
+  padding: 0 16px 0 13;
+  border-radius: 16px;
 }

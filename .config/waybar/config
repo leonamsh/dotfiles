@@ -1,59 +1,53 @@
 {
-	"layer": "top",
-	"modules-left": ["hyprland/workspaces", "mpd", "hyprland/mode", "custom/spotify"],
-	"modules-center": [],
-	"modules-right": ["network", "pulseaudio", "temperature", "cpu", "memory", "clock", "custom/power"],
-	"mpd": {
-		"tooltip": false,
-		"format": "{stateIcon} {artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
-		"format-disconnected": "ﳌ",
-		"format-stopped": "",
-        "state-icons": {
-            "playing": "",
-            "paused": ""
-        }
-	},
-	"pulseaudio": {
-		"tooltip": false,
-		"scroll-step": 5,
-		"format": "{icon} {volume}%",
-		"format-icons": {
-			"default": ["奄", "奔", "墳"]
-		}
-	},
-	"network": {
-		"tooltip": false,
-		"format-wifi": " {essid} {ipaddr}",
-		"format-ethernet": " {ipaddr}"
-	},
-	"cpu": {
-		"tooltip": false,
-		"format": " {}%"
-	},
-	"memory": {
-		"tooltip": false,
-		"format": " {}%"
-	},
-    "custom/spotify": {
-        "exec": "~/.config/waybar/mediaplayer.py --player spotify",
-        "format": "{} ",
-        "return-type": "json",
-        "on-click": "playerctl play-pause",
-        "on-scroll-up": "playerctl next",
-        "on-scroll-down": "playerctl previous"
-    },
-    "custom/power": {
-        "format": " 󰐥 ",
-        "tooltip": false,
-        "on-click": "wlogout"
-    },
-    "hyprland/workspaces":{
-       "all-outputs": false, //true = mostra todos os workspaces independente do monitor | false = mostra apenas os workspaces do monitor
-        "format": "{name}",
-        "on-scroll-up": "hyprctl dispatch workspace e+1",
-        "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "sort-by-number": true,
-        "active-only": false,
-        "persistent-workspaces": {} 
+  "layer": "top",
+  "modules-left": ["sway/workspaces", "mpd", "sway/mode", "custom/spotify"],
+  "modules-center": [],
+  "modules-right": ["network", "pulseaudio", "temperature", "cpu", "memory", "clock", "custom/power"],
+
+  "sway/mode": { "format": "{}" },
+
+  "mpd": {
+    "tooltip": false,
+    "format": "{stateIcon} {artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+    "format-disconnected": "ﳌ",
+    "format-stopped": "",
+    "state-icons": {
+      "playing": "",
+      "paused": ""
     }
+  },
+
+  "pulseaudio": {
+    "tooltip": false,
+    "scroll-step": 5,
+    "format": "{icon} {volume}%",
+    "format-icons": { "default": ["奄", "奔", "墳"] }
+  },
+
+  "network": {
+    "tooltip": true,
+    "format-wifi": "  {essid} {signalStrength}%",
+    "format-ethernet": "  {ifname}",
+    "format-disconnected": "ﳌ"
+  },
+
+  "temperature": { "critical-threshold": 80 },
+  "cpu": { "interval": 2 },
+  "memory": { "interval": 5 },
+
+  "clock": {
+    "format": "{:%d/%m %H:%M}",
+    "tooltip-format": "{:%A, %d de %B de %Y}"
+  },
+
+  "custom/power": {
+    "format": "",
+    "on-click": "swaynag -t warning -m 'Encerrar sessão?' -b 'Sair' 'swaymsg exit'"
+  },
+
+  "custom/spotify": {
+    "exec": "~/.config/waybar/scripts/spotify.sh",
+    "interval": 3,
+    "tooltip": false
+  }
 }

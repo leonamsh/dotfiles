@@ -1,6 +1,16 @@
 0
+/run/media/lm/dev/walls/landscape/26.jpg
+/run/media/lm/dev/walls/landscape/65.jpg
+/run/media/lm/dev/walls/landscape/65.jpg
+/run/media/lm/dev/walls/landscape/88.jpg
+/run/media/lm/dev/walls/landscape/31.jpg
+/run/media/lm/dev/walls/landscape/65.jpg
+/run/media/lm/dev/walls/landscape/28.jpg
+/run/media/lm/dev/walls/landscape/28.jpg
+/run/media/lm/dev/walls/landscape/84.jpg
+/run/media/lm/dev/walls/landscape/42.jpg
+/run/media/lm/dev/walls/landscape/89.jpg
 /run/media/lm/dev/walls/landscape/75.jpg
-/usr/share/backgrounds/gnome/adwaita-l.jpg
 /run/media/lm/dev/walls/landscape/94.jpg
 /run/media/lm/dev/walls/landscape/57.jpg
 /run/media/lm/dev/walls/landscape/61.jpg
