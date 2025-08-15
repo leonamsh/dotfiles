@@ -26,14 +26,6 @@ keymap.set("n", "<leader>ld", "", { desc = "[L]eo [D]irectory" })
 -- Alterna a exibição da barra lateral do Neotree.
 keymap.set("n", "<leader>te", "<cmd>Neotree toggle<cr>", { desc = "[T]oggle N[E]otree" })
 
--- Revela o arquivo atual na árvore do Neotree.
-keymap.set(
-    "n",
-    "<leader>e",
-    "<Cmd>Neotree position=right dir=%:p:h:h reveal_file=%:p<CR>",
-    { desc = "Reveal current file in Neotree(Force CWD)" }
-)
-
 -- Alterna (ou abre) o Neotree para o caminho '/run/media/lm/dev'.
 keymap.set(
     "n",
@@ -124,3 +116,11 @@ keymap.set("v", "p", '"_dP', opts)
 keymap.set("n", "x", '"_x', opts)
 
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = true, silent = true })
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+    desc = "Highlight text after yanking",
+    callback = function()
+        vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
+    end,
+})

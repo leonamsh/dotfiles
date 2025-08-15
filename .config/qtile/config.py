@@ -56,8 +56,8 @@ powerline = {
 
 mod = "mod4"  # Sets mod key to SUPER/WINDOWS
 myTerm = "wezterm"  # My terminal of choice
-myBrowser = "vivaldi-stable"  # My browser of choice
-myBrowser2 = "brave"  # My browser of choice
+myBrowser2 = "vivaldi-stable"  # My browser of choice
+myBrowser = "brave"  # My browser of choice
 myFiles = "thunar"  # My file manager of choice
 myCode = "code"  # vscode
 myMusic = "flatpak run com.spotify.Client"  # spotify

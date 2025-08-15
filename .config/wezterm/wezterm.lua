@@ -8,10 +8,9 @@ local transparent_bg = "rgba(22, 24, 26, " .. opacity .. ")"
 -- Font settings
 config.font_size = 13
 -- config.line_height = 1.3
--- config.font = wezterm.font("Iosevka NF")
+config.font = wezterm.font("Iosevka NF")
 -- config.font = wezterm.font("0xProto Nerd Font Mono")
-config.font = wezterm.font("DMMono Nerd Font")
--- config.font = wezterm.font("CaskaydiaCove Nerd Font Mono")
+-- config.font = wezterm.font("DMMono Nerd Font")
 
 -- Colors
 config.colors = {
@@ -136,7 +135,7 @@ if host_os == "linux" then
 	emoji_font = "Noto Color Emoji"
 	config.default_prog = { "fish" }
 	config.front_end = "WebGpu"
-	config.window_background_image = os.getenv("HOME") .. "/.config/wezterm/bg-blurred.png"
+	config.window_background_image = os.getenv("HOME") .. "/.config/wezterm/assets/bg-blurred.png"
 	config.window_decorations = nil -- use system decorations
 end
 
