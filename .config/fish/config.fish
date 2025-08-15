@@ -20,7 +20,7 @@ set -gx EDITOR nvim
 # ALIASES PRÁTICOS [cite: 5, 6, 8, 9, 10, 11]
 # ------------------------------
 function ll
-    ls -lah --color=auto $argv
+    ls -lah $argv
 end
 
 function la
@@ -274,45 +274,45 @@ function ......
     cd ../../../../.. $argv
 end
 
-function dir
-    dir --color=auto $argv
-end
-
-function vdir
-    vdir --color=auto $argv
-end
-
-function grep
-    grep --color=auto $argv
-end
-
-function fgrep
-    fgrep --color=auto $argv
-end
-
-function egrep
-    egrep --color=auto $argv
-end
-
-function hw
-    hwinfo --short $argv
-end
-
-function big
-    expac -H M '%m\t%n' | sort -h | nl $argv
-end
-
-function gitpkg
-    pacman -Q | grep -i "\-git" | wc -l $argv
-end
-
-function jctl
-    journalctl -p 3 -xb $argv
-end
-
-function rip
-    expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl $argv
-end
+# function dir
+#     dir --color=auto $argv
+# end
+#
+# function vdir
+#     vdir --color=auto $argv
+# end
+#
+# function grep
+#     grep --color=auto $argv
+# end
+#
+# function fgrep
+#     fgrep --color=auto $argv
+# end
+#
+# function egrep
+#     egrep --color=auto $argv
+# end
+#
+# function hw
+#     hwinfo --short $argv
+# end
+#
+# function big
+#     expac -H M '%m\t%n' | sort -h | nl $argv
+# end
+#
+# function gitpkg
+#     pacman -Q | grep -i "\-git" | wc -l $argv
+# end
+#
+# function jctl
+#     journalctl -p 3 -xb $argv
+# end
+#
+# function rip
+#     expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl $argv
+# end
 
 # ------------------------------
 # Função toggle-theme [cite: 5]
