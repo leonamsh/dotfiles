@@ -55,3 +55,5 @@ vim.schedule(function()
 end)
 
 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+
+vim.opt.fillchars = vim.opt.fillchars + "eob: "
