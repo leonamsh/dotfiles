@@ -38,5 +38,14 @@ require("lazy").setup({
     checker = { enabled = true },
 })
 
-vim.cmd.colorscheme("cyberdream")
 require("config.keymaps")
+
+local function set_colorscheme()
+    if vim.g.neovide then
+        vim.cmd("colorscheme catppuccin")
+    else
+        vim.cmd("colorscheme rose-pine-moon")
+    end
+end
+
+set_colorscheme()

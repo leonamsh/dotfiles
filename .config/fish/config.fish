@@ -207,6 +207,10 @@ function ni3
     nvim ~/.config/i3/config $argv
 end
 
+function nsway
+    nvim ~/.config/sway/config $argv
+end
+
 function nzsh
     nvim ~/.zshrc $argv
 end

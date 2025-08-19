@@ -1,10 +1,21 @@
 {
   "layer": "top",
+  "position": "top",
+  "margin-top": 2,
   "modules-left": ["sway/workspaces", "mpd", "sway/mode", "custom/spotify"],
   "modules-center": [],
-  "modules-right": ["network", "pulseaudio", "temperature", "cpu", "memory", "clock", "custom/power"],
+  "modules-right": ["network", "pulseaudio", "temperature", "cpu", "memory", "clock", "tray", "custom/power"],
 
-  "sway/mode": { "format": "{}" },
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": false,
+    "format": "{name}",
+    "on-click": "swaymsg workspace {name}"
+  },
+
+  "sway/mode": {
+    "format": "{}"
+  },
 
   "mpd": {
     "tooltip": false,
@@ -17,37 +28,62 @@
     }
   },
 
-  "pulseaudio": {
-    "tooltip": false,
-    "scroll-step": 5,
-    "format": "{icon} {volume}%",
-    "format-icons": { "default": ["奄", "奔", "墳"] }
+  "custom/spotify": {
+    "exec": "~/.config/waybar/scripts/spotify.sh",
+    "return-type": "json",
+    "interval": 2,
+    "tooltip": false
   },
 
   "network": {
-    "tooltip": true,
+    "tooltip": false,
     "format-wifi": "  {essid} {signalStrength}%",
-    "format-ethernet": "  {ifname}",
-    "format-disconnected": "ﳌ"
+    "format-ethernet": "  {ipaddr}",
+    "format-disconnected": "睊",
+    "max-length": 40
   },
 
-  "temperature": { "critical-threshold": 80 },
-  "cpu": { "interval": 2 },
-  "memory": { "interval": 5 },
+  "pulseaudio": {
+    "tooltip": false,
+    "scroll-step": 5,
+    "format": "墳 {volume}%",
+    "format-muted": "婢 mute",
+    "format-icons": {
+      "default": ["奄", "奔", "墳"]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "temperature": {
+    "tooltip": false,
+    "hwmon-path": "/sys/class/thermal/thermal_zone0/temp",
+    "critical-threshold": 85,
+    "format": "{temperatureC}°C"
+  },
+
+  "cpu": {
+    "tooltip": false,
+    "interval": 5,
+    "format": "{usage}%"
+  },
+
+  "memory": {
+    "tooltip": false,
+    "interval": 5,
+    "format": "{used:0.1f}G"
+  },
 
   "clock": {
-    "format": "{:%d/%m %H:%M}",
-    "tooltip-format": "{:%A, %d de %B de %Y}"
+    "tooltip": false,
+    "format": "{:%a %d/%m %H:%M:%S}"
   },
 
   "custom/power": {
-    "format": "",
-    "on-click": "swaynag -t warning -m 'Encerrar sessão?' -b 'Sair' 'swaymsg exit'"
-  },
-
-  "custom/spotify": {
-    "exec": "~/.config/waybar/scripts/spotify.sh",
-    "interval": 3,
+    "exec": "~/.config/waybar/scripts/power.sh",
+    "return-type": "json",
+    "interval": 3600,
+    "on-click": "wlogout -p layer-shell",
     "tooltip": false
   }
 }
+

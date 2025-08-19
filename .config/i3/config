@@ -3,7 +3,7 @@ set $mod Mod4
 
 # Definições de programas
 set $term wezterm
-set $browser vivaldi
+set $browser brave-browser-nightly
 set $browser2 firefox-developer-edition
 set $files thunar
 set $code code
@@ -129,6 +129,12 @@ for_window [class="tasty.javafx.launcher.LauncherFxApp"] floating enable
 
 for_window [title="Guild Wars 2"] fullscreen enable
 
+# Amarrar cada workspace a um monitor
+workspace $ws1 output HDMI-A-0
+workspace $ws2 output DisplayPort-0
+
+# Alternar para eles ao iniciar
+exec_always --no-startup-id i3-msg "workspace $ws1; workspace $ws2"
 
 default_border pixel
 default_floating_border pixel
@@ -136,7 +142,7 @@ default_floating_border pixel
 # Configurações de inicialização
 # exec ~/.config/qtile/autostart.sh
 gaps inner 8
-gaps outer -5
+# gaps outer 0
 
 # manage monitors
 
@@ -145,13 +151,19 @@ gaps outer -5
 # workspace ws2 output DisplayPort-0
 
 # Programas que precisam sempre reiniciar com reload
-exec_always --no-startup-id sh -c "sleep 1 && ~/.config/autostart/screenResolution.sh && i3-msg 'workspace 1; workspace 2'"
 exec_always --no-startup-id sh -c "sleep 1 && ~/.config/autostart/xinputI3.sh"
 exec_always --no-startup-id sh -c "sleep 1 && ~/.config/polybar/launch.sh"
 exec_always --no-startup-id variety
 exec_always --no-startup-id dunst
+# Desliga screensaver/blank/DPMS sempre que recarregar
+exec_always --no-startup-id sh -c "pgrep -x xscreensaver >/dev/null 2>&1 && xscreensaver-command -exit || true; xset s off; xset s noblank; xset -dpms"
+exec_always --no-startup-id sh -c "xset s off; xset s noblank; xset -dpms"
+exec_always --no-startup-id xset s off
+exec_always --no-startup-id xset s noblank
+exec_always --no-startup-id xset -dpms
 
 # Programas que iniciam apenas uma vez
+exec --no-startup-id sh -c "sleep 1 && ~/.config/autostart/screenResolution.sh"
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id numlockx on
 exec --no-startup-id lxsession 
@@ -184,3 +196,5 @@ for_window [window_role="bubble"] focus no
 for_window [title="Notification"] focus no
 for_window [class="Dunst"] focus no
 for_window [urgent=latest] focus no
+
+

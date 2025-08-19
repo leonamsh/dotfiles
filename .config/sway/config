@@ -14,8 +14,8 @@ floating_modifier $mod
 
 ### Apps
 set $term    wezterm
-set $browser vivaldi
-set $browser2 firefox-developer-edition
+set $browser2 vivaldi
+set $browser brave-browser-nightly 
 set $files   thunar
 set $code    code
 set $music   flatpak run com.spotify.Client
@@ -92,8 +92,10 @@ workspace $ws2 output DP-1
 for_window [app_id="firefox"                      ] move to workspace $ws2
 for_window [app_id="firefoxdeveloperedition"      ] move to workspace $ws2
 for_window [app_id="vivaldi-stable"               ] move to workspace $ws2
-for_window [class="Vivaldi-stable"] move to workspace $ws2
+for_window [class="Vivaldi-stable"                ] move to workspace $ws2
 for_window [app_id="brave-browser"                ] move to workspace $ws2
+for_window [app_id="brave-browser-nightly"        ] move to workspace $ws2
+for_window [class="Brave-browser-nightly"         ] move to workspace $ws2
 # VS Code
 for_window [app_id="code"                         ] move to workspace $ws1
 for_window [class="Code"] move to workspace $ws1
@@ -102,14 +104,14 @@ for_window [app_id="org.wezfurlong.wezterm"       ] move to workspace $ws1
 for_window [class="wezterm"] move to workspace $ws1
 for_window [class="org.wezfurlong.wezterm"] move to workspace $ws1
 # Arquivos
-for_window [app_id="thunar"] move to workspace $ws5
-for_window [class="Thunar"] move to workspace $ws5
+for_window [app_id="thunar"] move to workspace $ws4
+for_window [class="Thunar"] move to workspace $ws4
 # Spotify
-for_window [app_id="com.spotify.Client"] move to workspace $ws4
-for_window [class="Spotify"]             move to workspace $ws4
+for_window [app_id="com.spotify.Client"] move to workspace $ws6
+for_window [class="Spotify"]             move to workspace $ws6
 # Discord
-for_window [app_id="com.discordapp.Discord"] move to workspace $ws6
-for_window [class="discord"]                move to workspace $ws6
+for_window [app_id="com.discordapp.Discord"] move to workspace $ws5
+for_window [class="discord"]                move to workspace $ws5
 
 ### Ir para workspaces
 bindsym $mod+1 workspace $ws1
@@ -169,10 +171,16 @@ exec_always sh -c "killall waybar; waybar"
 
 # Wallpaper (Wayland nativo)
 # troque a imagem pelo seu caminho
-exec_always swaybg -i /run/media/lm/dev/walls/landscape/73.jpg -m fill
+# exec_always swaybg -i /run/media/lm/dev/walls/landscape/73.jpg -m fill
+exec variety
 
-# Notificações (versão Wayland do dunst recomendada)
-exec_always dunst
+# Notificações: dunst → mako (recomendado)
+# exec_always dunst
+exec mako
+
+# Idle/lock: xscreensaver/xset → swayidle + swaylock/gtklock
+# Remova TODAS as linhas xset/xscreensaver
+exec swayidle -w timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' exec_always swayidle -w timeout 1800 'systemctl suspend'   
 
 # Gerenciador de energia (opcional)
 exec xfce4-power-manager
@@ -204,3 +212,4 @@ for_window [title="Notification"] focus no
 for_window [class="Dunst"]        focus no
 for_window [urgent=latest]        focus no
 
+output * adaptive_sync on

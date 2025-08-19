@@ -5,7 +5,7 @@ WINIT_X11_SCALE_FACTOR = "1"
 [window]
 dynamic_padding = true
 decorations = "full"
-title = "Alacritty@CachyOS"
+title = "Alacritty@Arch"
 opacity = 0.8
 decorations_theme_variant = "Dark"
 
@@ -52,20 +52,7 @@ white = "0xECEFF4"
 size = 12
 
 [font.normal]
-family = "DMMono Nerd Font"
-style = "Regular"
-
-[font.bold]
-family = "DMMono Nerd Font"
-style = "Bold"
-
-[font.italic]
-family = "DMMono Nerd Font"
-style = "Italic"
-
-[font.bold_italic]
-family = "DMMono Nerd Font"
-style = "Bold Italic"
+family = "GeistMono Nerd Font"
 
 [selection]
 semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"

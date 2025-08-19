@@ -1,0 +1,108 @@
+/* Seu CSS atual adaptado — pode colar o arquivo que você já usa */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: Nerd Font Hack;
+  font-size: 10px;
+  min-height: 14px;
+  margin: 1 3;
+}
+window#waybar {
+  background: transparent;
+}
+window#waybar.hidden {
+  opacity: 0.2;
+}
+#window {
+  margin-top: 8px;
+  padding: 0 16px;
+  border-radius: 16px;
+  color: transparent;
+  background: transparent;
+}
+#workspaces {
+  padding: 0 5px;
+  border-radius: 16px;
+  background: #282a36;
+}
+#workspaces button {
+  color: #f8f8f2;
+  background: transparent;
+  font-size: 16px;
+}
+#workspaces button.focused {
+  color: #9aedfe;
+}
+#workspaces button:hover {
+  color: #ff79c6;
+}
+#workspaces button.active {
+  color: #50fa7b;
+}
+#workspaces button.urgent {
+  background: #ffb3ba;
+  color: #fff;
+  animation: blink 0.5s steps(12) infinite alternate;
+}
+#custom-spotify {
+  padding: 0 16px;
+  border-radius: 16px;
+  color: #f8f8f2;
+  background: #6272a4;
+}
+#mpd {
+  padding: 0 16px;
+  border-radius: 16px;
+  color: #4d4d4d;
+  background: #5af78e;
+}
+#mpd.disconnected,
+#mpd.stopped {
+  color: #f8f8f2;
+  background: #282a36;
+}
+
+#network {
+  color: #4d4d4d;
+  background: #bd93f9;
+  padding: 0 16px;
+  border-radius: 16px;
+  transition: none;
+}
+#pulseaudio {
+  color: #4d4d4d;
+  background: #9aedfe;
+  padding: 0 16px;
+  border-radius: 16px;
+}
+#temperature {
+  color: #4d4d4d;
+  background: #5af78e;
+  padding: 0 16px;
+  border-radius: 16px;
+}
+#cpu {
+  color: #4d4d4d;
+  background: #f1fa8c;
+  padding: 0 16px;
+  border-radius: 16px;
+}
+#memory {
+  color: #4d4d4d;
+  background: #ff6e67;
+  padding: 0 16px;
+  border-radius: 16px;
+}
+#clock {
+  color: #f8f8f2;
+  background: #282a36;
+  padding: 0 16px;
+  border-radius: 16px;
+}
+#custom-power {
+  color: #4d4d4d;
+  background: #ffb86c;
+  /* padding-left: 3px; */
+  padding: 0 16px 0 13;
+  border-radius: 16px;
+}

@@ -35,6 +35,11 @@ from qtile_extras.widget.decorations import PowerLineDecoration, RectDecoration
 # from spotify import Spotify
 
 
+@hook.subscribe.startup_once
+def autostart():
+    subprocess.Popen(["/usr/lib/xfce4/notifyd/xfce4-notifyd"])
+
+
 def dmlogout():
     qtile.cmd_spawn("sh -c /home/lm/.config/qtile/scripts/dm-logout.sh")
 
@@ -56,8 +61,8 @@ powerline = {
 
 mod = "mod4"  # Sets mod key to SUPER/WINDOWS
 myTerm = "wezterm"  # My terminal of choice
+myBrowser2 = "brave-browser-nightly"  # My browser of choice
 myBrowser = "vivaldi-stable"  # My browser of choice
-myBrowser2 = "brave"  # My browser of choice
 myFiles = "thunar"  # My file manager of choice
 myCode = "code"  # vscode
 myMusic = "flatpak run com.spotify.Client"  # spotify
@@ -108,6 +113,12 @@ keys = [
     Key([mod], "F2", lazy.spawn(myCode), desc="code"),
     Key([mod], "F3", lazy.spawn(myNeovim), desc="nvim"),
     Key([mod], "F4", lazy.spawn(myMusic), desc="spotify"),
+    # Fechar notificação mais recente
+    Key(["mod4"], "n", lazy.spawn("dunstctl close")),
+    # Fechar todas as notificações
+    Key(["mod4", "shift"], "n", lazy.spawn("dunstctl close-all")),
+    # Reabrir última notificação fechada
+    Key(["mod4", "control"], "n", lazy.spawn("dunstctl history-pop")),
     Key(
         [mod],
         "b",
@@ -238,15 +249,14 @@ for key, (cmd, desc) in power_commands.items():
 
 
 groups = []
-group_names = ["1", "2", "3", "4", "5", "6"]
+group_names = ["1", "2", "3", "4", "5"]
 # group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 # group_labels = ["DEV", "WWW", "SYS", "MUS", "VBOX", "CHAT", "DOC", "VID", "GFX", "MISC"]
 # group_labels = ["", "", "", "", "", "", "𝦝", "", "", "⛨"]
 # group_labels = ["I", "II", "III", "IV", "V", "VI"]
 # group_labels = ["", "", "", "", "", ""]
-group_labels = ["", "", "", "", "", ""]
+group_labels = ["", "", "", "", ""]
 group_layouts = [
-    "monadtall",
     "monadtall",
     "monadtall",
     "monadtall",
@@ -270,7 +280,7 @@ for i in range(len(group_names)):
     matches = None
     if group_names[i] == "2":
         # Se o grupo for o '2', adiciona a regra para o Vivaldi
-        matches = [Match(wm_class="Vivaldi-stable")]
+        matches = [Match(wm_class="firefox-developer-edition")]
     groups.append(
         Group(
             name=group_names[i],
@@ -288,7 +298,9 @@ for group in groups:
             Key([mod, "shift"], group.name, lazy.window.togroup(group.name)),
         ]
     )
-color = colors.Dracula
+# color = colors.Dracula
+color = colors.Cozytile
+# color = colors.Palenight
 layout_theme = {
     "border_width": 2,
     "margin": 12,
@@ -326,17 +338,17 @@ def init_widgets_list():
         widget.Image(
             filename="~/.config/qtile/Assets/launch_Icon.png",
             scale="False",
-            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("qtilekeys-yad")},
+            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("rofi -show drun")},
         ),
         widget.Prompt(font="0xProto Nerd Font Mono", fontsize=10, foreground=color[1]),
         widget.GroupBox(
-            fontsize=19,
+            fontsize=22,
             margin_y=3,
             margin_x=8,
             padding_y=0,
             padding_x=2,
             borderwidth=3,
-            active=color[6],
+            active=color[8],
             inactive=color[9],
             rounded=True,
             highlight_color=color[0],
