@@ -42,7 +42,7 @@ require("config.keymaps")
 
 local function set_colorscheme()
     if vim.g.neovide then
-        vim.cmd("colorscheme catppuccin")
+        vim.cmd("colorscheme kanagawa")
     else
         vim.cmd("colorscheme rose-pine-moon")
     end

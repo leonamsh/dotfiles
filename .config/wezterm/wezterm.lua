@@ -6,7 +6,7 @@ local opacity = 1
 local transparent_bg = "rgba(22, 24, 26, " .. opacity .. ")"
 
 -- Font settings
-config.font_size = 12
+config.font_size = 11.6
 -- config.line_height = 1.1
 -- config.font = wezterm.font("Iosevka NF")
 -- config.font = wezterm.font("DMMono Nerd Font")
