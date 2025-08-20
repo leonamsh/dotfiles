@@ -1,5 +1,6 @@
 return {
     "3rd/image.nvim",
+    enabled = vim.fn.has("win32") == 0, -- desativa no Windows
     build = false, -- evita compilar o rock
     -- Carrega apenas quando há UI e terminal compatível
     cond = function()

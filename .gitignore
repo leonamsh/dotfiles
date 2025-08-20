@@ -13,7 +13,6 @@
 !.config/alacritty/
 !.config/autostart/
 !.config/doom/
-!.config/emacs/
 !.config/fish/
 !.config/ghostty/
 !.config/hypr/
@@ -42,4 +41,5 @@
 !.fonts/
 *Zone.Identifier*
 
-/home/lm/dotfiles/.config/emacs/
+#arquivos ou pastas dentro do .config
+.config/nvim/lazy-lock.json

@@ -1,22 +1,8 @@
 return {
     -- Configuração principal do Telescope
-    {
-        "nvim-telescope/telescope.nvim",
-        tag = "0.1.6", -- É uma boa prática fixar em uma tag estável
-        dependencies = { "nvim-lua/plenary.nvim" },
-        -- Use 'opts' para opções passadas diretamente ao setup do Telescope,
-        -- ou 'config' para executar um bloco de código Lua.
-        -- Neste caso, como a configuração do file_browser é uma extensão,
-        -- faremos a configuração principal do Telescope no bloco do file_browser.
-    },
-
     -- Configuração do Telescope File Browser (que depende do Telescope)
     {
         "nvim-telescope/telescope-file-browser.nvim",
-        dependencies = {
-            "nvim-telescope/telescope.nvim", -- Dependência explícita
-            "nvim-lua/plenary.nvim", -- Dependência explícita
-        },
         -- Use 'config' para executar o setup e carregar a extensão
         config = function()
             -- Carrega as ações do file_browser. Você pode fazer isso aqui ou dentro da tabela de mapeamentos.
