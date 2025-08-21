@@ -1,4 +1,5 @@
 return {
+    enabled = false,
     "jakobwesthoff/project-fzf.nvim",
     dependencies = {
         "ahmedkhalf/project.nvim", -- Must be configured separately

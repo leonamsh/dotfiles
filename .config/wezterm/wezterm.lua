@@ -6,14 +6,14 @@ local opacity = 1
 local transparent_bg = "rgba(22, 24, 26, " .. opacity .. ")"
 
 -- Font settings
-config.font_size = 14
+config.font_size = 13
 -- config.line_height = 1.1
 -- config.font = wezterm.font("Iosevka NF")
 -- config.font = wezterm.font("DMMono Nerd Font")
--- config.font = wezterm.font("GeistMono Nerd Font")
+config.font = wezterm.font("GeistMono Nerd Font")
 -- config.font = wezterm.font("JetBrainsMono Nerd Font")
 -- config.font = wezterm.font("0xProto Nerd Font Mono")
-config.font = wezterm.font("Terminess Nerd Font Mono")
+-- config.font = wezterm.font("Terminess Nerd Font Mono")
 
 -- color_scheme
 config.colors = {
@@ -86,7 +86,7 @@ config.window_background_image = (os.getenv("WEZTERM_CONFIG_FILE") or ""):gsub("
 config.window_close_confirmation = "NeverPrompt"
 config.win32_system_backdrop = "Acrylic"
 
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.8
 -- Performance Settings
 config.max_fps = 144
 config.animation_fps = 60
