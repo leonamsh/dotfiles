@@ -44,7 +44,7 @@ local function set_colorscheme()
     if vim.g.neovide then
         vim.cmd("colorscheme kanagawa")
     else
-        vim.cmd("colorscheme eldritch")
+        vim.cmd("colorscheme cyberdream")
     end
 end
 

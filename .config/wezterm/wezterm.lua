@@ -6,15 +6,16 @@ local opacity = 1
 local transparent_bg = "rgba(22, 24, 26, " .. opacity .. ")"
 
 -- Font settings
-config.font_size = 11.6
+config.font_size = 14
 -- config.line_height = 1.1
 -- config.font = wezterm.font("Iosevka NF")
 -- config.font = wezterm.font("DMMono Nerd Font")
-config.font = wezterm.font("GeistMono Nerd Font")
+-- config.font = wezterm.font("GeistMono Nerd Font")
 -- config.font = wezterm.font("JetBrainsMono Nerd Font")
 -- config.font = wezterm.font("0xProto Nerd Font Mono")
+config.font = wezterm.font("Terminess Nerd Font Mono")
 
--- Colors
+-- color_scheme
 config.colors = {
 	cursor_bg = "white",
 	cursor_border = "white",
@@ -71,12 +72,14 @@ end
 local host_os = get_os()
 
 -- Color Configuration
-config.colors = require("cyberdream")
+-- config.color_scheme = require("cyberdream")
+-- config.color_scheme = require("Eldritch")
+config.color_scheme = "Eldritch"
 config.force_reverse_video_cursor = true
 
 -- Window Configuration
-config.initial_rows = 45
-config.initial_cols = 180
+config.initial_rows = 35
+config.initial_cols = 120
 config.window_decorations = "RESIZE"
 config.window_background_opacity = opacity
 config.window_background_image = (os.getenv("WEZTERM_CONFIG_FILE") or ""):gsub("wezterm.lua", "bg-blurred.png")
@@ -93,23 +96,23 @@ config.enable_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = true
 config.show_tab_index_in_tab_bar = false
 config.use_fancy_tab_bar = false
-config.colors.tab_bar = {
-	background = config.window_background_image and "rgba(0, 0, 0, 0)" or transparent_bg,
-	new_tab = { fg_color = config.colors.background, bg_color = config.colors.brights[6] },
-	new_tab_hover = { fg_color = config.colors.background, bg_color = config.colors.foreground },
-}
+-- config.color_scheme.tab_bar = {
+-- 	background = config.window_background_image and "rgba(0, 0, 0, 0)" or transparent_bg,
+-- 	new_tab = { fg_color = config.colors.background, bg_color = config.color_scheme.brights[6] },
+-- 	new_tab_hover = { fg_color = config.colors.background, bg_color = config.color_scheme.foreground },
+-- }
 
 -- Tab Formatting
 wezterm.on("format-tab-title", function(tab, _, _, _, hover)
-	local background = config.colors.brights[1]
-	local foreground = config.colors.foreground
+	local background = config.color_scheme.brights[1]
+	local foreground = config.color_scheme.foreground
 
 	if tab.is_active then
-		background = config.colors.brights[7]
-		foreground = config.colors.background
+		background = config.color_scheme.brights[7]
+		foreground = config.color_scheme.background
 	elseif hover then
-		background = config.colors.brights[8]
-		foreground = config.colors.background
+		background = config.color_scheme.brights[8]
+		foreground = config.color_scheme.background
 	end
 
 	local title = tostring(tab.tab_index + 1)

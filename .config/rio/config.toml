@@ -11,13 +11,13 @@ hide-cursor-when-typing = false
 
 # ===== Fontes =====
 [fonts]
-size = 15
+size = 19
 features = []
 use-drawable-chars = true
 symbol-map = []
 additional-dirs = []
-hinting = true                 # antes estava como fonts.hinting; mantém aqui
-line-height = 1.5
+hinting = true            # antes estava como fonts.hinting; mantém aqui
+# line-height = 1.5
 
 # Desativa avisos de fonte ausente (mantém limpo em setups multi-SO)
 disable-warnings-not-found = false
@@ -25,26 +25,26 @@ disable-warnings-not-found = false
 [fonts.regular]
 # family = "Hack Nerd Font"
 # family = "GeistMono Nerd Font"
-# family = "Terminess Nerd Font Mono"
-family = "JetBrainsMono Nerd Font"
+family = "Terminess Nerd Font Mono"
+# family = "JetBrainsMono Nerd Font"
 style = "Normal"
 width = "Normal"
 weight = 400
 
 [fonts.bold]
-family = "JetBrainsMono Nerd Font"
+family = "Terminess Nerd Font Mono"
 style = "Normal"
 width = "Normal"
 weight = 800
 
 [fonts.italic]
-family = "JetBrainsMono Nerd Font"
+family = "Terminess Nerd Font Mono"
 style = "Italic"
 width = "Normal"
 weight = 400
 
 [fonts.bold-italic]
-family = "JetBrainsMono Nerd Font"
+family = "Terminess Nerd Font Mono"
 style = "Italic"
 width = "Normal"
 weight = 800
@@ -59,8 +59,8 @@ use-split = true
 # ===== Janela =====
 [window]
 opacity = 0.9
-blur = true
-decorations = "Transparent"    # outras: "Enabled" | "Disabled" | "Buttonless"
+# blur = true
+decorations = "Transparent" # outras: "Enabled" | "Disabled" | "Buttonless"
 
 # Imagem de fundo (API suportada oficialmente)
 [window.background-image]
@@ -135,4 +135,3 @@ draw-bold-text-with-light-colors = false
 # ===== Geral =====
 # Pede confirmação pra fechar? (false = não pergunta)
 confirm-before-quit = false
-
