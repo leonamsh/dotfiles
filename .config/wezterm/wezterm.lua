@@ -86,6 +86,7 @@ config.window_background_image = (os.getenv("WEZTERM_CONFIG_FILE") or ""):gsub("
 config.window_close_confirmation = "NeverPrompt"
 config.win32_system_backdrop = "Acrylic"
 
+config.window_background_opacity = 0.9
 -- Performance Settings
 config.max_fps = 144
 config.animation_fps = 60
