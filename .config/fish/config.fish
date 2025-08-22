@@ -227,6 +227,10 @@ function nvimz
     env NVIM_APPNAME=nvim-lazar nvim $argv
 end
 
+function nl
+    env NVIM_APPNAME=lazyvim nvim $argv
+end
+
 function vk
     env NVIM_APPNAME=nvim-kickstart nvim $argv
 end

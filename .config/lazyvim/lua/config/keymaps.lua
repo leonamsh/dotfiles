@@ -1,57 +1,141 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
+-- Keymaps são carregados no evento VeryLazy
+-- Defaults do LazyVim: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 
--- ============================================================================
--- Arquivo de Configuração de Mapeamentos de Teclas (Keymaps) para Neovim
--- ============================================================================
-
--- Define uma variável local 'keymap' para simplificar o uso de vim.keymap.set.
-local keymap = vim.keymap
-
--- Define opções padrão para os mapeamentos:
---   'noremap = true': Garante que o mapeamento não seja recursivo,
---                     evitando comportamentos inesperados.
---   'silent = true': Evita que o comando seja exibido na linha de comando
---                    ao ser executado.
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
----
---- Navegação de Arquivos e Gerenciadores de Arquivos (Oil & Neotree)
---- Estes mapeamentos facilitam a navegação pelo sistema de arquivos e o uso de gerenciadores de arquivos como Oil e Neotree.
----
--- Abre o diretório pai no modo flutuante do plugin Oil.
-keymap.set("n", "-", "<cmd>Oil --float<CR>", { desc = "Open Parent Directory in Oil Float Mode" })
+-- LuaLS: declare a global Snacks para evitar warning de undefined-global
+---@class Snacks
+---@field picker table
+---@field explorer fun()
+---@field layout table
+Snacks = Snacks
 
--- Abre a informação de diagnóstico (erros/warnings LSP) em uma janela flutuante.
-vim.keymap.set("n", "gl", function()
-    vim.diagnostic.open_float()
-end, { desc = "Open Diagnostic in Float" })
+-- ===== Arquivos / Gerenciadores =====
+-- Oil (diretório pai em float)
+map("n", "-", "<cmd>Oil --float<CR>", { desc = "Oil: Parent (float)" })
 
--- Abrir arquivos recentes via Telescope.
--- vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Open recent files" })
+-- Abre o Snacks Explorer na pasta do arquivo atual (estilo Neo-tree)
+local function snacks_explorer_here()
+  local name = vim.api.nvim_buf_get_name(0)
+  local dir = (name ~= "" and vim.fn.fnamemodify(name, ":p:h")) or vim.loop.cwd()
 
--- Limpa os realces de busca ao pressionar <Esc> no modo normal.
-keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
+  -- Tenta usar a API com argumentos (quando disponível)
+  if _G.Snacks and Snacks.explorer then
+    local ok = pcall(function()
+      Snacks.explorer({
+        cwd = dir, -- <- força o diretório base
+        reveal = name ~= "" and name or nil, -- se suportar, já foca no arquivo
+        focus = true,
+      })
+    end)
+    if ok then
+      return
+    end
+  end
 
--- Mapeia <leader>fp para abrir projetos usando ProjectFzf.
-keymap.set("n", "<leader>fp", ":ProjectFzf<CR>", { noremap = true, silent = true, desc = "Open Projects with FZF" })
+  -- Fallback robusto: usa lcd local-janela, abre, e restaura cwd
+  local prev = vim.fn.getcwd()
+  vim.cmd(("lcd %s"):format(vim.fn.fnameescape(dir)))
+  pcall(function()
+    Snacks.explorer()
+  end)
+  vim.cmd(("lcd %s"):format(vim.fn.fnameescape(prev)))
+end
 
--- Divisão de janelas:
--- 'sh' para split horizontal (vsplit).
-keymap.set("n", "sh", ":vsplit<Return>", opts)
--- 'sv' para split vertical (split).
-keymap.set("n", "sv", ":split<Return>", opts)
+-- Keymaps
+vim.keymap.set("n", "<leader>e", snacks_explorer_here, { desc = "Explorer (buffer dir)" })
+-- se quiser também no '-':
+-- vim.keymap.set("n", "-", snacks_explorer_here, { desc = "Explorer (buffer dir)" })
 
--- Melhorias na indentação visual:
--- Reduz a indentação da seleção no modo visual.
-keymap.set("v", "<", "<gv", { desc = "Decrease indent" })
--- Aumenta a indentação da seleção no modo visual.
-keymap.set("v", ">", ">gv", { desc = "Increase indent" })
+-- Snacks Explorer (root)
+map("n", "<leader>E", function()
+  if _G.Snacks and Snacks.explorer then
+    Snacks.explorer()
+  end
+end, { desc = "Explorer (Project root)" })
 
--- Ao colar no modo visual, não copia a seleção para o registro padrão.
--- Isso permite colar várias vezes o mesmo conteúdo.
-vim.keymap.set("v", "p", '"_dP', opts)
+-- Salvar rápido com Ctrl + S
+vim.keymap.set({ "n", "i", "v" }, "<C-s>", function()
+  vim.cmd("silent! write")
+end, { desc = "Salvar arquivo" })
 
--- Deleta um único caractere sem copiá-lo para o registro (não polui o buffer de cola).
-vim.keymap.set("n", "x", '"_x', opts)
+-- ===== Diagnóstico =====
+map("n", "gl", function()
+  vim.diagnostic.open_float()
+end, { desc = "Diagnostics (float)" })
+
+-- ===== Splits =====
+-- 'sh' → vertical split (vsplit) | 'sv' → horizontal split (split)
+map("n", "sh", ":vsplit<CR>", opts)
+map("n", "sv", ":split<CR>", opts)
+
+-- ===== Indentação visual =====
+map("v", "<", "<gv", { desc = "Indent -" })
+map("v", ">", ">gv", { desc = "Indent +" })
+
+-- ===== Paste/Del “limpos” =====
+map("v", "p", '"_dP', opts) -- cola sem sobrescrever registro
+map("n", "x", '"_x', opts) -- deleta char sem ir p/ registro
+
+-- ===== Salvar / Sair =====
+map({ "n", "i" }, "<C-s>", function()
+  vim.cmd("silent! write")
+end, { desc = "Salvar arquivo" })
+map("n", "<leader>qq", ":qa<CR>", { desc = "Sair do Neovim" })
+
+-- ===== Navegação de janelas =====
+map("n", "<C-h>", "<C-w>h", { desc = "Janela esquerda" })
+map("n", "<C-j>", "<C-w>j", { desc = "Janela baixo" })
+map("n", "<C-k>", "<C-w>k", { desc = "Janela cima" })
+map("n", "<C-l>", "<C-w>l", { desc = "Janela direita" })
+
+-- ===== Mover linhas =====
+map("n", "<A-j>", ":m .+1<CR>==", { desc = "Mover linha ↓" })
+map("n", "<A-k>", ":m .-2<CR>==", { desc = "Mover linha ↑" })
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Mover seleção ↓" })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Mover seleção ↑" })
+
+-- ===== Snacks Picker =====
+-- *Com checagem segura para evitar erro se Snacks ainda não estiver pronto*
+map("n", "<leader><space>", function()
+  if Snacks and Snacks.picker then
+    Snacks.picker.files()
+  end
+end, { desc = "Files (root)" })
+map("n", "<leader>/", function()
+  if Snacks and Snacks.picker then
+    Snacks.picker.grep()
+  end
+end, { desc = "Grep (root)" })
+map("n", "<leader>fb", function()
+  if Snacks and Snacks.picker then
+    Snacks.picker.buffers()
+  end
+end, { desc = "Buffers" })
+map("n", "<leader>fr", function()
+  if Snacks and Snacks.picker then
+    Snacks.picker.recent()
+  end
+end, { desc = "Recent" })
+map("n", "<leader>fp", function()
+  if Snacks and Snacks.picker then
+    Snacks.picker.projects()
+  end
+end, { desc = "Projects" })
+map("n", "gd", function()
+  if Snacks and Snacks.picker then
+    Snacks.picker.lsp_definitions()
+  end
+end, { desc = "LSP Defs" })
+map("n", "gr", function()
+  if Snacks and Snacks.picker then
+    Snacks.picker.lsp_references()
+  end
+end, { desc = "LSP Refs" })
+
+-- ===== Trouble (diagnósticos) =====
+-- LazyVim já integra bem; este toggle é útil:
+map("n", "<leader>xx", function()
+  require("trouble").toggle()
+end, { desc = "Trouble" })

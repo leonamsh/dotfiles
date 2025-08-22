@@ -11,7 +11,7 @@ hide-cursor-when-typing = false
 
 # ===== Fontes =====
 [fonts]
-size = 19
+size = 16
 features = []
 use-drawable-chars = true
 symbol-map = []
@@ -23,28 +23,28 @@ hinting = true            # antes estava como fonts.hinting; mantém aqui
 disable-warnings-not-found = false
 
 [fonts.regular]
-# family = "Hack Nerd Font"
+family = "Hack Nerd Font"
 # family = "GeistMono Nerd Font"
-family = "Terminess Nerd Font Mono"
+# family = "Terminess Nerd Font Mono"
 # family = "JetBrainsMono Nerd Font"
 style = "Normal"
 width = "Normal"
 weight = 400
 
 [fonts.bold]
-family = "Terminess Nerd Font Mono"
+family = "Hack Nerd Font"
 style = "Normal"
 width = "Normal"
 weight = 800
 
 [fonts.italic]
-family = "Terminess Nerd Font Mono"
+family = "Hack Nerd Font"
 style = "Italic"
 width = "Normal"
 weight = 400
 
 [fonts.bold-italic]
-family = "Terminess Nerd Font Mono"
+family = "Hack Nerd Font"
 style = "Italic"
 width = "Normal"
 weight = 800
