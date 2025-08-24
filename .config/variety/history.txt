@@ -1,5 +1,17 @@
 0
 /run/media/lm/dev/walls/animes/undefined - Imgur.jpg
+/usr/share/backgrounds/gnome/adwaita-l.jpg
+/run/media/lm/dev/walls/animes/undefined - Imgur.jpg
+/run/media/lm/dev/walls/animes/undefined - Imgur.jpg
+/run/media/lm/dev/walls/animes/undefined - Imgur.jpg
+/run/media/lm/dev/walls/animes/undefined - Imgur.jpg
+/run/media/lm/dev/walls/animes/undefined - Imgur.jpg
+/run/media/lm/dev/walls/animes/undefined - Imgur.jpg
+/run/media/lm/dev/walls/animes/undefined - Imgur.jpg
+/run/media/lm/dev/walls/animes/undefined - Imgur.jpg
+/run/media/lm/dev/walls/animes/undefined - Imgur.jpg
+/run/media/lm/dev/walls/animes/undefined - Imgur.jpg
+/run/media/lm/dev/walls/animes/undefined - Imgur.jpg
 /run/media/lm/dev/walls/animes/undefined - Imgur.jpg
 /run/media/lm/dev/walls/animes/undefined - Imgur.jpg
 /run/media/lm/dev/walls/animes/undefined - Imgur.jpg
@@ -84,4 +96,3 @@
 /run/media/lm/dev/walls/landscape/32.jpg
 /run/media/lm/dev/walls/landscape/49.jpg
 /run/media/lm/dev/walls/landscape/52.jpg
-/usr/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png

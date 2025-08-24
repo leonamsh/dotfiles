@@ -5,7 +5,7 @@ application/x-docbook+xml=neovide.desktop;
 application/x-shellscript=neovide.desktop
 application/x-yaml=neovide.desktop;
 font/otf=org.kde.kfontview.desktop;
-font/ttf=org.kde.kfontview.desktop;
+font/ttf=org.gnome.TextEditor.desktop;org.kde.kfontview.desktop;
 image/jpeg=org.kde.gwenview.desktop;
 text/html=vivaldi.desktop;
 text/markdown=neovide.desktop;
@@ -15,6 +15,7 @@ text/x-lua=neovide.desktop
 x-scheme-handler/chrome=vivaldi.desktop;
 x-scheme-handler/http=vivaldi-stable.desktop;vivaldi.desktop;com.brave.Browser.desktop;com.vivaldi.Vivaldi.desktop;
 x-scheme-handler/https=vivaldi-stable.desktop;vivaldi.desktop;com.brave.Browser.desktop;com.vivaldi.Vivaldi.desktop;
+application/vnd.microsoft.portable-executable=wine.desktop;
 
 [Default Applications]
 application/json=neovide.desktop;

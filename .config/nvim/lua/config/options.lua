@@ -1,59 +1,55 @@
-vim.opt.expandtab = true -- Convert tabs to spaces
-vim.opt.shiftwidth = 4 -- Amount to indent with << and >>
-vim.opt.tabstop = 4 -- How many spaces are shown per Tab
-vim.opt.softtabstop = 4 -- How many spaces are applied when pressing Tab
+-- Options são carregadas antes do LazyVim: veja os defaults aqui:
+-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
+-- Este arquivo apenas complementa/sobrepõe.
 
-vim.opt.smarttab = true
-vim.opt.smartindent = true
-vim.opt.autoindent = true -- Keep identation from previous line
+local opt = vim.opt
+local g = vim.g
 
--- Enable break indent
-vim.opt.breakindent = true
+-- Líder
+g.mapleader = " "
 
--- Always show relative line numbers
-vim.opt.number = true
-vim.opt.relativenumber = true
+-- ========== UI / Edição ==========
+opt.number = true
+opt.relativenumber = true
+opt.cursorline = true
+opt.termguicolors = true
+opt.signcolumn = "yes"
+opt.wrap = false
+opt.scrolloff = 10 -- manter “folga” vertical
+opt.sidescrolloff = 8
 
-vim.opt.wrap = false -- Disable wrap
-vim.opt.linebreak = true -- Companion to wrap, don't split words
+-- Mostrar caracteres invisíveis (útil p/ revisão)
+opt.list = true
+opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
--- Show line under cursor
-vim.opt.cursorline = true
+-- ========== Indentação ==========
+opt.expandtab = true
+opt.shiftwidth = 2
+opt.tabstop = 2
+opt.smartindent = true
 
--- Store undos between sessions
-vim.opt.undofile = true
+-- ========== Busca ==========
+opt.ignorecase = true
+opt.smartcase = true
+opt.incsearch = true
+opt.hlsearch = false
 
--- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = "a"
+-- ========== Desempenho ==========
+opt.updatetime = 150
+opt.timeoutlen = 400
 
--- Don't show the mode, since it's already in the status line
-vim.opt.showmode = false
+-- ========== Outros ==========
+opt.clipboard = "unnamedplus"
+opt.splitbelow = true
+opt.splitright = true
 
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+-- ===== LazyVim specifics =====
+-- ESLint autoformat (se estiver usando extras linting.eslint)
+g.lazyvim_eslint_auto_format = true
+-- Toggle global de autoformat no save (do LazyVim); deixe comentado se não quiser mexer.
+-- g.autoformat = true
 
--- Keep signcolumn on by default
-vim.opt.signcolumn = "yes"
-
--- Configure how new splits should be opened
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
-
--- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 5
-
--- Clipboard (scheduled to avoid startup performance impact)
-vim.schedule(function()
-    vim.opt.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim
-end)
-
-vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-
-vim.opt.fillchars = vim.opt.fillchars + "eob: "
+-- Ajustes comentados do Neovide (ativar se usar GUI)
+-- vim.g.neovide_opacity = 0.9
+-- vim.g.neovide_scale_factor = 1.0
+-- vim.opt.linespace = 3
