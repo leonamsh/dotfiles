@@ -1,9 +1,7 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
-local constants = require("constants")
-local toggle_transparency_command = require("commands.toggle-transparency")
 local opacity = 1
-local transparent_bg = "rgba(22, 24, 26, " .. opacity .. ")"
+local theme = require("lua/rose-pine").main
 
 -- Font settings
 config.font_size = 12.0
@@ -20,7 +18,11 @@ config.colors = {
 -- config.color_scheme = require("Eldritch")
 -- config.color_scheme = "Eldritch"
 -- or Macchiato, Frappe, Latte
-config.color_scheme = "Catppuccin Mocha"
+-- config.color_scheme = "Catppuccin Mocha"
+config.colors = theme.colors()
+-- needed only if using fancy tab bar
+config.window_frame = theme.window_frame()
+
 config.force_reverse_video_cursor = true
 
 -- Appearance
@@ -40,12 +42,6 @@ config.max_fps = 120
 config.prefer_egl = true
 config.default_cursor_style = "SteadyBar"
 -- Custom commands
-
-wezterm.on("augment-command-palette", function()
-	return {
-		toggle_transparency = toggle_transparency_command,
-	}
-end)
 
 if wezterm.target_triple:find("windows") then
 	config.default_prog = { "pwsh.exe" }

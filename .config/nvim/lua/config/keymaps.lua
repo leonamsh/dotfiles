@@ -15,6 +15,8 @@ Snacks = Snacks
 -- Oil (diretório pai em float)
 map("n", "-", "<cmd>Oil --float<CR>", { desc = "Oil: Parent (float)" })
 
+map("n", "<leader>ls", "<cmd>Lazy sync<CR>", { desc = "Lazy: Sync" })
+
 -- Abre o Snacks Explorer na pasta do arquivo atual (estilo Neo-tree)
 local function snacks_explorer_here()
   local name = vim.api.nvim_buf_get_name(0)
