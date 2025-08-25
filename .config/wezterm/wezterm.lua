@@ -1,13 +1,13 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local opacity = 1
-local theme = require("lua/rose-pine").main
+local theme = require("lua/rose-pine").moon
 
 -- Font settings
-config.font_size = 12.0
+config.font_size = 12.5
 -- config.line_height = 1.1
-config.font = wezterm.font("GeistMono Nerd Font")
--- config.font = wezterm.font("JetBrainsMono Nerd Font")
+-- config.font = wezterm.font("GeistMono Nerd Font")
+config.font = wezterm.font("JetBrainsMono Nerd Font")
 
 -- color_scheme
 config.colors = {
