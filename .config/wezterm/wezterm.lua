@@ -22,7 +22,6 @@ config.color_scheme = "Catppuccin Mocha"
 -- config.colors = theme.colors()
 -- needed only if using fancy tab bar
 -- config.window_frame = theme.window_frame()
-
 config.force_reverse_video_cursor = true
 
 -- Appearance
@@ -94,7 +93,11 @@ config.keys = {
 }
 
 -- Default Shell Configuration
-config.default_prog = { "pwsh", "-NoLogo" }
+config.default_prog = {
+	"C:\\Windows\\System32\\cmd.exe",
+	"--login",
+	"-i",
+}
 
 -- OS-Specific Overrides
 if host_os == "linux" then
