@@ -6,8 +6,8 @@ return {
     require("catppuccin").setup({
       flavour = "auto", -- latte, frappe, macchiato, mocha
       background = { -- :h background
-        light = "latte",
-        dark = "mocha",
+        light = "macchiato",
+        dark = "macchiato",
       },
       transparent_background = false, -- disables setting the background color.
       float = {
@@ -48,6 +48,7 @@ return {
         gitsigns = true,
         nvimtree = true,
         treesitter = true,
+        bufferline = true,
         notify = false,
         mini = {
           enabled = true,
@@ -57,6 +58,22 @@ return {
       },
     })
 
+    -- Shim de compat: LazyVim antigo chama `.get`, Catppuccin novo tem `.get_theme`
+    do
+      local ok, mod = pcall(require, "catppuccin.groups.integrations.bufferline")
+      if ok and mod then
+        if type(mod.get) ~= "function" and type(mod.get_theme) == "function" then
+          mod.get = function(...)
+            return mod.get_theme(...)
+          end
+        elseif type(mod.get) ~= "function" and type(mod.get_highlights) == "function" then
+          -- fallback bem antigo
+          mod.get = function(...)
+            return mod.get_highlights(...)
+          end
+        end
+      end
+    end
     -- setup must be called before loading
     -- vim.cmd.colorscheme("catppuccin")
   end,
