@@ -17,11 +17,11 @@ wsl = false
 [font]
 # normal = "BlexMono Nerd Font"
 # normal = "SauceCodePro Nerd Font"
-# normal = "DMMono Nerd Font"
+normal = "JetBrainsMono Nerd Font"
 # normal = "IosevkaTerm Nerd Font Mono"
-normal = "GeistMono Nerd Font"
+# normal = "GeistMono Nerd Font"
 
-size = 11.0
+size = 12.0
 # linespace = 2
 
 [box-drawing]

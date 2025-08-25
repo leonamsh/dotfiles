@@ -18,10 +18,10 @@ config.colors = {
 -- config.color_scheme = require("Eldritch")
 -- config.color_scheme = "Eldritch"
 -- or Macchiato, Frappe, Latte
--- config.color_scheme = "Catppuccin Mocha"
-config.colors = theme.colors()
+config.color_scheme = "Catppuccin Mocha"
+-- config.colors = theme.colors()
 -- needed only if using fancy tab bar
-config.window_frame = theme.window_frame()
+-- config.window_frame = theme.window_frame()
 
 config.force_reverse_video_cursor = true
 

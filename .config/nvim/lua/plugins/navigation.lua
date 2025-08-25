@@ -277,7 +277,7 @@ return {
       "MunifTanjim/nui.nvim",
     },
     keys = {
-      { "<leader>\\", "<cmd>NvimTreeToggle<cr>", desc = "Open Explorer" },
+      { "\\", "<cmd>NvimTreeToggle<cr>", desc = "Open Explorer" },
     },
     opts = {
       reload_on_bufenter = true,
