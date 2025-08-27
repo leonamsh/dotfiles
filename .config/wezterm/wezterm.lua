@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local opacity = 1
-local theme = require("lua/rose-pine").moon
+-- local theme = require("lua/rose-pine").moon
 
 -- Font settings
 config.font_size = 12.5
@@ -104,7 +104,7 @@ if host_os == "linux" then
 	config.default_prog = { "fish" }
 	config.front_end = "WebGpu"
 	-- config.window_background_image = os.getenv("HOME") .. "/.config/wezterm/assets/bg-blurred.png"
-	config.window_decorations = nil -- use system decorations
+	config.window_decorations = "NONE" -- use system decorations
 end
 
 return config
