@@ -49,7 +49,7 @@ return {
         nvimtree = true,
         treesitter = true,
         bufferline = true,
-        notify = false,
+        notify = true,
         mini = {
           enabled = true,
           indentscope_color = "",
