@@ -42,7 +42,7 @@ return {
       color_overrides = {},
       custom_highlights = {},
       default_integrations = true,
-      auto_integrations = false,
+      auto_integrations = true,
       integrations = {
         cmp = true,
         gitsigns = true,
