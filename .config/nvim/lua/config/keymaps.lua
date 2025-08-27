@@ -17,33 +17,63 @@ map("n", "-", "<cmd>Oil --float<CR>", { desc = "Oil: Parent (float)" })
 
 map("n", "<leader>ls", "<cmd>Lazy sync<CR>", { desc = "Lazy: Sync" })
 
--- Abre o Snacks Explorer na pasta do arquivo atual (estilo Neo-tree)
+-- Helper: abrir o Snacks Explorer no diretório do arquivo atual (ou no cwd)
 local function snacks_explorer_here()
-  local name = vim.api.nvim_buf_get_name(0)
-  local dir = (name ~= "" and vim.fn.fnamemodify(name, ":p:h")) or vim.loop.cwd()
+  local name = vim.api.nvim_buf_get_name(0) -- "" quando o buffer não tem arquivo
+  local uv = vim.uv or vim.loop
+  local dir = (name ~= "" and vim.fn.fnamemodify(name, ":p:h")) or uv.cwd()
 
-  -- Tenta usar a API com argumentos (quando disponível)
+  -- Monta opções SEM campos nil (evita LuaLS "string|nil")
+  ---@type { cwd: string, focus?: boolean, reveal?: string }
+  local opts = { cwd = dir, focus = true }
+  if name ~= "" then
+    opts.reveal = name
+  end
+
+  -- Se o plugin estiver presente, tenta as APIs possíveis
   if _G.Snacks and Snacks.explorer then
-    local ok = pcall(function()
-      Snacks.explorer({
-        cwd = dir, -- <- força o diretório base
-        reveal = name ~= "" and name or nil, -- se suportar, já foca no arquivo
-        focus = true,
-      })
-    end)
-    if ok then
-      return
+    if type(Snacks.explorer) == "table" then
+      if type(Snacks.explorer.open) == "function" then
+        pcall(Snacks.explorer.open, opts)
+        return
+      elseif type(Snacks.explorer.toggle) == "function" then
+        pcall(Snacks.explorer.toggle, opts)
+        return
+      end
+    elseif type(Snacks.explorer) == "function" then
+      -- Alguns tipos marcam como 0 args; silenciamos o warning localmente
+      local ok = pcall(function()
+        ---@diagnostic disable-next-line: redundant-parameter
+        Snacks.explorer(opts)
+      end)
+      if ok then
+        return
+      end
+      if pcall(Snacks.explorer) then
+        return
+      end
     end
   end
 
-  -- Fallback robusto: usa lcd local-janela, abre, e restaura cwd
+  -- Fallback robusto: muda lcd da janela, abre, e restaura
   local prev = vim.fn.getcwd()
   vim.cmd(("lcd %s"):format(vim.fn.fnameescape(dir)))
   pcall(function()
-    Snacks.explorer()
+    if _G.Snacks and Snacks.explorer then
+      if type(Snacks.explorer) == "function" then
+        Snacks.explorer()
+      elseif type(Snacks.explorer) == "table" and type(Snacks.explorer.open) == "function" then
+        Snacks.explorer.open({})
+      end
+    else
+      vim.notify("Snacks.explorer não disponível", vim.log.levels.WARN)
+    end
   end)
   vim.cmd(("lcd %s"):format(vim.fn.fnameescape(prev)))
 end
+
+-- (Opcional) Mapeamento
+-- vim.keymap.set("n", "<leader>e", snacks_explorer_here, { desc = "Explorer aqui (Snacks)" })
 
 -- Keymaps
 vim.keymap.set("n", "<leader>e", snacks_explorer_here, { desc = "Explorer (buffer dir)" })

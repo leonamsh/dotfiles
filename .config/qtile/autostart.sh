@@ -19,31 +19,31 @@ export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:/usr/bin:$PATH"
 
 # --- Helper: start if available & not already running ---
 run() {
-    # usage: run "command with args" [process_name]
-    local cmd="$1"
-    local name="${2:-$(basename "$1" | awk '{print $1}')}"
-    if ! command -v ${cmd%% *} >/dev/null 2>&1; then
-        echo "skip: ${cmd%% *} (not found)"
-        return 0
-    fi
-    if pgrep -u "$USER" -x "$name" >/dev/null 2>&1; then
-        echo "ok: $name already running"
-        return 0
-    fi
-    echo "start: $cmd"
-    nohup bash -lc "$cmd" >/dev/null 2>&1 &
+  # usage: run "command with args" [process_name]
+  local cmd="$1"
+  local name="${2:-$(basename "$1" | awk '{print $1}')}"
+  if ! command -v ${cmd%% *} >/dev/null 2>&1; then
+    echo "skip: ${cmd%% *} (not found)"
+    return 0
+  fi
+  if pgrep -u "$USER" -x "$name" >/dev/null 2>&1; then
+    echo "ok: $name already running"
+    return 0
+  fi
+  echo "start: $cmd"
+  nohup bash -lc "$cmd" >/dev/null 2>&1 &
 }
 
 # --- Export DBus/X variables for child apps launched by Qtile ---
 # Some applets (nm-applet, blueman-applet) rely on a proper session bus/env.
 if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-    dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_RUNTIME_DIR
+  dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_RUNTIME_DIR
 fi
 
 # --- Notifications: prefer xfce4-notifyd; stop dunst if running ---
 if pgrep -u "$USER" -x dunst >/dev/null 2>&1; then
-    echo "stop: dunst (we'll use xfce4-notifyd)"
-    killall -q dunst || true
+  echo "stop: dunst (we'll use xfce4-notifyd)"
+  killall -q dunst || true
 fi
 
 # Many distros auto-start xfce4-notifyd via DBus; manual start is optional.
@@ -53,14 +53,14 @@ fi
 # --- Polkit agent (needed for mounting, network auth, etc.) ---
 # Try common agents in order (the first available will start).
 if ! pgrep -u "$USER" -x polkit-gnome-authentication-agent-1 >/dev/null 2>&1 &&
-    ! pgrep -u "$USER" -x xfce-polkit >/dev/null 2>&1; then
-    if [ -x /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 ]; then
-        run "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" "polkit-gnome-authentication-agent-1"
-    elif command -v xfce-polkit >/dev/null 2>&1; then
-        run "xfce-polkit" "xfce-polkit"
-    else
-        echo "warn: no polkit agent found"
-    fi
+  ! pgrep -u "$USER" -x xfce-polkit >/dev/null 2>&1; then
+  if [ -x /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 ]; then
+    run "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" "polkit-gnome-authentication-agent-1"
+  elif command -v xfce-polkit >/dev/null 2>&1; then
+    run "xfce-polkit" "xfce-polkit"
+  else
+    echo "warn: no polkit agent found"
+  fi
 fi
 
 # --- System tray applets ---
@@ -78,8 +78,12 @@ run "xfce4-clipman" "xfce4-clipman"         # Clipboard manager (X11)
 
 # --- Programas extras ---
 run "steam -silent" "steam"
-run "variety"
+variety &
 numlockx on &
+setxkbmap -layout us -variant intl
+clipmenud &
+xsettingsd &
+feh --randomize --bg-fill /run/media/lm/dev/walls/catppuccin/*
 
 # --- Optional compositor (X11). Uncomment if you want shadows/transparency. ---
 # run "picom --experimental-backends" "picom"

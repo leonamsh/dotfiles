@@ -30,6 +30,8 @@ from libqtile import bar, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 import colors
+
+# from qtile_extras import widget
 from qtile_extras.widget.decorations import PowerLineDecoration, RectDecoration
 
 # from spotify import Spotify
@@ -61,8 +63,8 @@ powerline = {
 
 mod = "mod4"  # Sets mod key to SUPER/WINDOWS
 myTerm = "wezterm"  # My terminal of choice
-myBrowser2 = "brave-browser-nightly"  # My browser of choice
-myBrowser = "vivaldi-stable"  # My browser of choice
+myBrowser = "firefox-developer-edition"  # My browser of choice
+myBrowser2 = "zen-browser"  # My browser of choice
 myFiles = "thunar"  # My file manager of choice
 myCode = "code"  # vscode
 myMusic = "flatpak run com.spotify.Client"  # spotify
