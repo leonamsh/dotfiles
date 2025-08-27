@@ -35,6 +35,7 @@
 !mimeapps.list
 !.config/fastfetch/
 !.config/fish/
+!.config/xsettingsd/
 
 # arquivos ou pastas fora do .config
 !.local/share/fonts/
