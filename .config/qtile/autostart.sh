@@ -79,7 +79,7 @@ run "xfce4-clipman" "xfce4-clipman"         # Clipboard manager (X11)
 # --- Programas extras ---
 run "steam -silent" "steam"
 variety &
-numlockx on &
+# numlockx on &
 setxkbmap -layout us -variant intl
 clipmenud &
 xsettingsd &
@@ -112,8 +112,8 @@ feh --randomize --bg-fill /run/media/lm/dev/walls/catppuccin/*
 
 # --- User-defined hooks ---
 # Place any personal startup commands here:
-# run "copyq" "copyq"
-# run "flameshot" "flameshot"
+run "copyq" "copyq"
+run "flameshot" "flameshot"
 # run "syncthing --no-browser" "syncthing"
 
 echo "=== Qtile autostart end ==="

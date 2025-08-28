@@ -55,7 +55,7 @@ function pS
 end
 
 function Ss
-    sudo pacman -Ss $argv
+    pacman -Ss $argv
 end
 
 function pSs

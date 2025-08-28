@@ -363,7 +363,7 @@ def init_widgets_list():
         separator(),
         widget.LaunchBar(
             progs=[
-                ("🦁", "vivaldi-stable", "Web Browser"),
+                ("🦁", "firefox-developer-edition", "Web Browser"),
                 ("🚀", "wezterm", "Terminal"),
                 ("📁", "thunar", "PCManFM file manager"),
                 ("🎸", "com.spotify.Client", "Spotify"),

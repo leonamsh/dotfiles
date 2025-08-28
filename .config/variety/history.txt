@@ -1,4 +1,14 @@
 0
+/run/media/lm/dev/walls/catppuccin/purpled-night.jpg
+/run/media/lm/dev/walls/catppuccin/voxel-city.jpg
+/run/media/lm/dev/walls/catppuccin/beach.jpg
+/run/media/lm/dev/walls/catppuccin/voxel-city.jpg
+/run/media/lm/dev/walls/catppuccin/tree.jpg
+/run/media/lm/dev/walls/catppuccin/voxel-city.jpg
+/run/media/lm/dev/walls/catppuccin/pixel-reading.png
+/run/media/lm/dev/walls/catppuccin/stall.jpg
+/run/media/lm/dev/walls/catppuccin/tora.jpg
+/run/media/lm/dev/walls/catppuccin/stall.jpg
 /run/media/lm/dev/walls/catppuccin/koi.jpg
 /run/media/lm/dev/walls/catppuccin/touhou-house.jpg
 /run/media/lm/dev/walls/animes/undefined - Imgur.jpg
@@ -89,13 +99,3 @@
 /run/media/lm/dev/walls/landscape/28.jpg
 /run/media/lm/dev/walls/landscape/84.jpg
 /run/media/lm/dev/walls/landscape/42.jpg
-/run/media/lm/dev/walls/landscape/89.jpg
-/run/media/lm/dev/walls/landscape/75.jpg
-/run/media/lm/dev/walls/landscape/94.jpg
-/run/media/lm/dev/walls/landscape/57.jpg
-/run/media/lm/dev/walls/landscape/61.jpg
-/run/media/lm/dev/walls/landscape/74.jpg
-/run/media/lm/dev/walls/landscape/69.jpg
-/run/media/lm/dev/walls/landscape/84.jpg
-/run/media/lm/dev/walls/landscape/26.jpg
-/run/media/lm/dev/walls/landscape/20.jpg
