@@ -7,7 +7,8 @@ local opacity = 1
 config.font_size = 12.5
 -- config.line_height = 1.1
 -- config.font = wezterm.font("GeistMono Nerd Font")
-config.font = wezterm.font("JetBrainsMono Nerd Font")
+-- config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font = wezterm.font("FiraCode Nerd Font")
 
 -- color_scheme
 config.colors = {
