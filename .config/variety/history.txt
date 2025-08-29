@@ -1,4 +1,8 @@
 0
+/run/media/lm/dev/walls/catppuccin/basement.jpg
+/run/media/lm/dev/walls/catppuccin/voxel-city.jpg
+/run/media/lm/dev/walls/catppuccin/voyager-5.jpg
+/run/media/lm/dev/walls/catppuccin/voxel-city.jpg
 /run/media/lm/dev/walls/catppuccin/purpled-night.jpg
 /run/media/lm/dev/walls/catppuccin/voxel-city.jpg
 /run/media/lm/dev/walls/catppuccin/beach.jpg
@@ -95,7 +99,3 @@
 /run/media/lm/dev/walls/landscape/88.jpg
 /run/media/lm/dev/walls/landscape/31.jpg
 /run/media/lm/dev/walls/landscape/65.jpg
-/run/media/lm/dev/walls/landscape/28.jpg
-/run/media/lm/dev/walls/landscape/28.jpg
-/run/media/lm/dev/walls/landscape/84.jpg
-/run/media/lm/dev/walls/landscape/42.jpg

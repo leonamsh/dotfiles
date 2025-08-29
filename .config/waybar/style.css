@@ -1,95 +1,167 @@
-
-/* Catppuccin Mocha — cores de referência:
-   base #1e1e2e, mantle #181825, crust #11111b
-   text #cdd6f4, subtext0 #a6adc8, overlay0 #6c7086
-   surface0 #313244, surface1 #45475a, surface2 #585b70
-   blue #89b4fa, lavender #b4befe, sapphire #74c7ec, sky #89dceb
-   teal #94e2d5, green #a6e3a1, yellow #f9e2af, peach #fab387
-   maroon #eba0ac, red #f38ba8, mauve #cba6f7, flamingo #f2cdcd, pink #f5c2e7
-*/
-
-/* Base enxuta e consistente */
+/* -- Global rules -- */
 * {
   border: none;
-  border-radius: 0;
-  font-family: "Hack Nerd Font", monospace;
-  font-size: 11px;
-  min-height: 0;
-  margin: 0;
-  padding: 0;
+  font-family: "FiraMono Nerd Font";
+  font-size: 12px;
+  min-height: 10px;
 }
 
-/* Fundo da barra (transparente sobre o wallpaper) */
 window#waybar {
-  background: transparent;
-  color: #cdd6f4; /* text */
+  background: rgba(34, 36, 54, 0.6);
 }
 
-/* Título da janela (discreto) */
-#window {
-  margin: 0 10px;
-  padding: 2px 8px;
-  border-radius: 12px;
-  color: #313244;
-  background: #cba6f7; /* ative um chip se quiser: background: #313244; */
+window#waybar.hidden {
+  opacity: 0.2;
 }
 
-/* Workspaces em “pílulas” compactas */
+/* - Genera rules for visible modules -- */
+#custom-archicon,
+#clock,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#idle_inhibitor,
+#pulseaudio,
+#pulseaudio_slider,
+#network,
+#language {
+  color: #161320;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  transition: none;
+}
+
+#custom-archicon,
+#clock,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#idle_inhibitor,
+#pulseaudio,
+#pulseaudio_slider,
+#network,
+#language {
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+/* -- Specific styles -- */
+
+/* Modules left */
+#custom-archicon {
+  font-size: 17px;
+  color: #89B4FA;
+  background: #161320;
+  padding-right: 17px;
+  margin-left: 5px;
+}
+
+#clock {
+  background: #ABE9B3;
+}
+
+#cpu {
+  background: #96CDFB;
+}
+
+#memory {
+  background: #DDB6F2;
+}
+
+#disk {
+  background: #F5C2E7;
+}
+
+#temperature {
+  background: #F8BD96;
+}
+
+/* Modules center */
 #workspaces {
-  padding: 2px 6px;
-  border-radius: 12px;
-  background: #313244; /* surface0 */
-  margin-left: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  margin: 2px 5px;
+  padding: 0px 6px;
 }
+
 #workspaces button {
-  padding: 0 6px;
-  margin: 0 2px;
-  font-size: 13px;
-  color: #cdd6f4; /* text */
+  color: #B5E8E0;
   background: transparent;
-}
-#workspaces button.focused { color: #89b4fa; }   /* blue */
-#workspaces button.active  { color: #a6e3a1; }   /* green */
-#workspaces button:hover   { color: #f5c2e7; }   /* pink */
-#workspaces button.urgent {
-  background: #f38ba8; /* red */
-  color: #11111b;      /* crust (escuro p/ contraste) */
-  animation: blink 0.5s steps(12) infinite alternate;
+  padding: 4px 4px;
+  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
 }
 
-/* Chips genéricos (direita) */
-#network, #pulseaudio, #temperature, #cpu, #memory, #clock, #custom-power {
-  padding: 2px 10px;
-  margin: 0 4px;
-  border-radius: 12px;
-  font-size: 11px;
+#workspaces button.occupied {
+  color: #A6E3A1;
 }
 
-/* Cores por módulo — Catppuccin Mocha */
-#network      { color: #11111b; background: #89b4fa; } /* blue */
-#pulseaudio   { color: #11111b; background: #94e2d5; } /* teal */
-#temperature  { color: #11111b; background: #a6e3a1; } /* green */
-#cpu          { color: #11111b; background: #f9e2af; } /* yellow */
-#memory       { color: #11111b; background: #fab387; } /* peach */
-#clock        { color: #cdd6f4; background: #313244; } /* surface0 + text */
-#custom-power { color: #11111b; background: #f38ba8; padding-left: 7px;} /* red */
-
-/* Estados */
-#pulseaudio.muted {
-  background: #585b70;  /* surface2 */
-  color: #cdd6f4;
+#workspaces button.active {
+  color: #89B4FA;
+  text-shadow: 0 0 4px #ABE9B3;
 }
 
-/* MPD/Spotify (caso habilite no futuro) */
-#custom-spotify { color: #11111b; background: #b4befe; } /* lavender */
-#mpd            { color: #11111b; background: #a6e3a1; } /* green */
-#mpd.disconnected, #mpd.stopped {
-  color: #cdd6f4;
-  background: #313244; /* surface0 */
+#workspaces button:hover {
+  color: #89B4FA;
 }
 
-/* Animação urgente */
+#workspaces button.active:hover {}
+
+/* Modules right */
+#taskbar {
+  background: transparent;
+  border-radius: 10px;
+  padding: 0px 5px;
+  margin: 6px 5px;
+}
+
+#taskbar button {
+  padding: 0px 5px;
+  margin: 0px 3px;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+#taskbar button.active {
+  background: rgba(34, 36, 54, 0.5);
+}
+
+#taskbar button:hover {
+  background: rgba(34, 36, 54, 0.5);
+}
+
+#idle_inhibitor {
+  background: #B5E8E0;
+  padding-right: 15px;
+}
+
+#pulseaudio {
+  color: #1A1826;
+  background: #F5E0DC;
+}
+
+#pulseaudio_slider {
+  color: #1A1826;
+  background: #E8A2AF;
+}
+
+#network {
+  background: #CBA6F7;
+  padding-right: 13px;
+}
+
+#language {
+  background: #A6E3A1;
+  padding-right: 15px;
+}
+
+/* === Optional animation === */
 @keyframes blink {
-  to { background-color: #eba0ac; } /* maroon */
+  to {
+    background-color: #BF616A;
+    color: #B5E8E0;
+  }
 }
-
