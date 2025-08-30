@@ -89,7 +89,7 @@ end, { desc = "Explorer (Project root)" })
 
 -- Salvar rápido com Ctrl + S
 vim.keymap.set({ "n", "i", "v" }, "<C-s>", function()
-  vim.cmd("silent! write")
+  vim.cmd("write")
 end, { desc = "Salvar arquivo" })
 
 -- ===== Diagnóstico =====
