@@ -1,8 +1,8 @@
 # font_family GeistMono Nerd Font
 # font_family Terminess Nerd Font Mono
 # font_family AdwaitaMono Nerd Font
-font_family BlexMono Nerd Font Mono
-# font_family JetBrainsMono Nerd Font
+# font_family BlexMono Nerd Font Mono
+font_family JetBrainsMono Nerd Font
 # font_family 0xProto Nerd Font
 
 font_size 13.0
@@ -37,9 +37,3 @@ window_padding_width 4
 # foreground #dddddd
 # background #000000
 # cursor #dddddd
-
-
-# BEGIN_KITTY_THEME
-# Rosé Pine Moon
-include current-theme.conf
-# END_KITTY_THEME

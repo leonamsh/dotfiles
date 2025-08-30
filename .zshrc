@@ -99,22 +99,22 @@ function toggle-theme() {
 # ------------------------------
 # updates 
 # ------------------------------
-alias S='sudo pacman -S --noconfirm --needed'
+alias S='sudo apt install -y'
 alias pS='paru -S --noconfirm --needed'
-alias Ss='sudo pacman -Ss'
+alias Ss='apt search'
 alias pSs='paru -Ss'
 alias dins='sudo dnf install -y'
 alias dsrc='dnf search'
 alias fsrc='flatpak search'
 alias fins='flatpak install -y'
 alias upds='~/.config/autostart/xinputI3.sh'
-alias update='/run/media/lm/dev/dev/gitlab/scripts/1-fedora/update.sh'
-alias limpao='/run/media/lm/dev/dev/gitlab/scripts/1-fedora/update-clean-arch.sh'
+alias update='/media/lm/dev/gitlab/scripts/4-ubuntu/update-ubuntu.sh'
+alias limpao='/media/lm/dev/gitlab/scripts/1-fedora/update-clean-arch.sh'
 alias cdg='cd .config'
 alias srcfish='source ~/.config/fish/config.fish'
 alias srczsh='source ~/.zshrc'
 alias clone='git clone'
-alias cddev='cd /run/media/lm/dev/'
+alias cddev='cd /media/lm/dev/'
 alias gitr='git remote set-url origin'
 # ------------------------------
 # doom aliases 
@@ -123,13 +123,15 @@ alias doomsync='~/.config/emacs/bin/doom sync'
 alias doomupd='~/.config/emacs/bin/doom upgrade'
 alias doomdoc='~/.config/emacs/bin/doom doctor'
 alias doompurge='~/.config/emacs/bin/doom purge'
-alias dinstall='emacs -nw /run/media/lm/dev/gitlab/scripts/1-fedora/post-install.sh'
+alias dinstall='emacs -nw /media/lm/dev/gitlab/scripts/1-fedora/post-install.sh'
 alias emacs='emacs -nw'
 # ------------------------------
 # change directory aliases 
 # ------------------------------
-alias cdaula='cd /run/media/lm/dev/maisPraTi/'
-alias naula='nvim /run/media/lm/dev/maisPraTi/'
+alias cdaula='cd /media/lm/dev/maisPraTi/'
+alias naula='nvim /media/lm/dev/maisPraTi/'
+alias cdprojeto='cd /media/lm/dev/projeto-mercado-frontend/'
+alias nprojeto='nvim /media/lm/dev/projeto-mercado-frontend/'
 # ------------------------------
 # nvim aliases
 # ------------------------------
@@ -143,8 +145,8 @@ alias ngtty='nvim ~/.config/ghostty/config'
 alias nfish='nvim ~/.config/fish/config.fish'
 alias nqtile='nvim ~/.config/qtile/config.py'
 alias nzsh='nvim ~/.zshrc'
-alias ninstall='nvim /run/media/lm/dev/gitlab/scripts/1-fedora/post-install.sh'
-alias ngit='nvim /run/media/lm/dev/gitlab'
+alias ninstall='nvim /media/lm/dev/gitlab/scripts/1-fedora/post-install.sh'
+alias ngit='nvim /media/lm/dev/gitlab'
 alias nvimz="env NVIM_APPNAME=nvim-lazar nvim"
 alias nvima="env NVIM_APPNAME=astronvim nvim"
 alias nvimc="env NVIM_APPNAME=nvchad nvim"
