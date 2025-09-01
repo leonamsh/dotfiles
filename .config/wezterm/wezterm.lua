@@ -4,13 +4,13 @@ local opacity = 1
 -- local theme = require("lua/rose-pine").moon
 
 -- Font settings
-config.font_size = 12.5
+config.font_size = 12
 -- config.line_height = 1.1
 -- config.font = wezterm.font("GeistMono Nerd Font")
 -- config.font = wezterm.font("JetBrainsMono Nerd Font")
 -- config.font = wezterm.font("FiraCode Nerd Font")
-config.font = wezterm.font("BlexMono Nerd Font")
-
+-- config.font = wezterm.font("BlexMono Nerd Font")
+config.font = wezterm.font("MesloLGS Nerd Font Mono")
 -- color_scheme
 config.colors = {
 	cursor_bg = "white",
@@ -36,7 +36,7 @@ config.window_padding = {
 	top = 0,
 	bottom = 0,
 }
-config.enable_wayland = false
+config.enable_wayland = true
 
 -- Miscellaneous settings
 config.max_fps = 120
@@ -77,7 +77,7 @@ config.window_background_opacity = opacity
 config.window_close_confirmation = "NeverPrompt"
 config.win32_system_backdrop = "Acrylic"
 
--- config.window_background_opacity = 0.9
+config.window_background_opacity = 0.95
 -- Performance Settings
 config.max_fps = 144
 config.animation_fps = 60

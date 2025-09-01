@@ -3,7 +3,7 @@ return {
   branch = "master",
   config = function()
     require("kanagawa").setup({
-      transparent = true,
+      transparent = false,
       overrides = function(colors)
         return {
           ["@markup.link.url.markdown_inline"] = { link = "Special" }, -- (url)

@@ -1,3 +1,11 @@
+source /usr/share/cachyos-fish-config/cachyos-config.fish
+
+# overwrite greeting
+# potentially disabling fastfetch
+#function fish_greeting
+#    # smth smth
+#end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
@@ -114,6 +122,13 @@ function gitr
     git remote set-url origin $argv
 end
 
+function npostinstall
+    v /run/media/lm/dev/gitlab/scripts/1-arch/post-install.sh $argv
+end
+
+function cdpostinstall
+    cd /run/media/lm/dev/gitlab/scripts/1-arch/post-install.sh $argv
+end
 # ------------------------------
 # Aliases do Doom [cite: 7]
 # ------------------------------
