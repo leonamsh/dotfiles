@@ -1,4 +1,6 @@
 0
+/home/lm/Imagens/walls/catppuccin/mandelbrot_gap_green.png
+/home/lm/Imagens/walls/catppuccin/temple.jpg
 /home/lm/Imagens/walls/catppuccin/flower.jpg
 /home/lm/Imagens/walls/catppuccin/railroad-2.jpg
 /home/lm/Imagens/walls/catppuccin/compass.jpg

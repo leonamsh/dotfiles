@@ -10,7 +10,9 @@ config.font_size = 12
 -- config.font = wezterm.font("JetBrainsMono Nerd Font")
 -- config.font = wezterm.font("FiraCode Nerd Font")
 -- config.font = wezterm.font("BlexMono Nerd Font")
-config.font = wezterm.font("MesloLGS Nerd Font Mono")
+config.font = wezterm.font("AdwaitaMono Nerd Font")
+
+-- config.font = wezterm.font("MesloLGS Nerd Font Mono")
 -- color_scheme
 config.colors = {
 	cursor_bg = "white",
@@ -77,7 +79,7 @@ config.window_background_opacity = opacity
 config.window_close_confirmation = "NeverPrompt"
 config.win32_system_backdrop = "Acrylic"
 
-config.window_background_opacity = 0.95
+config.window_background_opacity = 1
 -- Performance Settings
 config.max_fps = 144
 config.animation_fps = 60
@@ -103,7 +105,7 @@ config.default_prog = {
 
 -- OS-Specific Overrides
 if host_os == "linux" then
-	config.default_prog = { "fish" }
+	config.default_prog = { "zsh" }
 	config.front_end = "WebGpu"
 	-- config.window_background_image = os.getenv("HOME") .. "/.config/wezterm/assets/bg-blurred.png"
 	config.window_decorations = "NONE" -- use system decorations
