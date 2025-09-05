@@ -2,23 +2,32 @@ return {
     {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.8",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5 && cmake --build build --config Release",
+            },
+            {
+                "nvim-telescope/telescope-file-browser.nvim",
+            },
+        },
+
         opts = function()
             local actions = require("telescope.actions")
             local action_layout = require("telescope.actions.layout")
-            local builtin = require("telescope.builtin")
+            local fb_actions = require("telescope._extensions.file_browser.actions")
 
-            -- mapeamentos comuns a todos os pickers (insert e normal)
             local common_i = {
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
                 ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-                ["<C-s>"] = actions.select_horizontal, -- split
-                ["<C-v>"] = actions.select_vertical, -- vsplit
-                ["<C-t>"] = actions.select_tab, -- tab
+                ["<C-s>"] = actions.select_horizontal,
+                ["<C-v>"] = actions.select_vertical,
+                ["<C-t>"] = actions.select_tab,
                 ["<F4>"] = action_layout.toggle_preview,
                 ["<C-h>"] = "which_key",
-                ["<C-u>"] = false, -- deixa <C-u> livre (não apaga input)
+                ["<C-u>"] = false,
             }
             local common_n = {
                 ["q"] = actions.close,
@@ -56,7 +65,7 @@ return {
                     },
                     oldfiles = { only_cwd = false },
                     buffers = { sort_mru = true, ignore_current_buffer = true },
-                    diagnostics = { bufnr = 0 }, -- “document diagnostics” como no seu fzf-lua
+                    diagnostics = { bufnr = 0 }, -- buffer diagnostics por padrão
                 },
 
                 extensions = {
@@ -82,79 +91,71 @@ return {
                         git_status = true,
                         mappings = {
                             ["i"] = {
-                                ["<A-c>"] = require("telescope._extensions.file_browser.actions").create,
-                                ["<S-CR>"] = require("telescope._extensions.file_browser.actions").create_from_prompt,
-                                ["<A-r>"] = require("telescope._extensions.file_browser.actions").rename,
-                                ["<A-m>"] = require("telescope._extensions.file_browser.actions").move,
-                                ["<A-y>"] = require("telescope._extensions.file_browser.actions").copy,
-                                ["<A-d>"] = require("telescope._extensions.file_browser.actions").remove,
-                                ["<C-o>"] = require("telescope._extensions.file_browser.actions").open,
-                                ["<C-g>"] = require("telescope._extensions.file_browser.actions").goto_parent_dir,
-                                ["<C-e>"] = require("telescope._extensions.file_browser.actions").goto_home_dir,
-                                ["<C-w>"] = require("telescope._extensions.file_browser.actions").goto_cwd,
-                                ["<C-t>"] = require("telescope._extensions.file_browser.actions").change_cwd,
-                                ["<C-f>"] = require("telescope._extensions.file_browser.actions").toggle_browser,
-                                ["<C-h>"] = require("telescope._extensions.file_browser.actions").toggle_hidden,
-                                ["<C-s>"] = require("telescope._extensions.file_browser.actions").toggle_all,
-                                ["<bs>"] = require("telescope._extensions.file_browser.actions").backspace,
+                                ["<A-c>"] = fb_actions.create,
+                                ["<S-CR>"] = fb_actions.create_from_prompt,
+                                ["<A-r>"] = fb_actions.rename,
+                                ["<A-m>"] = fb_actions.move,
+                                ["<A-y>"] = fb_actions.copy,
+                                ["<A-d>"] = fb_actions.remove,
+                                ["<C-o>"] = fb_actions.open,
+                                ["<C-g>"] = fb_actions.goto_parent_dir,
+                                ["<C-e>"] = fb_actions.goto_home_dir,
+                                ["<C-w>"] = fb_actions.goto_cwd,
+                                ["<C-t>"] = fb_actions.change_cwd,
+                                ["<C-f>"] = fb_actions.toggle_browser,
+                                ["<C-h>"] = fb_actions.toggle_hidden,
+                                ["<C-s>"] = fb_actions.toggle_all,
+                                ["<bs>"] = fb_actions.backspace,
                             },
                             ["n"] = {
-                                ["c"] = require("telescope._extensions.file_browser.actions").create,
-                                ["r"] = require("telescope._extensions.file_browser.actions").rename,
-                                ["m"] = require("telescope._extensions.file_browser.actions").move,
-                                ["y"] = require("telescope._extensions.file_browser.actions").copy,
-                                ["d"] = require("telescope._extensions.file_browser.actions").remove,
-                                ["o"] = require("telescope._extensions.file_browser.actions").open,
-                                ["g"] = require("telescope._extensions.file_browser.actions").goto_parent_dir,
-                                ["e"] = require("telescope._extensions.file_browser.actions").goto_home_dir,
-                                ["w"] = require("telescope._extensions.file_browser.actions").goto_cwd,
-                                ["t"] = require("telescope._extensions.file_browser.actions").change_cwd,
-                                ["f"] = require("telescope._extensions.file_browser.actions").toggle_browser,
-                                ["h"] = require("telescope._extensions.file_browser.actions").toggle_hidden,
-                                ["s"] = require("telescope._extensions.file_browser.actions").toggle_all,
+                                ["c"] = fb_actions.create,
+                                ["r"] = fb_actions.rename,
+                                ["m"] = fb_actions.move,
+                                ["y"] = fb_actions.copy,
+                                ["d"] = fb_actions.remove,
+                                ["o"] = fb_actions.open,
+                                ["g"] = fb_actions.goto_parent_dir,
+                                ["e"] = fb_actions.goto_home_dir,
+                                ["w"] = fb_actions.goto_cwd,
+                                ["t"] = fb_actions.change_cwd,
+                                ["f"] = fb_actions.toggle_browser,
+                                ["h"] = fb_actions.toggle_hidden,
+                                ["s"] = fb_actions.toggle_all,
                             },
                         },
                     },
                 },
             }
         end,
+
         config = function(_, opts)
             local telescope = require("telescope")
             telescope.setup(opts)
-            -- carregar extensões aqui (se instaladas)
             pcall(telescope.load_extension, "fzf")
             pcall(telescope.load_extension, "file_browser")
 
             local builtin = require("telescope.builtin")
 
-            -- ======= atalhos espelhando seu fzf-lua =======
             vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files (project)" })
             vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Grep in project" })
             vim.keymap.set("n", "<leader>fc", function()
                 builtin.find_files({ cwd = vim.fn.stdpath("config") })
             end, { desc = "Find in Neovim config" })
-            vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
-            vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
-            vim.keymap.set("n", "<leader>fb", builtin.builtin, { desc = "[F]ind [B]uiltin pickers" })
-            vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Grep current cword" })
+            vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find Help" })
+            vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Find Keymaps" })
+            vim.keymap.set("n", "<leader>fb", builtin.builtin, { desc = "Find Builtin pickers" })
+            vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Grep cword" })
             vim.keymap.set("n", "<leader>fW", function()
                 builtin.grep_string({ search = vim.fn.expand("<cWORD>") })
-            end, { desc = "Grep current cWORD" })
+            end, { desc = "Grep cWORD" })
             vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Find diagnostics (buffer)" })
             vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Recent files" })
             vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "Buffers" })
-            vim.keymap.set(
-                "n",
-                "<leader>/",
-                builtin.current_buffer_fuzzy_find,
-                { desc = "Fuzzy find in current buffer" }
-            )
+            vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "Fuzzy find in buffer" })
 
-            -- atalhos extras úteis
             vim.keymap.set("n", "<leader>fe", function()
                 telescope.extensions.file_browser.file_browser({ path = "%:p:h", select_buffer = true })
             end, { desc = "File Browser (cwd)" })
-
             vim.keymap.set("n", "<leader>fE", function()
                 telescope.extensions.file_browser.file_browser({ path = vim.fn.stdpath("config") })
             end, { desc = "File Browser (nvim config)" })

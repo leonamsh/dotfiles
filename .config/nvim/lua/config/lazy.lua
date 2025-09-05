@@ -33,7 +33,7 @@ require("lazy").setup({
     },
     -- Configure any other settings here. See the documentation for more details.
     -- colorscheme that will be used when installing plugins.
-    install = { colorscheme = { "catppuccin", "kanagawa" } },
+    install = { colorscheme = { "tokyonight", "kanagawa" } },
     -- automatically check for plugin updates
     checker = { enabled = true },
 })
@@ -42,4 +42,4 @@ require("config.keymaps")
 
 -- options.lua
 
-vim.cmd("colorscheme catppuccin")
+vim.cmd("colorscheme tokyonight")
