@@ -1,4 +1,6 @@
 0
+/home/lm/Imagens/walls/catppuccin/mandelbrot_gap_maroon.png
+/home/lm/Imagens/walls/catppuccin/mandelbrot_full_teal.png
 /home/lm/Imagens/walls/catppuccin/cat-sound.png
 /home/lm/Imagens/walls/catppuccin/sports.png
 /home/lm/Imagens/walls/catppuccin/mandelbrot_side_pink.png
