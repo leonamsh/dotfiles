@@ -17,6 +17,7 @@ export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:$HOME/.cargo/bin:$PATH"
 
 # 2) Oh My Zsh + Tema
 export ZSH="$HOME/.oh-my-zsh"
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 ZSH_THEME="powerlevel10k/powerlevel10k"   # usa p10k via oh-my-zsh
 
 # Plugins (ordem importa: syntax-highlighting por último)
