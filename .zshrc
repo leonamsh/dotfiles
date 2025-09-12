@@ -78,8 +78,8 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias cdg='cd ~/.config'
-alias cddev='cd /run/media/lm/dev/'
-alias cdprojeto='cd /run/media/lm/dev/projeto-mercado-frontend/'
+alias cddev='cd /home/lm/Documentos/dev/'
+alias cdprojeto='cd /home/lm/Documentos/dev/projeto-mercado-frontend/'
 
 # 5.3 — Neovim / Emacs
 export EDITOR=nvim
@@ -90,7 +90,7 @@ alias nkitty='nvim ~/.config/kitty/kitty.conf'
 alias nwez='nvim ~/.config/wezterm/wezterm.lua'
 alias nzsh='nvim ~/.zshrc'
 alias nfish='nvim ~/.config/fish/config.fish'
-alias nprojeto='nvim /run/media/lm/dev/projeto-mercado-frontend/'
+alias nprojeto='nvim /home/lm/Documentos/dev/projeto-mercado-frontend/'
 # ambientes Neovim
 alias nvima='env NVIM_APPNAME=astronvim nvim'
 alias nvimc='env NVIM_APPNAME=nvchad nvim'
@@ -122,19 +122,19 @@ alias jctl="journalctl -p 3 -xb"
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 
 # 5.6 — Pessoais 
-alias S='sudo pacman -S --noconfirm'
-alias Ss='pacman -Ss'
+alias S='sudo apt install -y'
+alias Ss='apt search'
 alias pS='paru -S --noconfirm'
 alias pSs='paru -Ss'
 alias upds='~/.config/autostart/xinputI3.sh'
-alias update='/run/media/lm/dev/gitlab/scripts/1-arch/update.sh'
-alias limpao='/run/media/lm/dev/gitlab/scripts/1-arch/update-clean-arch.sh'
+alias update='/home/lm/Documentos/dev/gitlab/scripts/3-popos/update-popos.sh'
+alias limpao='/home/lm/Documentos/dev/gitlab/scripts/1-arch/update-clean-arch.sh'
 alias srcfish='source ~/.config/fish/config.fish'
 alias srczsh='source ~/.zshrc'
-alias cdaula='cd /run/media/lm/dev/maisPraTi/'
-alias naula='nvim /run/media/lm/dev/maisPraTi/'
-alias ninstall='nvim /run/media/lm/dev/gitlab/scripts/1-fedora/post-install.sh'
-alias ngit='nvim /run/media/lm/dev/gitlab'
+alias cdaula='cd /home/lm/Documentos/dev/maisPraTi/'
+alias naula='nvim /home/lm/Documentos/dev/maisPraTi/'
+alias ninstall='nvim /home/lm/Documentos/dev/gitlab/scripts/3-popos/post-install-popos-v2.sh'
+alias ngit='nvim /home/lm/Documentos/dev/gitlab'
 
 # 6) Funções úteis
 
