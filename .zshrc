@@ -68,6 +68,7 @@ alias gl='git pull'
 alias gco='git checkout'
 alias gitr='git remote set-url origin'
 alias clone='git clone'
+alias lz='lazygit'
 
 # 5.2 — Navegação
 alias ..='cd ..'
