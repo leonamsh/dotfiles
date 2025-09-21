@@ -5,7 +5,7 @@ return {
     ft = { "java" },
     dependencies = {
       "neovim/nvim-lspconfig",
-      "williamboman/mason.nvim",
+      "mason-org/mason.nvim",
       "mfussenegger/nvim-dap",
       "rcarriga/nvim-dap-ui",
       { "hrsh7th/cmp-nvim-lsp", optional = true },

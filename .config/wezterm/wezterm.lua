@@ -10,9 +10,9 @@ config.font_size = 12
 -- config.font = wezterm.font("JetBrainsMono Nerd Font")
 -- config.font = wezterm.font("FiraCode Nerd Font")
 -- config.font = wezterm.font("BlexMono Nerd Font")
-config.font = wezterm.font("AdwaitaMono Nerd Font")
+-- config.font = wezterm.font("AdwaitaMono Nerd Font")
+config.font = wezterm.font("DMMono Nerd Font")
 
--- config.font = wezterm.font("MesloLGS Nerd Font Mono")
 -- color_scheme
 config.colors = {
 	cursor_bg = "white",

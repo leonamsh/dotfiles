@@ -20,6 +20,7 @@
 !.config/kitty/
 !.config/kvantum/
 !.config/lazyvim/
+!.config/leovim/
 !.config/neovide/
 !.config/nvim/
 !.config/picom/

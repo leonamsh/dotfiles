@@ -16,7 +16,7 @@
     "temperature"
   ],
   "modules-center": [
-    "hyprland/workspaces"
+    "sway/workspaces"
   ],
   "modules-right": [
     "wlr/taskbar",
@@ -24,17 +24,18 @@
     "pulseaudio_slider",
     "pulseaudio",
     "network",
-    "hyprland/language"
+    "sway/language",
+    "tray"
   ],
   /* === Modules Left === */
   "custom/archicon": {
-    "format": "",
+    "format": " ",
     "on-click": "wofi --show drun",
     "tooltip": false
   },
   "clock": {
-    "timezone": "America/Mexico_City",
-    "format": "{:%I:%M  %d, %m}",
+    "timezone": "America/Sao_Paulo",
+    "format": "{:%I:%M  %d/%m}",
     "tooltip-format": "{calendar}",
     "calendar": {
       "mode": "month"
@@ -64,14 +65,14 @@
     ]
   },
   /* === Modules Center === */
-  "hyprland/workspaces": {
+  "sway/workspaces": {
     "format": "{icon}",
     "format-icons": {
-      "default": "",
-      "active": ""
+      // "default": "",
+      // "active": "",
     },
     "persistent-workspaces": {
-      "*": 2
+      // "*": 2,
     },
     "disable-scroll": true,
     "all-outputs": true,
@@ -120,7 +121,7 @@
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50
   },
-  "hyprland/language": {
+  "sway/language": {
     "format": "{} ",
     "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next",
     "format-es": "ESP",

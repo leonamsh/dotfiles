@@ -52,7 +52,8 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 # 4) Ferramentas/integrações opcionais
 # zoxide (cd mais inteligente). Obs: redefine 'cd' para 'z' — comente se não quiser.
 eval "$(zoxide init zsh)"
-alias cd="z"
+alias cd='z'
+alias dnf='dnf5'
 
 # nvm (Node.js)
 export NVM_DIR="$HOME/.nvm"
@@ -78,8 +79,8 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias cdg='cd ~/.config'
-alias cddev='cd /home/lm/Documentos/dev/'
-alias cdprojeto='cd /home/lm/Documentos/dev/projeto-mercado-frontend/'
+alias cddev='cd /home/lm/Documents/dev/'
+alias cdprojeto='cd /home/lm/Documents/dev/projeto-mercado-frontend/'
 
 # 5.3 — Neovim / Emacs
 export EDITOR=nvim
@@ -90,11 +91,12 @@ alias nkitty='nvim ~/.config/kitty/kitty.conf'
 alias nwez='nvim ~/.config/wezterm/wezterm.lua'
 alias nzsh='nvim ~/.zshrc'
 alias nfish='nvim ~/.config/fish/config.fish'
-alias nprojeto='nvim /home/lm/Documentos/dev/projeto-mercado-frontend/'
+alias nprojeto='nvim /home/lm/Documents/dev/projeto-mercado-frontend/'
+alias nsway='nvim ~/.config/sway'
 # ambientes Neovim
 alias nvima='env NVIM_APPNAME=astronvim nvim'
 alias nvimc='env NVIM_APPNAME=nvchad nvim'
-alias nviml='env NVIM_APPNAME=lazynvim nvim'
+alias nviml='env NVIM_APPNAME=leovim nvim'
 # Doom Emacs
 alias doomsync='~/.config/emacs/bin/doom sync'
 alias doomupd='~/.config/emacs/bin/doom upgrade'
@@ -122,19 +124,19 @@ alias jctl="journalctl -p 3 -xb"
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 
 # 5.6 — Pessoais 
-alias S='sudo apt install -y'
-alias Ss='apt search'
+alias S='sudo dnf5 install -y'
+alias Ss='dnf5 search'
 alias pS='paru -S --noconfirm'
 alias pSs='paru -Ss'
 alias upds='~/.config/autostart/xinputI3.sh'
-alias update='/home/lm/Documentos/dev/gitlab/scripts/3-popos/update-popos.sh'
-alias limpao='/home/lm/Documentos/dev/gitlab/scripts/1-arch/update-clean-arch.sh'
+alias update='/home/lm/Documents/dev/gitlab/scripts/1-fedora/update.sh'
+alias limpao='/home/lm/Documents/dev/gitlab/scripts/1-arch/update-clean-arch.sh'
 alias srcfish='source ~/.config/fish/config.fish'
 alias srczsh='source ~/.zshrc'
-alias cdaula='cd /home/lm/Documentos/dev/maisPraTi/'
-alias naula='nvim /home/lm/Documentos/dev/maisPraTi/'
-alias ninstall='nvim /home/lm/Documentos/dev/gitlab/scripts/3-popos/post-install-popos-v2.sh'
-alias ngit='nvim /home/lm/Documentos/dev/gitlab'
+alias cdaula='cd /home/lm/Documents/dev/maisPraTi/'
+alias naula='nvim /home/lm/Documents/dev/maisPraTi/'
+alias ninstall='nvim /home/lm/Documents/dev/gitlab/scripts/3-popos/post-install-popos-v2.sh'
+alias ngit='nvim /home/lm/Documents/dev/gitlab'
 
 # 6) Funções úteis
 
