@@ -29,8 +29,8 @@ config.color_scheme = "Catppuccin Macchiato"
 config.force_reverse_video_cursor = true
 
 -- Appearance
--- config.window_decorations = "NONE"
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE"
+-- config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
 config.window_padding = {
 	left = 0,

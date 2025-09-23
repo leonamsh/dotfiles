@@ -1,4 +1,9 @@
 0
+/home/lm/Pictures/walls/catppuccin/rainbow.png
+/home/lm/Pictures/walls/catppuccin/cat_pacman.png
+/home/lm/Pictures/walls/catppuccin/mandelbrot_full_green.png
+/home/lm/Pictures/walls/catppuccin/list-aligned-right.png
+/home/lm/Pictures/walls/catppuccin/various-arch-2-4k.png
 /home/lm/Pictures/walls/catppuccin/mandelbrot_full_yellow.png
 /home/lm/Pictures/walls/catppuccin/list-aligned-right.png
 /home/lm/Pictures/walls/catppuccin/list-aligned-left.png
