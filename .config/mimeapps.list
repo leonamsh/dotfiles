@@ -112,14 +112,14 @@ image/x-xcursor=org.gnome.Loupe.desktop
 image/x-xfig=org.gnome.Loupe.desktop
 image/x-xpixmap=org.gnome.Loupe.desktop
 image/x-xwindowdump=org.gnome.Loupe.desktop
-text/html=org.mozilla.firefox.desktop
+text/html=google-chrome.desktop
 text/plain=nvim.desktop
-x-scheme-handler/about=brave-browser.desktop
+x-scheme-handler/about=google-chrome.desktop
 x-scheme-handler/chrome=org.mozilla.firefox.desktop
-x-scheme-handler/http=org.mozilla.firefox.desktop
-x-scheme-handler/https=org.mozilla.firefox.desktop
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
 x-scheme-handler/terminal=kitty.desktop
-x-scheme-handler/unknown=brave-browser.desktop
+x-scheme-handler/unknown=google-chrome.desktop
 
 [Added Associations]
 application/x-shellscript=org.gnome.TextEditor.desktop;nvim.desktop

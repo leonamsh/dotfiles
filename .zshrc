@@ -93,6 +93,7 @@ alias nzsh='nvim ~/.zshrc'
 alias nfish='nvim ~/.config/fish/config.fish'
 alias nprojeto='nvim /home/lm/Documents/dev/projeto-mercado-frontend/'
 alias nsway='nvim ~/.config/sway'
+alias nrascunho='nvim ~/Documents/rascunhos/'
 # ambientes Neovim
 alias nvima='env NVIM_APPNAME=astronvim nvim'
 alias nvimc='env NVIM_APPNAME=nvchad nvim'

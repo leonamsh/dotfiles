@@ -268,18 +268,6 @@ return {
     },
   },
   {
-    -- If you want neo-tree's file operations to work with LSP (updating imports, etc.), you can use a plugin like
-    -- https://github.com/antosha417/nvim-lsp-file-operations:
-    -- {
-    --   "antosha417/nvim-lsp-file-operations",
-    --   dependencies = {
-    --     "nvim-lua/plenary.nvim",
-    --     "nvim-neo-tree/neo-tree.nvim",
-    --   },
-    --   config = function()
-    --     require("lsp-file-operations").setup()
-    --   end,
-    -- },
     {
       "nvim-neo-tree/neo-tree.nvim",
       branch = "v3.x",
@@ -310,9 +298,6 @@ return {
       },
       lazy = false,
       config = function()
-        -- If you want icons for diagnostic errors, you'll need to define them somewhere.
-        -- In Neovim v0.10+, you can configure them in vim.diagnostic.config(), like:
-        --
         vim.diagnostic.config({
           signs = {
             text = {
@@ -323,12 +308,6 @@ return {
             },
           },
         })
-
-        -- In older versions, you can define the signs manually:
-        -- vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
-        -- vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
-        -- vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
-        -- vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
 
         require("neo-tree").setup({
           close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
@@ -364,26 +343,26 @@ return {
               expander_expanded = "",
               expander_highlight = "NeoTreeExpander",
             },
-            icon = {
-              folder_closed = "",
-              folder_open = "",
-              folder_empty = "󰜌",
-              provider = function(icon, node, state) -- default icon provider utilizes nvim-web-devicons if available
-                if node.type == "file" or node.type == "terminal" then
-                  local success, web_devicons = pcall(require, "nvim-web-devicons")
-                  local name = node.type == "terminal" and "terminal" or node.name
-                  if success then
-                    local devicon, hl = web_devicons.get_icon(name)
-                    icon.text = devicon or icon.text
-                    icon.highlight = hl or icon.highlight
-                  end
-                end
-              end,
-              -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
-              -- then these will never be used.
-              default = "*",
-              highlight = "NeoTreeFileIcon",
-            },
+            -- icon = {
+            --   folder_closed = "",
+            --   folder_open = "",
+            --   folder_empty = "󰜌",
+            --   provider = function(icon, node, state) -- default icon provider utilizes nvim-web-devicons if available
+            --     if node.type == "file" or node.type == "terminal" then
+            --       local success, web_devicons = pcall(require, "nvim-web-devicons")
+            --       local name = node.type == "terminal" and "terminal" or node.name
+            --       if success then
+            --         local devicon, hl = web_devicons.get_icon(name)
+            --         icon.text = devicon or icon.text
+            --         icon.highlight = hl or icon.highlight
+            --       end
+            --     end
+            --   end,
+            --   -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
+            --   -- then these will never be used.
+            --   default = "*",
+            --   highlight = "NeoTreeFileIcon",
+            -- },
             modified = {
               symbol = "[+]",
               highlight = "NeoTreeModified",
@@ -419,16 +398,16 @@ return {
               width = 10, -- width of the column
               required_width = 122, -- min width of window required to show this column
             },
-            last_modified = {
-              enabled = true,
-              width = 20, -- width of the column
-              required_width = 88, -- min width of window required to show this column
-            },
-            created = {
-              enabled = true,
-              width = 20, -- width of the column
-              required_width = 110, -- min width of window required to show this column
-            },
+            -- last_modified = {
+            --   enabled = true,
+            --   width = 20, -- width of the column
+            --   required_width = 88, -- min width of window required to show this column
+            -- },
+            -- created = {
+            --   enabled = true,
+            --   width = 20, -- width of the column
+            --   required_width = 110, -- min width of window required to show this column
+            -- },
             symlink_target = {
               enabled = false,
             },
@@ -546,7 +525,7 @@ return {
               },
             },
             follow_current_file = {
-              enabled = false, -- This will find and focus the file in the active buffer every time
+              enabled = true, -- This will find and focus the file in the active buffer every time
               --               -- the current file is changed while the tree is open.
               leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
             },
@@ -678,42 +657,4 @@ return {
     },
     config = true,
   },
-  -- {
-  --   "nvim-neo-tree/neo-tree.nvim",
-  --   branch = "v3.x",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "MunifTanjim/nui.nvim",
-  --     "nvim-tree/nvim-web-devicons",
-  --   },
-  -- },
-  -- {
-  --   "antosha417/nvim-lsp-file-operations",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-neo-tree/neo-tree.nvim", -- makes sure that this loads after Neo-tree.
-  --   },
-  --   config = function()
-  --     require("lsp-file-operations").setup()
-  --   end,
-  -- },
-  -- {
-  --   "s1n7ax/nvim-window-picker",
-  --   version = "2.*",
-  --   config = function()
-  --     require("window-picker").setup({
-  --       filter_rules = {
-  --         include_current_win = false,
-  --         autoselect_one = true,
-  --         -- filter using buffer options
-  --         bo = {
-  --           -- if the file type is one of following, the window will be ignored
-  --           filetype = { "neo-tree", "neo-tree-popup", "notify" },
-  --           -- if the buffer type is one of following, the window will be ignored
-  --           buftype = { "terminal", "quickfix" },
-  --         },
-  --       },
-  --     })
-  --   end,
-  -- },
 }
