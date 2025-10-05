@@ -3,6 +3,8 @@
 
 # Exceto estas pastas (e seus conteúdos)
 !.config/
+!imagens/
+!scripts/
 
 # Permite arquivos específicos na raiz
 !.zshrc
@@ -45,3 +47,4 @@
 
 #arquivos ou pastas dentro do .config
 .config/nvim/lazy-lock.json
+
